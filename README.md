@@ -19,3 +19,7 @@ Copyright © Penguin_Spy 2023
 This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+## Attribution
+- `graphics/icons/ice.png` from https://www.vecteezy.com/png/9384604-ice-cube-clipart-design-illustration
+- `graphics/icons/methane.png` By Ben Mills - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=6643505
