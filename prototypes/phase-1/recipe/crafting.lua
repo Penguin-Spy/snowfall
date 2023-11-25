@@ -9,7 +9,8 @@ data:extend{
     results = {
       {type = "item", name = "snowfall-ingot-mold", amount = 1}
     },
-    energy_required = 3
+    energy_required = 3,
+    allow_decomposition = false
   },
   {
     type = "recipe",
@@ -20,7 +21,8 @@ data:extend{
     results = {
       {type = "item", name = "snowfall-gear-mold", amount = 1}
     },
-    energy_required = 3
+    energy_required = 3,
+    allow_decomposition = false
   },
   {
     type = "recipe",
@@ -31,7 +33,8 @@ data:extend{
     results = {
       {type = "item", name = "snowfall-rod-mold", amount = 1}
     },
-    energy_required = 3
+    energy_required = 3,
+    allow_decomposition = false
   },
 
   -- machines
@@ -55,6 +58,34 @@ data:extend{
     },
     results = {
       {type = "item", name = "snowfall-foundry", amount = 1}
+    },
+    energy_required = 3
+  },
+  {
+    type = "recipe",
+    name = "snowfall-rolling-machine",
+    ingredients = {
+      {type = "item", name = "stone-brick",     amount = 4},
+      {type = "item", name = "iron-stick",      amount = 4},
+      {type = "item", name = "iron-gear-wheel", amount = 2},
+      {type = "item", name = "motor",           amount = 1},
+    },
+    results = {
+      {type = "item", name = "snowfall-rolling-machine", amount = 1}
+    },
+    energy_required = 3
+  },
+  {
+    type = "recipe",
+    name = "snowfall-drawing-machine",
+    ingredients = {
+      {type = "item", name = "stone-brick",     amount = 4},
+      {type = "item", name = "nickel-plate",    amount = 4},
+      {type = "item", name = "iron-gear-wheel", amount = 2},
+      {type = "item", name = "motor",           amount = 1},
+    },
+    results = {
+      {type = "item", name = "snowfall-drawing-machine", amount = 1}
     },
     energy_required = 3
   },

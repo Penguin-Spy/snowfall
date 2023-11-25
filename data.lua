@@ -1,13 +1,13 @@
-require "prototypes.items"
-require "prototypes.recipe.crafting"
-require "prototypes.recipe.melting"
-require "prototypes.recipe.kiln"
-require "prototypes.recipe.direct-casting"
+require "prototypes.phase-1.recipe.crafting"
+require "prototypes.phase-1.recipe.kiln"
+require "prototypes.phase-1.recipe.melting"
+require "prototypes.phase-1.recipe.rolling"
 
-require "prototypes.fluids"
+require "prototypes.phase-1.entities"
+require "prototypes.phase-1.fluids"
+require "prototypes.phase-1.item-groups"
+require "prototypes.phase-1.items"
+require "prototypes.phase-1.resources"
+require "prototypes.phase-1.smelting"
 
-require "prototypes.entities"
-require "prototypes.resources"
-
-
-require "prototypes.changes"
+require "prototypes.phase-1.changes"

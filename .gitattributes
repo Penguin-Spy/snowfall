@@ -3,3 +3,4 @@
 .github export-ignore
 .vscode export-ignore
 .editorconfig export-ignore
+*.pdn export-ignore

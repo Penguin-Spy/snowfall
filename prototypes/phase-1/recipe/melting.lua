@@ -16,6 +16,9 @@ data:extend{
       {type = "fluid", name = "water", amount = 100, temperature = 15}
     },
     energy_required = 8,
-    always_show_products = true
+    always_show_products = true,
+    subgroup = "fluid-recipes",
+    hide_from_player_crafting = true,
+    allow_decomposition = false
   }
 }

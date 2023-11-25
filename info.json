@@ -6,8 +6,18 @@
   "author": "Penguin_Spy",
   "factorio_version": "1.1",
   "dependencies": [
+    "BrassTacks",
+    "IfNickel",
+    "ThemTharHills",
+    "bzlead",
+    "bzsilicon",
+    "bzgas",
     "alien-biomes",
+
     "thermal-solar-power-lite",
+    "wret-beacon-rebalance-mod",
+
+    "Rohlinheatagtmuf_Hdhaotaotfnllsape-atnsasri",
     "RealisticOres",
     "Realistic_Heat_Glow",
     "informatron",

@@ -1,14 +1,6 @@
 local graphics = "__snowfall__/graphics/"
 
 data:extend{
-  -- subgroups
-  {
-    type = "item-subgroup",
-    name = "snowfall-molds",
-    group = "intermediate-products",
-    order = "c-a"  -- after raw-material
-  },
-
   -- resources
   {
     type = "item",
@@ -30,8 +22,8 @@ data:extend{
     type = "item",
     name = "snowfall-fire-brick",
     icon = graphics .. "icons/fire-brick.png", icon_size = 64,
-    subgroup = "raw-material",
-    order = "a[fire-brick]",  -- before iron plate
+    subgroup = "processed-stone",
+    order = "b-a[fire-brick]",  -- between stone brick & silica
     stack_size = 50
   },
 
@@ -40,24 +32,24 @@ data:extend{
     type = "item",
     name = "snowfall-ingot-mold",
     icon = graphics .. "icons/placeholder.png", icon_size = 64,
-    subgroup = "snowfall-molds",
-    order = "a",
+    subgroup = "processed-stone",
+    order = "c[snowfall-molds]-a",
     stack_size = 10
   },
   {
     type = "item",
     name = "snowfall-gear-mold",
     icon = graphics .. "icons/placeholder.png", icon_size = 64,
-    subgroup = "snowfall-molds",
-    order = "b",
+    subgroup = "processed-stone",
+    order = "c[snowfall-molds]-b",
     stack_size = 10
   },
   {
     type = "item",
     name = "snowfall-rod-mold",
     icon = graphics .. "icons/placeholder.png", icon_size = 64,
-    subgroup = "snowfall-molds",
-    order = "c",
+    subgroup = "processed-stone",
+    order = "c[snowfall-molds]-c",
     stack_size = 10
   },
 
@@ -80,6 +72,26 @@ data:extend{
     subgroup = "smelting-machine",
     order = "d[snowfall]-b",
     place_result = "snowfall-foundry",
+    stack_size = 50
+  },
+  {
+    type = "item",
+    name = "snowfall-rolling-machine",
+    icon = "__base__/graphics/icons/assembling-machine-1.png",
+    icon_size = 64, icon_mipmaps = 4,
+    subgroup = "production-machine",
+    order = "c-a[snowfall]-a",  -- after assembler 3
+    place_result = "snowfall-rolling-machine",
+    stack_size = 50
+  },
+  {
+    type = "item",
+    name = "snowfall-drawing-machine",
+    icon = "__base__/graphics/icons/assembling-machine-1.png",
+    icon_size = 64, icon_mipmaps = 4,
+    subgroup = "production-machine",
+    order = "c-a[snowfall]-b",
+    place_result = "snowfall-drawing-machine",
     stack_size = 50
   },
   {
