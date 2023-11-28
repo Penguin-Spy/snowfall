@@ -22,4 +22,4 @@ data:extend{
 }
 
 -- move the stone brick recipe to the kiln category
-data.raw.recipe["stone-brick"].category = "kiln"
+data.raw["recipe"]["stone-brick"].category = "kiln"

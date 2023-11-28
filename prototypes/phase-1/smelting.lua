@@ -1,7 +1,5 @@
 -- generates recipes & intermediate items for metal casting, cooling, and alloying
 
-local graphics = "__snowfall__/graphics/"
-
 --[[
   lead    ore -> ingot -> plate
 
@@ -48,14 +46,6 @@ local function smelting(resource, mold)
       main_product = resource .. "-" .. mold,
       energy_required = 3.2,
       allow_decomposition = false
-    },
-    {
-      type = "item",
-      name = resource .. "-" .. mold,
-      icon = graphics .. "icons/placeholder.png", icon_size = 64,
-      subgroup = "ingots",
-      order = "c",
-      stack_size = 50
     }
   }
 end
@@ -116,16 +106,17 @@ data:extend{
   },
 }
 
-smelting("lead", "ingot")    -- item-name.lead-ingot
-smelting("copper", "rod")    -- item-name.copper-rod
-smelting("nickel", "ingot")  -- item-name.nickel-ingot
-smelting("nickel", "rod")    -- item-name.nickel-rod
-smelting("iron", "ingot")    -- item-name.iron-ingot
-smelting("iron", "rod")      -- item-name.iron-rod
-smelting("zinc", "ingot")    -- item-name.zinc-ingot
-smelting("gold", "rod")      -- item-name.gold-rod
+smelting("lead", "ingot")      -- item-name.lead-ingot
+smelting("copper", "ingot")    -- item-name.copper-ingot
+smelting("copper", "rod")      -- item-name.copper-rod
+smelting("iron", "ingot")      -- item-name.iron-ingot
+--smelting("iron", "rod")        -- item-name.iron-rod
+smelting("zinc", "ingot")      -- item-name.zinc-ingot
+smelting("gold", "rod")        -- item-name.gold-rod
+smelting("titanium", "ingot")  -- item-name.titanium-ingot
 
-alloy{                       -- item-name.brass-ingot
+
+alloy{  -- item-name.brass-ingot
   ingredients = {copper = 3, zinc = 1},
   result = "brass-ingot", amount = 2,
   mold = "ingot"
@@ -136,27 +127,14 @@ alloy{  -- item-name.iron-gear-wheel
   mold = "gear"
 }
 
-alloy{  -- item-name.invar-ingot
-  ingredients = {iron = 2, nickel = 2},
-  result = "invar-ingot", amount = 2,
-  mold = "ingot"
-}
 
-data:extend{
-  {
-    type = "item",
-    name = "brass-ingot",
-    icon = graphics .. "icons/placeholder.png", icon_size = 64,
-    subgroup = "ingots",
-    order = "d",
-    stack_size = 50
-  },
-  {
-    type = "item",
-    name = "invar-ingot",
-    icon = graphics .. "icons/placeholder.png", icon_size = 64,
-    subgroup = "ingots",
-    order = "d",
-    stack_size = 50
+if mods["IfNickel"] then
+  smelting("nickel", "ingot")  -- item-name.nickel-ingot
+  smelting("nickel", "rod")    -- item-name.nickel-rod
+
+  alloy{                       -- item-name.invar-ingot
+    ingredients = {iron = 2, nickel = 2},
+    result = "invar-ingot", amount = 2,
+    mold = "ingot"
   }
-}
+end

@@ -4,6 +4,7 @@ for _, preset in pairs(data.raw["map-gen-presets"].default) do
       preset.basic_settings and
       preset.basic_settings.autoplace_controls then
     preset.basic_settings.autoplace_controls["gas"] = nil
+    preset.basic_settings.autoplace_controls["coal"] = nil
   end
 end
 
@@ -14,15 +15,15 @@ for i, ingredient in pairs(data.raw.recipe["iron-gear-wheel"].ingredients) do
   end
 end
 
--- move bolted flange to underground pipes
-data.raw.recipe["pipe"].normal.ingredients = {
-  {type = "item", name = "lead-plate", amount = 5}
-}
-data.raw.recipe["pipe"].expensive.ingredients = {
-  {type = "item", name = "lead-plate", amount = 10}
-}
-data.raw.recipe["pipe-to-ground"].ingredients = {
+-- move bolted flange to underground pipes, make pipes even cheaper (1 plate -> 2 pipes)
+data_util.replace_recipe_ingredients("pipe", {
+  {type = "item", name = "lead-plate", amount = 1}
+})
+data_util.replace_recipe_results("pipe", {
+  {type = "item", name = "pipe", amount = 2}
+})
+data_util.replace_recipe_ingredients("pipe-to-ground", {
   {type = "item", name = "pipe",          amount = 10},
   {type = "item", name = "lead-plate",    amount = 2},
   {type = "item", name = "bolted-flange", amount = 2}
-}
+})

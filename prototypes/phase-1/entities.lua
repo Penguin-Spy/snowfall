@@ -1,9 +1,3 @@
-local graphics = "__snowfall__/graphics/"
-
----@diagnostic disable: different-requires
-local sounds = require("__base__.prototypes.entity.sounds")
-local hit_effects = require("__base__.prototypes.entity.hit-effects")
-
 data:extend{
   -- kiln
   {
@@ -16,11 +10,11 @@ data:extend{
     max_health = 200,
     corpse = "stone-furnace-remnants",
     dying_explosion = "stone-furnace-explosion",
-    repair_sound = sounds.manual_repair,
-    mined_sound = sounds.deconstruct_bricks(0.8),
-    open_sound = sounds.machine_open,
-    close_sound = sounds.machine_close,
-    vehicle_impact_sound = sounds.car_stone_impact,
+    repair_sound = data_util.sounds.manual_repair,
+    mined_sound = data_util.sounds.deconstruct_bricks(0.8),
+    open_sound = data_util.sounds.machine_open,
+    close_sound = data_util.sounds.machine_close,
+    vehicle_impact_sound = data_util.sounds.car_stone_impact,
     working_sound = {
       sound = {
         {
@@ -48,7 +42,7 @@ data:extend{
     },
     collision_box = {{-1.29, -0.79}, {1.29, 0.79}},
     selection_box = {{-1.5, -1}, {1.5, 1}},
-    damaged_trigger_effect = hit_effects.rock(),
+    damaged_trigger_effect = data_util.hit_effects.rock(),
     crafting_categories = {"kiln"},
     energy_usage = "90kW",
     crafting_speed = 1,
@@ -241,11 +235,11 @@ data:extend{
     max_health = 200,
     corpse = "stone-furnace-remnants",
     dying_explosion = "stone-furnace-explosion",
-    repair_sound = sounds.manual_repair,
-    mined_sound = sounds.deconstruct_bricks(0.8),
-    open_sound = sounds.machine_open,
-    close_sound = sounds.machine_close,
-    vehicle_impact_sound = sounds.car_stone_impact,
+    repair_sound = data_util.sounds.manual_repair,
+    mined_sound = data_util.sounds.deconstruct_bricks(0.8),
+    open_sound = data_util.sounds.machine_open,
+    close_sound = data_util.sounds.machine_close,
+    vehicle_impact_sound = data_util.sounds.car_stone_impact,
     working_sound = {
       sound = {
         {
@@ -273,7 +267,7 @@ data:extend{
     },
     collision_box = {{-1.29, -0.79}, {1.29, 0.79}},
     selection_box = {{-1.5, -1}, {1.5, 1}},
-    damaged_trigger_effect = hit_effects.rock(),
+    damaged_trigger_effect = data_util.hit_effects.rock(),
     crafting_categories = {"snowfall-direct-casting", "snowfall-direct-alloying"},
     energy_usage = "90kW",
     crafting_speed = 1,
@@ -467,11 +461,11 @@ data:extend{
     max_health = 200,
     corpse = "stone-furnace-remnants",
     dying_explosion = "stone-furnace-explosion",
-    repair_sound = sounds.manual_repair,
-    mined_sound = sounds.deconstruct_bricks(0.8),
-    open_sound = sounds.machine_open,
-    close_sound = sounds.machine_close,
-    vehicle_impact_sound = sounds.car_stone_impact,
+    repair_sound = data_util.sounds.manual_repair,
+    mined_sound = data_util.sounds.deconstruct_bricks(0.8),
+    open_sound = data_util.sounds.machine_open,
+    close_sound = data_util.sounds.machine_close,
+    vehicle_impact_sound = data_util.sounds.car_stone_impact,
     working_sound = {
       sound = {
         {
@@ -499,7 +493,7 @@ data:extend{
     },
     collision_box = {{-0.79, -0.79}, {0.79, 0.79}},
     selection_box = {{-1, -1}, {1, 1}},
-    damaged_trigger_effect = hit_effects.rock(),
+    damaged_trigger_effect = data_util.hit_effects.rock(),
     crafting_categories = {"snowfall-caster"},
     energy_usage = "0kW",
     crafting_speed = 1,
@@ -667,7 +661,7 @@ data:extend{
     },
     collision_box = {{-0.75, -0.35}, {0.75, 0.35}},
     selection_box = {{-1, -0.5}, {1, 0.5}},
-    damaged_trigger_effect = hit_effects.entity(),
+    damaged_trigger_effect = data_util.hit_effects.entity(),
     alert_icon_shift = util.by_pixel(-3, -12),
     animation = {
       layers = {
@@ -723,9 +717,9 @@ data:extend{
       emissions_per_minute = 4
     },
     energy_usage = "75kW",
-    open_sound = sounds.machine_open,
-    close_sound = sounds.machine_close,
-    vehicle_impact_sound = sounds.generic_impact,
+    open_sound = data_util.sounds.machine_open,
+    close_sound = data_util.sounds.machine_close,
+    vehicle_impact_sound = data_util.sounds.generic_impact,
     working_sound = {
       sound = {
         {
@@ -758,7 +752,7 @@ data:extend{
     },
     collision_box = {{-0.8, -0.4}, {0.8, 0.4}},
     selection_box = {{-1, -0.5}, {1, 0.5}},
-    damaged_trigger_effect = hit_effects.entity(),
+    damaged_trigger_effect = data_util.hit_effects.entity(),
     alert_icon_shift = util.by_pixel(-3, -12),
     animation = {
       layers = {
@@ -814,9 +808,9 @@ data:extend{
       emissions_per_minute = 4
     },
     energy_usage = "75kW",
-    open_sound = sounds.machine_open,
-    close_sound = sounds.machine_close,
-    vehicle_impact_sound = sounds.generic_impact,
+    open_sound = data_util.sounds.machine_open,
+    close_sound = data_util.sounds.machine_close,
+    vehicle_impact_sound = data_util.sounds.generic_impact,
     working_sound = {
       sound = {
         {
@@ -841,11 +835,11 @@ data:extend{
     max_health = 200,
     corpse = "heat-exchanger-remnants",
     dying_explosion = "heat-exchanger-explosion",
-    repair_sound = sounds.manual_repair,
-    mined_sound = sounds.deconstruct_bricks(0.8),
-    open_sound = sounds.machine_open,
-    close_sound = sounds.machine_close,
-    vehicle_impact_sound = sounds.generic_impact,
+    repair_sound = data_util.sounds.manual_repair,
+    mined_sound = data_util.sounds.deconstruct_bricks(0.8),
+    open_sound = data_util.sounds.machine_open,
+    close_sound = data_util.sounds.machine_close,
+    vehicle_impact_sound = data_util.sounds.generic_impact,
     working_sound = {
       sound = {
         {
@@ -873,7 +867,7 @@ data:extend{
     },
     collision_box = {{-1.29, -0.79}, {1.29, 0.79}},
     selection_box = {{-1.5, -1}, {1.5, 1}},
-    damaged_trigger_effect = hit_effects.rock(),
+    damaged_trigger_effect = data_util.hit_effects.rock(),
     crafting_categories = {"snowfall-melting"},
     cant_insert_at_source_message_key = "inventory-restriction.snowfall-cant-be-melted",
     result_inventory_size = 0,

@@ -7,11 +7,11 @@
   "factorio_version": "1.1",
   "dependencies": [
     "BrassTacks",
-    "IfNickel",
     "ThemTharHills",
     "bzlead",
     "bzsilicon",
     "bzgas",
+    "bztitanium",
     "alien-biomes",
 
     "thermal-solar-power-lite",

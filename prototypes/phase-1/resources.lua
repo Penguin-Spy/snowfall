@@ -1,4 +1,3 @@
-local graphics = "__snowfall__/graphics/"
 local resource_autoplace = require("resource-autoplace")
 
 resource_autoplace.initialize_patch_set("ice", true)

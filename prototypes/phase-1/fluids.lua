@@ -1,10 +1,8 @@
-local graphics = "__snowfall__/graphics/"
-
 data:extend{
   {
     type = "fluid",
     name = "methane",
-    icon = graphics .. "icons/methane.png", icon_size = 64,
+    icon = data_util.graphics "icons/methane.png", icon_size = 64,
     default_temperature = -179,
     max_temperature = 25,
     gas_temperature = -161.5,

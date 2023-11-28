@@ -1,7 +1,5 @@
 -- Item group & subgroup definitions
 
-local graphics = "__snowfall__/graphics/"
-
 data:extend{
   -- [[ Intermediate products group ]]
   -- raw-resource (b)
@@ -17,7 +15,7 @@ data:extend{
     group = "intermediate-products",
     order = "bb"
   },
-  -- raw-material (c)
+  -- raw-material             (c)  -- plates
   -- intermediate-product     (d)
   -- engine-components        (e)
   -- cable                    (f-z)
@@ -31,11 +29,12 @@ data:extend{
     name = "chemistry",
     order = "ca",
     order_in_recipe = "0",
-    icon = graphics .. "icons/chemistry-item-group.png",
+    icon = data_util.graphics "icons/chemistry-item-group.png",
     icon_size = 128
   },
   -- fluid-recipes      (a)
   -- advanced-chemicals (ab)
+  -- helium             (a-ab)
   {
     type = "item-subgroup",
     name = "chemical-products",
@@ -54,10 +53,11 @@ data:extend{
 }
 
 data.raw["item-subgroup"]["intermediate-product"].order = "d"  -- vanilla, default is "g"
-data.raw["item-subgroup"]["engine-components"].order = "e"     -- from IfIHadANickel, default is "fx"
+--data.raw["item-subgroup"]["engine-components"].order = "e"     -- from IfIHadANickel, default is "fx"
 
 data.raw["item-subgroup"]["fluid-recipes"].group = "chemistry"
 data.raw["item-subgroup"]["advanced-chemicals"].group = "chemistry"  -- from ThemTharHills
+data.raw["item-subgroup"]["helium"].group = "chemistry"
 data.raw["item-subgroup"]["barrel"].group = "chemistry"
 data.raw["item-subgroup"]["fill-barrel"].group = "chemistry"
 data.raw["item-subgroup"]["empty-barrel"].group = "chemistry"
