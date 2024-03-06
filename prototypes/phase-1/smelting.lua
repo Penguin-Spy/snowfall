@@ -46,7 +46,7 @@ local function smelting(resource, mold)
       main_product = resource .. "-" .. mold,
       energy_required = 3.2,
       allow_decomposition = false
-    }
+    }  --[[@as data.RecipePrototype]]
   }
 end
 
@@ -78,7 +78,7 @@ local function alloy(params)
       main_product = result,
       energy_required = 6.4,
       allow_decomposition = false
-    }
+    }  --[[@as data.RecipePrototype]]
   }
 end
 

@@ -1,11 +1,16 @@
 local graphics = data_util.graphics
 
+local graphics_BrassTacks = "__BrassTacks__/graphics/galdoc/icons/"
+local graphics_ThemTharHills = "__ThemTharHills__/graphics/icons/"
+local graphics_bzlead = "__bzlead__/graphics/icons/"
+local graphics_bztitanium = "__bztitanium__/graphics/icons/"
+
 data:extend{
   -- resources
   {
     type = "item",
     name = "ice",
-    icon = graphics "icons/ice.png", icon_size = 64,
+    icon = graphics .. "icons/ice.png", icon_size = 64,
     subgroup = "raw-resource",
     order = "c[ice]",  -- before stone
     stack_size = 100
@@ -13,7 +18,7 @@ data:extend{
   {
     type = "item",
     name = "snowfall-kaolinite",
-    icon = graphics "icons/kaolinite.png", icon_size = 64,
+    icon = graphics .. "icons/kaolinite.png", icon_size = 64,
     subgroup = "raw-resource",
     order = "c[kaolinite]",  -- before stone
     stack_size = 50
@@ -21,7 +26,7 @@ data:extend{
   {
     type = "item",
     name = "snowfall-fire-brick",
-    icon = graphics "icons/fire-brick.png", icon_size = 64,
+    icon = graphics .. "icons/fire-brick.png", icon_size = 64,
     subgroup = "processed-stone",
     order = "b-a[fire-brick]",  -- between stone brick & silica
     stack_size = 50
@@ -30,7 +35,7 @@ data:extend{
   {
     type = "item",
     name = "snowfall-ingot-mold",
-    icon = graphics "icons/placeholder.png", icon_size = 64,
+    icon = graphics .. "icons/placeholder.png", icon_size = 64,
     subgroup = "processed-stone",
     order = "c[snowfall-molds]-a",
     stack_size = 10
@@ -38,7 +43,7 @@ data:extend{
   {
     type = "item",
     name = "snowfall-gear-mold",
-    icon = graphics "icons/placeholder.png", icon_size = 64,
+    icon = graphics .. "icons/placeholder.png", icon_size = 64,
     subgroup = "processed-stone",
     order = "c[snowfall-molds]-b",
     stack_size = 10
@@ -46,7 +51,7 @@ data:extend{
   {
     type = "item",
     name = "snowfall-rod-mold",
-    icon = graphics "icons/placeholder.png", icon_size = 64,
+    icon = graphics .. "icons/placeholder.png", icon_size = 64,
     subgroup = "processed-stone",
     order = "c[snowfall-molds]-c",
     stack_size = 10
@@ -56,7 +61,7 @@ data:extend{
   {
     type = "item",
     name = "iron-ingot",
-    icon = data_util.graphics "icons/iron-ingot.png", icon_size = 64,
+    icon = graphics .. "icons/iron-ingot.png", icon_size = 64,
     subgroup = "ingots",
     order = data.raw.item["iron-plate"].order,
     stack_size = 50
@@ -64,7 +69,7 @@ data:extend{
   {
     type = "item",
     name = "copper-ingot",
-    icon = data_util.graphics "icons/copper-ingot.png", icon_size = 64,
+    icon = graphics .. "icons/copper-ingot.png", icon_size = 64,
     subgroup = "ingots",
     order = data.raw.item["copper-plate"].order,
     stack_size = 50
@@ -72,7 +77,7 @@ data:extend{
   {
     type = "item",
     name = "lead-ingot",
-    icon = "__bzlead__/graphics/icons/lead-ingot.png", icon_size = 128,
+    icon = graphics_bzlead .. "lead-ingot.png", icon_size = 128,
     subgroup = "ingots",
     order = data.raw.item["lead-plate"].order,
     stack_size = 50
@@ -80,7 +85,7 @@ data:extend{
   {
     type = "item",
     name = "zinc-ingot",
-    icon = "__BrassTacks__/graphics/items/zinc-ingot.png", icon_size = 64,
+    icon = graphics_BrassTacks .. "zinc-ingot.png", icon_size = 64,
     subgroup = "ingots",
     order = data.raw.item["zinc-plate"].order,
     stack_size = 50
@@ -88,7 +93,7 @@ data:extend{
   {
     type = "item",
     name = "gold-ingot",
-    icon = "__ThemTharHills__/graphics/items/gold-ingot.png", icon_size = 64,
+    icon = graphics_ThemTharHills .. "gold-ingot.png", icon_size = 64,
     subgroup = "ingots",
     order = data.raw.item["gold-plate"].order,
     stack_size = 50
@@ -96,7 +101,7 @@ data:extend{
   {
     type = "item",
     name = "titanium-ingot",
-    icon = "__bztitanium__/graphics/icons/titanium-ingot.png", icon_size = 128,
+    icon = graphics_bztitanium .. "titanium-ingot.png", icon_size = 128,
     subgroup = "ingots",
     order = data.raw.item["titanium-plate"].order,
     stack_size = 50
@@ -104,7 +109,7 @@ data:extend{
   {
     type = "item",
     name = "brass-ingot",
-    icon = "__BrassTacks__/graphics/items/brass-ingot.png", icon_size = 64,
+    icon = graphics_BrassTacks .. "brass-ingot.png", icon_size = 64,
     subgroup = "ingots",
     order = data.raw.item["brass-plate"].order,
     stack_size = 50
@@ -114,7 +119,7 @@ data:extend{
   {
     type = "item",
     name = "copper-rod",
-    icon = data_util.graphics "icons/copper-rod.png", icon_size = 64,
+    icon = graphics .. "icons/copper-rod.png", icon_size = 64,
     subgroup = "intermediate-product",
     order = data.raw.item["copper-plate"].order,
     stack_size = 50
@@ -122,7 +127,7 @@ data:extend{
   {
     type = "item",
     name = "gold-rod",
-    icon = data_util.graphics "icons/gold-rod.png", icon_size = 64,
+    icon = graphics .. "icons/gold-rod.png", icon_size = 64,
     subgroup = "intermediate-product",
     order = data.raw.item["gold-plate"].order,
     stack_size = 50
@@ -132,7 +137,7 @@ data:extend{
   {
     type = "item",
     name = "motor",
-    icon = graphics "icons/motor.png",
+    icon = graphics .. "icons/motor.png",
     icon_size = 64, icon_mipmaps = 4,
     subgroup = "intermediate-product",
     order = "a",

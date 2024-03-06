@@ -97,20 +97,20 @@ data.raw["inserter"]["burner-inserter"].energy_source = {
 }
 
 -- make wooden chest stone (visually only, leave prototype name alone)
-data.raw.item["wooden-chest"].icon = graphics "icons/stone-chest.png"
+data.raw.item["wooden-chest"].icon = graphics .. "icons/stone-chest.png"
 local wooden_chest = data.raw.container["wooden-chest"]
-wooden_chest.icon = graphics "icons/stone-chest.png"
+wooden_chest.icon = graphics .. "icons/stone-chest.png"
 wooden_chest.vehicle_impact_sound = data_util.sounds.car_stone_impact
 wooden_chest.picture = {
   layers = {
     {
-      filename = graphics "entity/stone-chest.png",
+      filename = graphics .. "entity/stone-chest.png",
       priority = "extra-high",
       width = 32,
       height = 36,
       shift = util.by_pixel(0.5, -2),
       hr_version = {
-        filename = graphics "entity/hr-stone-chest.png",
+        filename = graphics .. "entity/hr-stone-chest.png",
         priority = "extra-high",
         width = 62,
         height = 72,

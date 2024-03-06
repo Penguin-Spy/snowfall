@@ -29,7 +29,7 @@ data:extend{
     name = "chemistry",
     order = "ca",
     order_in_recipe = "0",
-    icon = data_util.graphics "icons/chemistry-item-group.png",
+    icon = data_util.graphics .. "icons/chemistry-item-group.png",
     icon_size = 128
   },
   -- fluid-recipes      (a)

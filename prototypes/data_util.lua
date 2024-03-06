@@ -2,13 +2,6 @@
   General utilities for modifying prototypes, handling shorthand forms and edge cases.
 ]]
 
--- appends the graphics path prefix, including the final slash (`__snowfall__/graphics/`)
----@param path string
----@return string
-local function graphics(path)
-  return "__snowfall__/graphics/" .. path
-end
-
 -- appends the snowfall mod prefix, including the hyphen (`snowfall-`)
 ---@param name string
 ---@return string
@@ -135,7 +128,8 @@ end
 
 
 return {
-  graphics = graphics,
+  --- the graphics path prefix, including the final slash
+  graphics = "__snowfall__/graphics/",
   prefix = prefix,
   remove_technology_recipe_unlock = remove_technology_recipe_unlock,
   add_technology_recipe_unlock = add_technology_recipe_unlock,

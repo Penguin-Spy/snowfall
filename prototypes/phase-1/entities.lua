@@ -222,7 +222,7 @@ data:extend{
       rotate = false,
       orientation_to_variation = false
     }
-  },
+  }  --[[@as data.AssemblingMachinePrototype]],
 
   -- foundry
   {
@@ -447,7 +447,7 @@ data:extend{
       rotate = false,
       orientation_to_variation = false
     }
-  },
+  }  --[[@as data.AssemblingMachinePrototype]],
 
   -- caster
   --[[
@@ -731,7 +731,7 @@ data:extend{
       fade_in_ticks = 4,
       fade_out_ticks = 20
     }
-  },
+  }  --[[@as data.AssemblingMachinePrototype]],
 
   -- drawing machine
   {
@@ -822,7 +822,7 @@ data:extend{
       fade_in_ticks = 4,
       fade_out_ticks = 20
     }
-  },
+  }  --[[@as data.AssemblingMachinePrototype]],
 
   -- Solid Heat Exchanger
   {
@@ -1137,5 +1137,5 @@ data:extend{
     },
     working_visualisations = nil,  -- todo
     water_reflection = boiler_reflection()
-  }
+  }  --[[@as data.FurnacePrototype]]
 }
