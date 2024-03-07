@@ -63,7 +63,22 @@ data:extend{
     energy_required = 1
   },
 
-  -- entities
+  ---- entities ----
+
+  -- drills
+  {
+    type = "recipe",
+    name = "snowfall-burner-ice-bore",
+    ingredients = {
+      {type = "item", name = "stone-brick", amount = 4},
+      {type = "item", name = "lead-plate",  amount = 2},
+      {type = "item", name = "basic-gear",  amount = 2},
+    },
+    results = {
+      {type = "item", name = "snowfall-burner-ice-bore", amount = 1}
+    },
+    energy_required = 2
+  },
 
   -- machines
   {

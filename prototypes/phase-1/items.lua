@@ -153,7 +153,22 @@ data:extend{
     stack_size = 100
   },
 
-  -- entities
+  ---- entities ----
+
+  -- drills
+  {
+    type = "item",
+    name = "snowfall-burner-ice-bore",
+    icons = {
+      {icon = "__base__/graphics/icons/burner-mining-drill.png", icon_size = 64, icon_mipmaps = 4, tint = {r = 0.7, g = 0.85, b = 1, a = 1}}
+    },
+    subgroup = "extraction-machine",
+    order = "a[items]-a[burner-mining-drill]-a",
+    place_result = "snowfall-burner-ice-bore-placer",
+    stack_size = 50
+  }  --[[@as data.ItemPrototype]],
+
+  -- machines
   {
     type = "item",
     name = "snowfall-kiln",

@@ -1,4 +1,44 @@
+-- ice bore & its placer
+
+local collision_mask_util_extended = require("__alien-biomes__/collision-mask-util-extended/data/collision-mask-util-extended")
+local collision_mask_ice_tile = collision_mask_util_extended.get_make_named_collision_mask("not-ice-tile")
+
+local burner_ice_bore = table.deepcopy(data.raw["mining-drill"]["burner-mining-drill"])
+burner_ice_bore.name = "snowfall-burner-ice-bore"
+burner_ice_bore.resource_categories = {"snowfall-internal"}
+burner_ice_bore.collision_mask = {"item-layer", "object-layer", "player-layer", "water-tile", collision_mask_ice_tile}
+burner_ice_bore.energy_usage = "150kW"  -- same as burner drill
+burner_ice_bore.mining_speed = 0.2
+burner_ice_bore.minable.result = "snowfall-burner-ice-bore"
+burner_ice_bore.placeable_by = {item = "snowfall-burner-ice-bore", count = 1}
+burner_ice_bore.fast_replaceable_group = nil
+
+
+local range = math.ceil(burner_ice_bore.resource_searching_radius * 2)
+local burner_ice_bore_placer = data_util.generate_placer(burner_ice_bore, "simple-entity-with-owner", {
+  created_effect = data_util.created_effect("snowfall_placed_ice_bore"),
+  picture = burner_ice_bore.animations,
+  animations = nil,
+  localised_description = {"",
+    {"entity-description.snowfall-burner-ice-bore"}, "\n",
+    {"",
+      "[font=default-bold][color=#f8e0bb]", {"description.mining-speed"}, ":[/color][/font] ", burner_ice_bore.mining_speed, {"per-second-suffix"},
+      "\n[font=default-bold][color=#f8e0bb]", {"description.efficiency-penalty-range"}, ":[/color][/font] 16",
+      "\n[font=default-bold][color=#f8e0bb]", {"description.pollution"}, ":[/color][/font] " .. burner_ice_bore.energy_source.emissions_per_minute, {"per-minute-suffix"}, "\n",
+    },
+    {"",
+      "[img=tooltip-category-consumes] [font=default-bold][color=#f8cd48]", {"tooltip-category.consumes"}, " ", {"fluid-name.methane"}, "[/color]\n[color=#f8e0bb]",
+      {"description.max-energy-consumption"}, ":[/color][/font] " .. util.parse_energy(burner_ice_bore.energy_usage) * 0.06, " ", {"si-prefix-symbol-kilo"}, {"si-unit-symbol-watt"}
+    }
+  }
+})
+
+
 data:extend{
+  -- burner ice bore
+  burner_ice_bore,
+  burner_ice_bore_placer,
+
   -- kiln
   {
     type = "assembling-machine",

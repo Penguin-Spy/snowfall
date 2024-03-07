@@ -25,5 +25,6 @@ require "prototypes.phase-1.items"
 require "prototypes.phase-1.resources"
 require "prototypes.phase-1.smelting"
 require "prototypes.phase-1.technology"
+require "prototypes.phase-1.tiles"
 
 data_util = orig_data_util  ---@diagnostic disable-line: lowercase-global

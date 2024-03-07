@@ -126,6 +126,41 @@ local function replace_recipe_results(recipe_name, results)
   recipe.results = results
 end
 
+-- generates a dummy "placer entity" to use it's placement restrictions for a different entity type
+---@param entity_to_place data.EntityPrototype  the prototype table for the entity to mimic
+---@param placer_prototype string               the type string for the entity that gets placed
+---@param additional_properties data.EntityPrototype           additional properties to assign to the placer prototype
+local function generate_placer(entity_to_place, placer_prototype, additional_properties)
+  local placer = table.deepcopy(entity_to_place)
+
+  placer.type = placer_prototype
+  placer.name = entity_to_place.name .. "-placer"
+  placer.localised_name = {"entity-name." .. entity_to_place.name}
+  placer.localised_description = {"entity-description." .. entity_to_place.name}
+
+  for k, v in pairs(additional_properties) do
+    placer[k] = v
+  end
+
+  return placer
+end
+
+-- creates a script trigger effect table
+---@param effect_id string
+---@return data.Trigger
+local function created_effect(effect_id)
+  ---@type data.Trigger
+  return {
+    type = "direct",
+    action_delivery = {
+      type = "instant",
+      source_effects = {
+        type = "script",
+        effect_id = effect_id,
+      }
+    }
+  }
+end
 
 return {
   --- the graphics path prefix, including the final slash
@@ -137,6 +172,8 @@ return {
   add_recipe_ingredient = add_recipe_ingredient,
   replace_recipe_ingredients = replace_recipe_ingredients,
   replace_recipe_results = replace_recipe_results,
+  generate_placer = generate_placer,
+  created_effect = created_effect,
 
   -- include some convenient requires from base
   sounds = require("__base__.prototypes.entity.sounds"),
