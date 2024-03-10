@@ -20,15 +20,12 @@ set_subgroup("advanced-chemicals", {
   "gold-powder"
 })
 
-log("battery item: " .. serpent.block(data.raw.item["battery"]))
-log("battery recipe: " .. serpent.block(data.raw.recipe["battery"]))
-
 set_subgroup("chemical-products", {
   "phenol",
   "bakelite",
   "plastic-bar",
   "sulfur",
-  "battery",
+  "battery",  -- ThemTharHills moves this again in data-final-fixes. will need to rework batteries later anyways
   "explosives",
   "solid-fuel",
   "rocket-fuel"
@@ -44,6 +41,3 @@ set_subgroup("nuclear-products", {
   "uranium-processing",
   "nuclear-fuel-reprocessing"
 })
-
-log("battery item: " .. serpent.block(data.raw.item["battery"]))
-log("battery recipe: " .. serpent.block(data.raw.recipe["battery"]))

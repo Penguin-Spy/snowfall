@@ -15,8 +15,9 @@ local function rolling(metal)
   data:extend{
     {
       type = "recipe",
-      name = result_name,
+      name = "snowfall-rolling-" .. result_name,
       category = "rolling",
+      hide_from_player_crafting = true,
       ingredients = {
         {type = "item", name = ingredient_name, amount = 1}
       },
@@ -24,7 +25,7 @@ local function rolling(metal)
         {type = "item", name = result_name, amount = 2}
       },
       energy_required = 2
-    }
+    }  --[[@as data.RecipePrototype]]
   }
 end
 
@@ -32,22 +33,20 @@ rolling("iron")
 rolling("copper")
 rolling("zinc")
 rolling("lead")
+rolling("nickel")
 --rolling("gold")
 rolling("brass")
 --rolling("steel")  -- ?
-
-if mods["IfNickel"] then
-  rolling("nickel")
-  rolling("invar")
-end
+rolling("invar")
 
 local function drawing(metal, result_name)
   local ingredient_name = metal .. "-rod"
   data:extend{
     {
       type = "recipe",
-      name = result_name,
+      name = "snowfall-drawing-" .. result_name,
       category = "wire-drawing",
+      hide_from_player_crafting = true,
       ingredients = {
         {type = "item", name = ingredient_name, amount = 1}
       },
@@ -55,7 +54,7 @@ local function drawing(metal, result_name)
         {type = "item", name = result_name, amount = 2}
       },
       energy_required = 2
-    }
+    }  --[[@as data.RecipePrototype]]
   }
 end
 

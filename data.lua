@@ -10,21 +10,25 @@ data_util = require "prototypes.data_util"  ---@diagnostic disable-line: lowerca
 -- (order of running these files *shouldn't* matter)
 
 require "prototypes.phase-1.changes.entities"
+require "prototypes.phase-1.changes.items"
 require "prototypes.phase-1.changes.recipes"
 require "prototypes.phase-1.changes.removals"
 
 require "prototypes.phase-1.recipe.crafting"
 require "prototypes.phase-1.recipe.kiln"
 require "prototypes.phase-1.recipe.melting"
-require "prototypes.phase-1.recipe.rolling"
+require "prototypes.phase-1.recipe.rolling-drawing"
+require "prototypes.phase-1.recipe.smelting"
 
+--require "prototypes.phase-1.casting" -- this system needs reworking
 require "prototypes.phase-1.entities"
 require "prototypes.phase-1.fluids"
 require "prototypes.phase-1.item-groups"
 require "prototypes.phase-1.items"
 require "prototypes.phase-1.resources"
-require "prototypes.phase-1.smelting"
 require "prototypes.phase-1.technology"
 require "prototypes.phase-1.tiles"
 
 data_util = orig_data_util  ---@diagnostic disable-line: lowercase-global
+
+log(serpent.block(data.raw["resource"]["iron-ore"]))

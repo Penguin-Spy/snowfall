@@ -23,3 +23,4 @@ file, You can obtain one at https://mozilla.org/MPL/2.0/.
 ## Attribution
 - `graphics/icons/ice.png` from https://www.vecteezy.com/png/9384604-ice-cube-clipart-design-illustration
 - `graphics/icons/methane.png` By Ben Mills - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=6643505
+- `graphics/icons/slag.png` from https://ftbwiki.org/File:Item_Slag.png  (CC BY-NC-SA 3.0)

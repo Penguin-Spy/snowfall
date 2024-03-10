@@ -20,5 +20,5 @@ data:extend{
     subgroup = "fluid-recipes",
     hide_from_player_crafting = true,
     allow_decomposition = false
-  }
+  }  --[[@as data.RecipePrototype]]
 }

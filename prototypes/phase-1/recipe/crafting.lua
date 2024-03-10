@@ -40,27 +40,14 @@ data:extend{
   -- intermediates
   {
     type = "recipe",
-    name = "basic-gear",  -- gear actually made from iron. the brass one is "iron-gear-wheel" (the vanilla name) so other mods use it by default
+    name = "basic-gear",  -- gear made from nickel. the brass one is "iron-gear-wheel" (the vanilla name) so other mods use it by default
     ingredients = {
-      {type = "item", name = "iron-plate", amount = 1},
+      {type = "item", name = "nickel-plate", amount = 1},
     },
     results = {
       {type = "item", name = "basic-gear", amount = 2}
     },
-    energy_required = 1
-  },
-  {
-    type = "recipe",
-    name = "motor",
-    ingredients = {
-      {type = "item", name = "zinc-plate",   amount = 2},
-      {type = "item", name = "copper-cable", amount = 2},
-      {type = "item", name = "iron-stick",   amount = 1},
-    },
-    results = {
-      {type = "item", name = "motor", amount = 1}
-    },
-    energy_required = 1
+    energy_required = 0.5
   },
 
   ---- entities ----
@@ -92,7 +79,7 @@ data:extend{
     },
     energy_required = 2
   },
-  {
+  --[[{
     type = "recipe",
     name = "snowfall-foundry",
     ingredients = {
@@ -103,7 +90,7 @@ data:extend{
       {type = "item", name = "snowfall-foundry", amount = 1}
     },
     energy_required = 3
-  },
+  },]]
   {
     type = "recipe",
     name = "snowfall-rolling-machine",
@@ -111,7 +98,7 @@ data:extend{
       {type = "item", name = "stone-brick", amount = 4},
       {type = "item", name = "iron-stick",  amount = 4},
       {type = "item", name = "basic-gear",  amount = 2},
-      {type = "item", name = "motor",       amount = 1},
+      --{type = "item", name = "motor",       amount = 1},
     },
     results = {
       {type = "item", name = "snowfall-rolling-machine", amount = 1}
@@ -125,7 +112,7 @@ data:extend{
       {type = "item", name = "stone-brick", amount = 4},
       {type = "item", name = "iron-plate",  amount = 4},
       {type = "item", name = "basic-gear",  amount = 2},
-      {type = "item", name = "motor",       amount = 1},
+      --{type = "item", name = "motor",       amount = 1},
     },
     results = {
       {type = "item", name = "snowfall-drawing-machine", amount = 1}

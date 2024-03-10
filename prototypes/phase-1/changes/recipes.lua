@@ -21,14 +21,17 @@ data_util.replace_recipe_ingredients("wooden-chest", {
   {type = "item", name = "stone-brick", amount = 4}
 })
 
+-- make stone furnace take bricks & fire bricks
+data_util.replace_recipe_ingredients("stone-furnace", {
+  {type = "item", name = "stone-brick",         amount = 4},
+  {type = "item", name = "snowfall-fire-brick", amount = 4}
+})
+data.raw.recipe["stone-furnace"].energy_required = 2
 
 -- [[ remove unneeded items/recipes ]]
 data.raw["item"]["brass-precursor"] = nil
 data.raw["recipe"]["brass-precursor"] = nil
+data.raw["item"]["invar-precursor"] = nil
+data.raw["recipe"]["invar-precursor"] = nil
 
-if mods["IfNickel"] then
-  data.raw["item"]["invar-precursor"] = nil
-  data.raw["recipe"]["invar-precursor"] = nil
-
-  data_util.remove_technology_recipe_unlock("invar-processing", "invar-precursor")
-end
+data_util.remove_technology_recipe_unlock("invar-processing", "invar-precursor")

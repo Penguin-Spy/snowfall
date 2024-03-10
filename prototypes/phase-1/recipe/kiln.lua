@@ -18,7 +18,7 @@ data:extend{
     },
     energy_required = 5,
     always_show_products = true
-  }
+  }  --[[@as data.RecipePrototype]]
 }
 
 -- move the stone brick recipe to the kiln category

@@ -1,5 +1,8 @@
 -- generates recipes & intermediate items for metal casting, cooling, and alloying
 
+-- CURRENTLY NOT REQUIRED BY data.lua
+-- i have plans to rework this later
+
 --[[
   lead    ore -> ingot -> plate
 
@@ -112,6 +115,8 @@ smelting("copper", "rod")      -- item-name.copper-rod
 smelting("iron", "ingot")      -- item-name.iron-ingot
 --smelting("iron", "rod")        -- item-name.iron-rod
 smelting("zinc", "ingot")      -- item-name.zinc-ingot
+smelting("nickel", "ingot")    -- item-name.nickel-ingot
+smelting("nickel", "rod")      -- item-name.nickel-rod
 smelting("gold", "rod")        -- item-name.gold-rod
 smelting("titanium", "ingot")  -- item-name.titanium-ingot
 
@@ -126,15 +131,8 @@ alloy{  -- item-name.iron-gear-wheel
   result = "iron-gear-wheel", amount = 2,
   mold = "gear"
 }
-
-
-if mods["IfNickel"] then
-  smelting("nickel", "ingot")  -- item-name.nickel-ingot
-  smelting("nickel", "rod")    -- item-name.nickel-rod
-
-  alloy{                       -- item-name.invar-ingot
-    ingredients = {iron = 2, nickel = 2},
-    result = "invar-ingot", amount = 2,
-    mold = "ingot"
-  }
-end
+alloy{  -- item-name.invar-ingot
+  ingredients = {iron = 2, nickel = 2},
+  result = "invar-ingot", amount = 2,
+  mold = "ingot"
+}

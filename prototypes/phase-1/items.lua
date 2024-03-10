@@ -31,6 +31,14 @@ data:extend{
     order = "b-a[fire-brick]",  -- between stone brick & silica
     stack_size = 50
   },
+  {
+    type = "item",
+    name = "slag",
+    icon = graphics .. "icons/slag.png", icon_size = 64,
+    subgroup = "raw-resource",
+    order = "c[slag]",
+    stack_size = 50
+  },
   -- molds
   {
     type = "item",
@@ -92,6 +100,14 @@ data:extend{
   },
   {
     type = "item",
+    name = "nickel-ingot",
+    icon = "__IfNickel__/graphics/icons/nickel-ingot.png", icon_size = 64,
+    subgroup = "ingots",
+    order = data.raw.item["nickel-plate"].order,
+    stack_size = 50
+  },
+  {
+    type = "item",
     name = "gold-ingot",
     icon = graphics_ThemTharHills .. "gold-ingot.png", icon_size = 64,
     subgroup = "ingots",
@@ -114,6 +130,14 @@ data:extend{
     order = data.raw.item["brass-plate"].order,
     stack_size = 50
   },
+  {
+    type = "item",
+    name = "invar-ingot",
+    icon = "__IfNickel__/graphics/icons/invar-ingot.png", icon_size = 64,
+    subgroup = "ingots",
+    order = data.raw.item["invar-plate"].order,
+    stack_size = 50
+  },
 
   -- rods
   {
@@ -126,6 +150,14 @@ data:extend{
   },
   {
     type = "item",
+    name = "nickel-rod",
+    icon = graphics .. "icons/nickel-rod.png", icon_size = 64,
+    subgroup = "intermediate-product",
+    order = data.raw.item["nickel-plate"].order,
+    stack_size = 50
+  },
+  {
+    type = "item",
     name = "gold-rod",
     icon = graphics .. "icons/gold-rod.png", icon_size = 64,
     subgroup = "intermediate-product",
@@ -134,15 +166,6 @@ data:extend{
   },
 
   -- intermediates
-  {
-    type = "item",
-    name = "motor",
-    icon = graphics .. "icons/motor.png",
-    icon_size = 64, icon_mipmaps = 4,
-    subgroup = "intermediate-product",
-    order = "a",
-    stack_size = 50
-  },
   {
     type = "item",
     name = "basic-gear",  -- gear actually made from iron. the brass one is "iron-gear-wheel" (the vanilla name) so other mods use it by default
@@ -179,7 +202,7 @@ data:extend{
     place_result = "snowfall-kiln",
     stack_size = 50
   },
-  {
+  --[[{
     type = "item",
     name = "snowfall-foundry",
     icon = "__base__/graphics/icons/stone-furnace.png",
@@ -188,7 +211,7 @@ data:extend{
     order = "d[snowfall]-b",
     place_result = "snowfall-foundry",
     stack_size = 50
-  },
+  },]]
   {
     type = "item",
     name = "snowfall-rolling-machine",
@@ -220,24 +243,3 @@ data:extend{
     stack_size = 50
   },
 }
-
-if mods["IfNickel"] then
-  data:extend{
-    {
-      type = "item",
-      name = "nickel-ingot",
-      icon = "__IfNickel__/graphics/items/nickel-ingot.png", icon_size = 64,
-      subgroup = "ingots",
-      order = data.raw.item["nickel-plate"].order,
-      stack_size = 50
-    },
-    {
-      type = "item",
-      name = "invar-ingot",
-      icon = "__IfNickel__/graphics/items/invar-ingot.png", icon_size = 64,
-      subgroup = "ingots",
-      order = data.raw.item["invar-plate"].order,
-      stack_size = 50
-    }
-  }
-end

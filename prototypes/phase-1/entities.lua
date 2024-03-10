@@ -265,6 +265,7 @@ data:extend{
   }  --[[@as data.AssemblingMachinePrototype]],
 
   -- foundry
+  --[=[
   {
     type = "assembling-machine",
     name = "snowfall-foundry",
@@ -488,6 +489,7 @@ data:extend{
       orientation_to_variation = false
     }
   }  --[[@as data.AssemblingMachinePrototype]],
+  ]=]
 
   -- caster
   --[[

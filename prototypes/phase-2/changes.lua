@@ -9,11 +9,11 @@ for _, preset in pairs(data.raw["map-gen-presets"].default) do
 end
 
 -- BrassTacks re-adds brass plates when it shouldn't
-for i, ingredient in pairs(data.raw.recipe["iron-gear-wheel"].ingredients) do
+--[[for i, ingredient in pairs(data.raw.recipe["iron-gear-wheel"].ingredients) do
   if ingredient[1] == "brass-plate" then
     data.raw.recipe["iron-gear-wheel"].ingredients[i] = nil
   end
-end
+end]]
 
 -- move bolted flange to underground pipes, make pipes even cheaper (1 plate -> 2 pipes)
 data_util.replace_recipe_ingredients("pipe", {
