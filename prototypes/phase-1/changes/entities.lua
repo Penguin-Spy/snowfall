@@ -42,16 +42,16 @@ for _, simple_entity in pairs(data.raw["simple-entity"]) do
   end
 end
 
--- burner mining drill powered by methane
+-- burner mining drill powered by steam
 data.raw["mining-drill"]["burner-mining-drill"].energy_source = {
   type = "fluid",
-  burns_fluid = true,
+  burns_fluid = false,
   scale_fluid_usage = true,
   effectivity = 1,
   emissions_per_minute = 12,
   fluid_box = {
     production_type = "input-output",
-    filter = "methane",
+    filter = "steam",
     base_area = 1,   -- storage volume of 100 (base_area*height*100)
     height = 1,      -- default
     base_level = 0,  -- default
@@ -76,12 +76,12 @@ data.raw["mining-drill"]["burner-mining-drill"].energy_source = {
 -- same with burner inserter
 data.raw["inserter"]["burner-inserter"].energy_source = {
   type = "fluid",
-  burns_fluid = true,
+  burns_fluid = false,
   scale_fluid_usage = true,
   effectivity = 1,
   fluid_box = {
     production_type = "input-output",
-    filter = "methane",
+    filter = "steam",
     base_area = 1,   -- storage volume of 50 (base_area*height*100)
     height = 0.5,    -- default is 1
     base_level = 0,  -- default
@@ -96,52 +96,31 @@ data.raw["inserter"]["burner-inserter"].energy_source = {
   light_flicker = {color = {0, 0, 0}},
 }
 
--- stone furnace powered by methane & converted to an assembler for alloying recipes
+-- stone furnace powered by heat
 local stone_furnace = data.raw["furnace"]["stone-furnace"]
-data.raw["furnace"]["stone-furnace"] = nil
-stone_furnace.type = "assembling-machine"
 stone_furnace.collision_box = {{-1.29, -0.79}, {1.29, 0.79}}
 stone_furnace.selection_box = {{-1.5, -1}, {1.5, 1}}
 stone_furnace.next_upgrade = nil
 stone_furnace.fast_replaceable_group = nil
 stone_furnace.energy_source = {
-  type = "fluid",
-  burns_fluid = true,
-  scale_fluid_usage = true,
-  effectivity = 1,
-  emissions_per_minute = 2,
-  fluid_box = {
-    production_type = "input-output",
-    filter = "methane",
-    base_area = 1,   -- storage volume of 100 (base_area*height*100)
-    height = 1,      -- default
-    base_level = 0,  -- default
-    pipe_connections = {
-      {type = "input-output", position = {0, -1.5}},
-      {type = "input-output", position = {0, 1.5}},
-    },
-    secondary_draw_orders = {north = -1},
-    pipe_picture = assembler2pipepictures(),
-    pipe_covers = pipecoverspictures(),
-  },
-  light_flicker =
-  {
-    color = {0, 0, 0},
-    minimum_intensity = 0.6,
-    maximum_intensity = 0.95
-  },
-  smoke = {
+  type = "heat",
+  default_temperature = 15,
+  minimum_glow_temperature = 250,
+  min_working_temperature = 250,
+  max_temperature = 350,
+  max_transfer = "90kJ",
+  specific_heat = "90kJ",
+  connections = {
     {
-      name = "smoke",
-      deviation = {0.1, 0.1},
-      frequency = 5,
-      position = {0.0, -0.8},
-      starting_vertical_speed = 0.08,
-      starting_frame_deviation = 60
-    }
-  }
-}
-data:extend{stone_furnace}
+      position = {0, -0.5},
+      direction = defines.direction.north
+    },
+    {
+      position = {0, 0.5},
+      direction = defines.direction.south
+    },
+  },
+}  --[[@as data.HeatEnergySource]]
 
 
 -- make wooden chest stone (visually only, leave prototype name alone)

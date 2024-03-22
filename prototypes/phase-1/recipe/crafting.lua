@@ -66,8 +66,34 @@ data:extend{
     },
     energy_required = 2
   },
+  {
+    type = "recipe",
+    name = "snowfall-steam-vent-cap",
+    ingredients = {
+      {type = "item", name = "stone-brick", amount = 4},
+      {type = "item", name = "lead-plate",  amount = 4},
+      {type = "item", name = "pipe",        amount = 2},
+    },
+    results = {
+      {type = "item", name = "snowfall-steam-vent-cap", amount = 1}
+    },
+    energy_required = 2
+  },
 
   -- machines
+  {
+    type = "recipe",
+    name = "snowfall-solar-heat-collector",
+    ingredients = {
+      {type = "item", name = "stone-brick",  amount = 8},
+      {type = "item", name = "brass-plate",  amount = 15},
+      {type = "item", name = "copper-plate", amount = 5},
+    },
+    results = {
+      {type = "item", name = "snowfall-solar-heat-collector", amount = 1}
+    },
+    energy_required = 2
+  },
   {
     type = "recipe",
     name = "snowfall-kiln",

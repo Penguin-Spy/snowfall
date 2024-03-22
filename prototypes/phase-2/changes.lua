@@ -27,3 +27,11 @@ data_util.replace_recipe_ingredients("pipe-to-ground", {
   {type = "item", name = "lead-plate",    amount = 2},
   {type = "item", name = "bolted-flange", amount = 2}
 })
+
+local steam_vent = data.raw["resource"]["geothermal-vent"]
+steam_vent.autoplace.starting_area_amount = 150
+steam_vent.order = "aaa"
+
+local iron_ore = data.raw["resource"]["iron-ore"]
+iron_ore.autoplace.starting_area_amount = 0
+iron_ore.autoplace.starting_area_size = 0

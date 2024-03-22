@@ -190,8 +190,29 @@ data:extend{
     place_result = "snowfall-burner-ice-bore-placer",
     stack_size = 50
   }  --[[@as data.ItemPrototype]],
+  {
+    type = "item",
+    name = "snowfall-steam-vent-cap",
+    icons = {
+      {icon = "__base__/graphics/icons/pumpjack.png", icon_size = 64, icon_mipmaps = 4, tint = {r = 0.7, g = 0.85, b = 1, a = 1}}
+    },
+    subgroup = "extraction-machine",
+    order = "a[items]-b[pumpjack]-a[steam-vent-cap]",
+    place_result = "snowfall-steam-vent-cap",
+    stack_size = 50
+  }  --[[@as data.ItemPrototype]],
 
   -- machines
+  {
+    type = "item",
+    name = "snowfall-solar-heat-collector",
+    icon = "__base__/graphics/icons/solar-panel.png",
+    icon_size = 64, icon_mipmaps = 4,
+    subgroup = "smelting-machine",
+    order = "d[snowfall]-a",
+    place_result = "snowfall-solar-heat-collector",
+    stack_size = 50
+  },
   {
     type = "item",
     name = "snowfall-kiln",

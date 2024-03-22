@@ -14,9 +14,10 @@ local function prepare_map()
       ["firearm-magazine"] = 10
     })
     remote.call("freeplay", "set_ship_items", {
-      ["offshore-pump"] = 2,
       ["burner-mining-drill"] = 10,
       ["snowfall-kiln"] = 1,
+      ["snowfall-steam-vent-cap"] = 2,
+      ["snowfall-solar-heat-collector"] = 1,
       ["firearm-magazine"] = 20
     })
     remote.call("freeplay", "set_debris_items", {

@@ -14,7 +14,6 @@ burner_ice_bore.placeable_by = {item = "snowfall-burner-ice-bore", count = 1}
 burner_ice_bore.fast_replaceable_group = nil
 
 
-local range = math.ceil(burner_ice_bore.resource_searching_radius * 2)
 local burner_ice_bore_placer = data_util.generate_placer(burner_ice_bore, "simple-entity-with-owner", {
   created_effect = data_util.created_effect("snowfall_placed_ice_bore"),
   picture = burner_ice_bore.animations,
@@ -27,7 +26,7 @@ local burner_ice_bore_placer = data_util.generate_placer(burner_ice_bore, "simpl
       "\n[font=default-bold][color=#f8e0bb]", {"description.pollution"}, ":[/color][/font] " .. burner_ice_bore.energy_source.emissions_per_minute, {"per-minute-suffix"}, "\n",
     },
     {"",
-      "[img=tooltip-category-consumes] [font=default-bold][color=#f8cd48]", {"tooltip-category.consumes"}, " ", {"fluid-name.methane"}, "[/color]\n[color=#f8e0bb]",
+      "[img=tooltip-category-consumes] [font=default-bold][color=#f8cd48]", {"tooltip-category.consumes"}, " ", {"fluid-name.steam"}, "[/color]\n[color=#f8e0bb]",
       {"description.max-energy-consumption"}, ":[/color][/font] " .. util.parse_energy(burner_ice_bore.energy_usage) * 0.06, " ", {"si-prefix-symbol-kilo"}, {"si-unit-symbol-watt"}
     }
   }
@@ -38,6 +37,226 @@ data:extend{
   -- burner ice bore
   burner_ice_bore,
   burner_ice_bore_placer,
+
+  -- steam vent cap
+  {
+    type = "mining-drill",
+    name = "snowfall-steam-vent-cap",
+    icon = "__base__/graphics/icons/pipe-to-ground.png",
+    icon_size = 64, icon_mipmaps = 4,
+    flags = {"placeable-neutral", "player-creation"},
+    minable = {mining_time = 0.5, result = "snowfall-steam-vent-cap"},
+    resource_categories = {"geothermal-vent"},
+    max_health = 150,
+    corpse = "pumpjack-remnants",
+    dying_explosion = "pumpjack-explosion",
+    collision_box = {{-1.2, -1.2}, {1.2, 1.2}},
+    selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+    damaged_trigger_effect = data_util.hit_effects.entity(),
+    drawing_box = {{-1.6, -2.5}, {1.5, 1.6}},
+    target_temperature = 250,
+    energy_source = {type = "void"},
+    output_fluid_box = {
+      base_area = 10,
+      base_level = 1,
+      pipe_covers = pipecoverspictures(),
+      pipe_connections = {
+        {
+          positions = {{1, -2}, {2, -1}, {-1, 2}, {-2, 1}},
+          type = "output"
+        }
+      }
+    },
+    energy_usage = "90kW",
+    mining_speed = 1,
+    resource_searching_radius = 0.49,
+    vector_to_place_result = {0, 0},
+    radius_visualisation_picture = {
+      filename = "__base__/graphics/entity/pumpjack/pumpjack-radius-visualization.png",
+      width = 12,
+      height = 12
+    },
+    monitor_visualization_tint = {r = 78, g = 173, b = 255},
+    base_render_layer = "lower-object-above-shadow",
+    base_picture = {
+      sheets = {
+        {
+          filename = data_util.graphics .. "entity/steam-vent-cap.png",
+          priority = "extra-high",
+          width = 131,
+          height = 137,
+          shift = util.by_pixel(-2.5, -4.5),
+          hr_version = {
+            filename = data_util.graphics .. "entity/hr-steam-vent-cap.png",
+            priority = "extra-high",
+            width = 261,
+            height = 273,
+            shift = util.by_pixel(-2.25, -4.75),
+            scale = 0.5
+          }
+        },
+        {
+          filename = data_util.graphics .. "entity/steam-vent-cap-shadow.png",
+          priority = "extra-high",
+          width = 110,
+          height = 111,
+          draw_as_shadow = true,
+          shift = util.by_pixel(6, 0.5),
+          hr_version = {
+            filename = data_util.graphics .. "entity/hr-steam-vent-cap-shadow.png",
+            width = 220,
+            height = 220,
+            scale = 0.5,
+            draw_as_shadow = true,
+            shift = util.by_pixel(6, 0.5)
+          }
+        }
+      }
+    },
+    vehicle_impact_sound = data_util.sounds.generic_impact,
+    open_sound = data_util.sounds.machine_open,
+    close_sound = data_util.sounds.machine_close,
+
+    circuit_wire_connection_points = circuit_connector_definitions["pumpjack"].points,
+    circuit_connector_sprites = circuit_connector_definitions["pumpjack"].sprites,
+    circuit_wire_max_distance = default_circuit_wire_max_distance
+  }  --[[@as data.MiningDrillPrototype]],
+
+  -- solar heat collector
+  {
+    type = "reactor",
+    name = "snowfall-solar-heat-collector",
+    collision_box = {{-2.29, -2.29}, {2.29, 2.29}},
+    selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
+    icon = "__base__/graphics/icons/stone-furnace.png",
+    icon_size = 64, icon_mipmaps = 4,
+    flags = {"placeable-neutral", "placeable-player", "player-creation"},
+    minable = {mining_time = 0.2, result = "snowfall-solar-heat-collector"},
+    max_health = 100,
+
+    consumption = "720kW",
+    energy_source = {type = "void"},
+    neighbour_bonus = 0,
+
+    heat_buffer = {
+      default_temperature = 15,
+      max_temperature = 500,
+      max_transfer = "720kW",
+      specific_heat = "90kJ",
+      connections = {
+        {
+          position = {0, -2},
+          direction = defines.direction.north
+        },
+        {
+          position = {2, 0},
+          direction = defines.direction.east
+        },
+        {
+          position = {0, 2},
+          direction = defines.direction.south
+        },
+        {
+          position = {-2, 0},
+          direction = defines.direction.west
+        }
+      }
+    },
+    picture = {
+      filename = data_util.graphics .. "entity/solar-heat-collector.png",
+      size = 320,
+      scale = 0.5
+    },
+    working_light_picture = {
+      filename = "__core__/graphics/empty.png",
+      size = 1
+    }
+  }  --[[@as data.ReactorPrototype]],
+
+  -- crashed ship RTG heat generator
+  --[=[]]{
+    type = "reactor",
+    name = "snowfall-crash-site-rtg",
+    collision_box = {{-2.4, -1.9}, {2.4, 1.9}},
+    selection_box = {{-2.5, -2}, {2.5, 2}},
+    icons = {{icon = "__base__/graphics/icons/fusion-reactor-equipment.png", icon_size = 64, icon_mipmaps = 4}},
+    flags = {"placeable-neutral"},
+    max_health = 500,
+    consumption = "500GW",
+    energy_source = {type = "void"},
+    neighbour_bonus = 0,
+    heat_buffer = {
+      max_temperature = 4000,
+      max_transfer = "450kW",
+      specific_heat = "8GJ",
+      connections = {
+        {  -- top left
+          direction = defines.direction.north,
+          position = {-0.5, -1.5}
+        },
+        {  -- top right
+          direction = defines.direction.north,
+          position = {1.5, -1.5}
+        },
+        {  -- bottom left
+          direction = defines.direction.south,
+          position = {-0.5, 1.5}
+        },
+        {  -- bottom right
+          direction = defines.direction.south,
+          position = {1.5, 1.5}
+        },
+        {  -- right top
+          direction = defines.direction.east,
+          position = {2, -1}
+        },
+        {  -- right bottom
+          direction = defines.direction.east,
+          position = {2, 1}
+        }
+      }
+    },
+    picture = {
+      layers = {
+        {
+          filename = "__factorio-crash-site__/graphics/entity/crash-site-lab/crash-site-lab-broken.png",
+          priority = "low",
+          width = 236,
+          height = 140,
+          shift = util.by_pixel(-24, 6),
+          hr_version = {
+            filename = "__factorio-crash-site__/graphics/entity/crash-site-lab/hr-crash-site-lab-broken.png",
+            priority = "low",
+            width = 472,
+            height = 280,
+            shift = util.by_pixel(-24, 6),
+            scale = 0.5
+          }
+        },
+        {
+          filename = "__factorio-crash-site__/graphics/entity/crash-site-lab/crash-site-lab-broken-shadow.png",
+          priority = "low",
+          width = 270,
+          height = 150,
+          shift = util.by_pixel(-16, 10),
+          draw_as_shadow = true,
+          hr_version = {
+            filename = "__factorio-crash-site__/graphics/entity/crash-site-lab/hr-crash-site-lab-broken-shadow.png",
+            priority = "low",
+            width = 550,
+            height = 304,
+            shift = util.by_pixel(-14, 9),
+            scale = 0.5,
+            draw_as_shadow = true
+          }
+        }
+      }
+    },
+    working_light_picture = {
+      filename = "__core__/graphics/empty.png",
+      size = 1
+    }
+  }  --[[@as data.ReactorPrototype]],]=]
 
   -- kiln
   {
@@ -87,42 +306,24 @@ data:extend{
     energy_usage = "90kW",
     crafting_speed = 1,
     energy_source = {
-      type = "fluid",
-      burns_fluid = true,
-      scale_fluid_usage = true,
-      effectivity = 1,
-      emissions_per_minute = 2,
-      fluid_box = {
-        production_type = "input-output",
-        filter = "methane",
-        base_area = 1,   -- storage volume of 100 (base_area*height*100)
-        height = 1,      -- default
-        base_level = 0,  -- default
-        pipe_connections = {
-          {type = "input-output", position = {0, -1.5}},
-          {type = "input-output", position = {0, 1.5}},
-        },
-        secondary_draw_orders = {north = -1},
-        pipe_picture = assembler2pipepictures(),
-        pipe_covers = pipecoverspictures(),
-      },
-      light_flicker =
-      {
-        color = {0, 0, 0},
-        minimum_intensity = 0.6,
-        maximum_intensity = 0.95
-      },
-      smoke = {
+      type = "heat",
+      default_temperature = 15,
+      minimum_glow_temperature = 250,
+      min_working_temperature = 250,
+      max_temperature = 350,
+      max_transfer = "90kJ",
+      specific_heat = "90kJ",
+      connections = {
         {
-          name = "smoke",
-          deviation = {0.1, 0.1},
-          frequency = 5,
-          position = {0.0, -0.8},
-          starting_vertical_speed = 0.08,
-          starting_frame_deviation = 60
-        }
-      }
-    },
+          position = {0, -0.5},
+          direction = defines.direction.north
+        },
+        {
+          position = {0, 0.5},
+          direction = defines.direction.south
+        },
+      },
+    }  --[[@as data.HeatEnergySource]],
     animation = {
       layers = {
         {
