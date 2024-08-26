@@ -1,12 +1,12 @@
 # Snowfall
-> Crash-landed on a hostile frozen moon, you must protect your factory from the elements. With an atmosphere of nitrogen and seas of methane, progressing here will be different than anything you've done before. At least scans of the surface didn't detect any lifeforms...
+> Crash-landed on an inhospitable frozen moon, you must protect your factory from the elements. With an atmosphere of nitrogen and seas of methane, progressing here will be different than anything you've done before. At least scans of the surface didn't detect any lifeforms...
 
 **in alpha**, many things are subject to change!  
 
 general gameplay:
 - capturing solar energy with heat solar panels
+- capturing geothermal steam for mechanical power
 - melting ice for water
-- burning methane for heat and power
 - somewhat more involved smelting & intermediate assembly
 - new ores and alloys
 - protecting your factory from the cold, harsh weather

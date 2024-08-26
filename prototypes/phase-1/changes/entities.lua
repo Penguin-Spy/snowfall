@@ -9,8 +9,8 @@ data.raw["offshore-pump"]["offshore-pump"].fluid_box.filter = "methane"
 -- mining stone produces kaolinite
 data.raw["resource"]["stone"].minable.result = nil
 data.raw["resource"]["stone"].minable.results = {
-  {type = "item", name = "stone",              amount = 1},
-  {type = "item", name = "snowfall-kaolinite", amount = 1, probability = 0.5},
+  { type = "item", name = "stone",              amount = 1 },
+  { type = "item", name = "snowfall-kaolinite", amount = 1, probability = 0.5 },
 }
 
 -- replace coal in rocks with kaolinite
@@ -56,18 +56,18 @@ data.raw["mining-drill"]["burner-mining-drill"].energy_source = {
     height = 1,      -- default
     base_level = 0,  -- default
     pipe_connections = {
-      {type = "input-output", position = {-1.5, 0.5}},
-      {type = "input-output", position = {1.5, 0.5}},
+      { type = "input-output", position = { -1.5, 0.5 } },
+      { type = "input-output", position = { 1.5, 0.5 } },
     },
-    secondary_draw_orders = {north = -1},
+    secondary_draw_orders = { north = -1 },
     pipe_picture = assembler2pipepictures(),
     pipe_covers = pipecoverspictures(),
   },
-  light_flicker = {color = {0, 0, 0}},
+  light_flicker = { color = { 0, 0, 0 } },
   smoke = {
     {
       name = "smoke",
-      deviation = {0.1, 0.1},
+      deviation = { 0.1, 0.1 },
       frequency = 3
     }
   }
@@ -86,20 +86,20 @@ data.raw["inserter"]["burner-inserter"].energy_source = {
     height = 0.5,    -- default is 1
     base_level = 0,  -- default
     pipe_connections = {
-      {type = "input-output", position = {1, 0}},
-      {type = "input-output", position = {-1, 0}},
+      { type = "input-output", position = { 1, 0 } },
+      { type = "input-output", position = { -1, 0 } },
     },
-    secondary_draw_orders = {north = -1},
+    secondary_draw_orders = { north = -1 },
     --pipe_picture = assembler2pipepictures(),
     pipe_covers = pipecoverspictures(),
   },
-  light_flicker = {color = {0, 0, 0}},
+  light_flicker = { color = { 0, 0, 0 } },
 }
 
 -- stone furnace powered by heat
 local stone_furnace = data.raw["furnace"]["stone-furnace"]
-stone_furnace.collision_box = {{-1.29, -0.79}, {1.29, 0.79}}
-stone_furnace.selection_box = {{-1.5, -1}, {1.5, 1}}
+stone_furnace.collision_box = { { -1.29, -0.79 }, { 1.29, 0.79 } }
+stone_furnace.selection_box = { { -1.5, -1 }, { 1.5, 1 } }
 stone_furnace.next_upgrade = nil
 stone_furnace.fast_replaceable_group = nil
 stone_furnace.energy_source = {
@@ -112,11 +112,11 @@ stone_furnace.energy_source = {
   specific_heat = "90kJ",
   connections = {
     {
-      position = {0, -0.5},
+      position = { 0, -0.5 },
       direction = defines.direction.north
     },
     {
-      position = {0, 0.5},
+      position = { 0, 0.5 },
       direction = defines.direction.south
     },
   },
@@ -166,3 +166,11 @@ wooden_chest.picture = {
     }
   }
 }
+
+-- remove surface biters
+data.raw["unit-spawner"]["biter-spawner"].autoplace = nil
+data.raw["unit-spawner"]["spitter-spawner"].autoplace = nil
+data.raw["turret"]["small-worm-turret"].autoplace = nil
+data.raw["turret"]["medium-worm-turret"].autoplace = nil
+data.raw["turret"]["big-worm-turret"].autoplace = nil
+data.raw["turret"]["behemoth-worm-turret"].autoplace = nil

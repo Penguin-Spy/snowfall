@@ -258,6 +258,28 @@ data:extend{
     }
   }  --[[@as data.ReactorPrototype]],]=]
 
+  -- pneumatic laboratory
+  {
+    type = "assembling-machine",
+    name = "snowfall-pneumatic-lab",
+    icons = {{icon = "__base__/graphics/icons/lab.png", icon_size = 64, icon_mipmaps = 4}},
+    flags = {"placeable-neutral", "placeable-player", "player-creation"},
+    minable = {mining_time = 0.2, result = "snowfall-pneumatic-lab"},
+    max_health = 200,
+    collision_box = {{-1.2, -1.2}, {1.2, 1.2}},
+    selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+    crafting_categories = {"snowfall-pneumatic-research"},
+    energy_usage = "120kW",
+    crafting_speed = 1,
+    energy_source = table.deepcopy(data.raw["mining-drill"]["burner-mining-drill"].energy_source),
+    animation = table.deepcopy(data.raw["lab"]["lab"].off_animation),
+    working_visualisations = {
+      {
+        animation = table.deepcopy(data.raw["lab"]["lab"].on_animation)
+      }  --[[@as data.WorkingVisualisation]]
+    },
+  }  --[[@as data.AssemblingMachinePrototype]],
+
   -- kiln
   {
     type = "assembling-machine",
@@ -466,7 +488,6 @@ data:extend{
   }  --[[@as data.AssemblingMachinePrototype]],
 
   -- foundry
-  --[=[
   {
     type = "assembling-machine",
     name = "snowfall-foundry",
@@ -510,45 +531,27 @@ data:extend{
     collision_box = {{-1.29, -0.79}, {1.29, 0.79}},
     selection_box = {{-1.5, -1}, {1.5, 1}},
     damaged_trigger_effect = data_util.hit_effects.rock(),
-    crafting_categories = {"snowfall-direct-casting", "snowfall-direct-alloying"},
-    energy_usage = "90kW",
-    crafting_speed = 1,
+    crafting_categories = {"smelting"},
+    energy_usage = "110kW",
+    crafting_speed = 1.2,
     energy_source = {
-      type = "fluid",
-      burns_fluid = true,
-      scale_fluid_usage = true,
-      effectivity = 1,
-      emissions_per_minute = 2,
-      fluid_box = {
-        production_type = "input-output",
-        filter = "methane",
-        base_area = 1,   -- storage volume of 100 (base_area*height*100)
-        height = 1,      -- default
-        base_level = 0,  -- default
-        pipe_connections = {
-          {type = "input-output", position = {0, -1.5}},
-          {type = "input-output", position = {0, 1.5}},
-        },
-        secondary_draw_orders = {north = -1},
-        pipe_picture = assembler2pipepictures(),
-        pipe_covers = pipecoverspictures(),
-      },
-      light_flicker =
-      {
-        color = {0, 0, 0},
-        minimum_intensity = 0.6,
-        maximum_intensity = 0.95
-      },
-      smoke = {
+      type = "heat",
+      default_temperature = 15,
+      minimum_glow_temperature = 250,
+      min_working_temperature = 250,
+      max_temperature = 350,
+      max_transfer = "110kJ",
+      specific_heat = "110kJ",
+      connections = {
         {
-          name = "smoke",
-          deviation = {0.1, 0.1},
-          frequency = 5,
-          position = {0.0, -0.8},
-          starting_vertical_speed = 0.08,
-          starting_frame_deviation = 60
-        }
-      }
+          position = {0, -0.5},
+          direction = defines.direction.north
+        },
+        {
+          position = {0, 0.5},
+          direction = defines.direction.south
+        },
+      },
     },
     animation = {
       layers = {
@@ -690,7 +693,6 @@ data:extend{
       orientation_to_variation = false
     }
   }  --[[@as data.AssemblingMachinePrototype]],
-  ]=]
 
   -- caster
   --[[

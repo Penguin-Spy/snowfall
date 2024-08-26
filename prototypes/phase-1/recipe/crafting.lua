@@ -64,7 +64,7 @@ data:extend{
     results = {
       {type = "item", name = "snowfall-burner-ice-bore", amount = 1}
     },
-    energy_required = 2
+    energy_required = 1
   },
   {
     type = "recipe",
@@ -77,7 +77,7 @@ data:extend{
     results = {
       {type = "item", name = "snowfall-steam-vent-cap", amount = 1}
     },
-    energy_required = 2
+    energy_required = 1
   },
 
   -- machines
@@ -96,6 +96,19 @@ data:extend{
   },
   {
     type = "recipe",
+    name = "snowfall-pneumatic-lab",
+    ingredients = {
+      {type = "item", name = "stone-brick", amount = 4},
+      {type = "item", name = "basic-gear",  amount = 4},
+      {type = "item", name = "lead-plate",  amount = 6},
+    },
+    results = {
+      {type = "item", name = "snowfall-pneumatic-lab", amount = 1}
+    },
+    energy_required = 2
+  },
+  {
+    type = "recipe",
     name = "snowfall-kiln",
     ingredients = {
       {type = "item", name = "stone", amount = 5},
@@ -103,20 +116,20 @@ data:extend{
     results = {
       {type = "item", name = "snowfall-kiln", amount = 1}
     },
-    energy_required = 2
+    energy_required = 1
   },
-  --[[{
+  {
     type = "recipe",
     name = "snowfall-foundry",
     ingredients = {
       {type = "item", name = "stone-brick",         amount = 4},
-      {type = "item", name = "snowfall-fire-brick", amount = 8},
+      {type = "item", name = "snowfall-fire-brick", amount = 6},
     },
     results = {
       {type = "item", name = "snowfall-foundry", amount = 1}
     },
-    energy_required = 3
-  },]]
+    energy_required = 2
+  },
   {
     type = "recipe",
     name = "snowfall-rolling-machine",

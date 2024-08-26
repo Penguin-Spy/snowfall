@@ -176,6 +176,19 @@ data:extend{
     stack_size = 100
   },
 
+  -- science items
+  {
+    type = "tool",
+    name = "snowfall-material-punchcard",
+    icons = {{icon = graphics .. "icons/material-punchcard.png", icon_size = 64}},
+    subgroup = "science-pack",
+    order = "a",
+    stack_size = 100,
+    durability = 1,
+    durability_description_key = "description.science-pack-remaining-amount-key",
+    durability_description_value = "description.science-pack-remaining-amount-value"
+  }  --[[@as data.ToolPrototype]],
+
   ---- entities ----
 
   -- drills
@@ -215,6 +228,15 @@ data:extend{
   },
   {
     type = "item",
+    name = "snowfall-pneumatic-lab",
+    icons = {{icon = "__base__/graphics/icons/lab.png", icon_size = 64, icon_mipmaps = 4}},
+    subgroup = "production-machine",
+    order = "gA",  -- vanilla lab is "g[lab]"
+    place_result = "snowfall-pneumatic-lab",
+    stack_size = 10
+  },
+  {
+    type = "item",
     name = "snowfall-kiln",
     icon = "__base__/graphics/icons/stone-furnace.png",
     icon_size = 64, icon_mipmaps = 4,
@@ -223,7 +245,7 @@ data:extend{
     place_result = "snowfall-kiln",
     stack_size = 50
   },
-  --[[{
+  {
     type = "item",
     name = "snowfall-foundry",
     icon = "__base__/graphics/icons/stone-furnace.png",
@@ -232,7 +254,7 @@ data:extend{
     order = "d[snowfall]-b",
     place_result = "snowfall-foundry",
     stack_size = 50
-  },]]
+  },
   {
     type = "item",
     name = "snowfall-rolling-machine",

@@ -23,10 +23,21 @@ data_util.replace_recipe_ingredients("wooden-chest", {
 
 -- make stone furnace take bricks & fire bricks
 data_util.replace_recipe_ingredients("stone-furnace", {
-  {type = "item", name = "stone-brick",         amount = 4},
+  {type = "item", name = "stone-brick",         amount = 2},
   {type = "item", name = "snowfall-fire-brick", amount = 4}
 })
 data.raw.recipe["stone-furnace"].energy_required = 2
+
+-- make belts & pneumatic inserters take lead/nickel/stone instead of iron
+data_util.replace_recipe_ingredients("burner-inserter", {
+  {type = "item", name = "stone-brick", amount = 1},
+  {type = "item", name = "basic-gear",  amount = 1},
+  {type = "item", name = "lead-plate",  amount = 1},
+})
+data_util.replace_recipe_ingredients("transport-belt", {
+  {type = "item", name = "basic-gear", amount = 1},
+  {type = "item", name = "lead-plate", amount = 1},
+})
 
 -- [[ remove unneeded items/recipes ]]
 data.raw["item"]["brass-precursor"] = nil

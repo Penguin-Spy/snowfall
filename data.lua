@@ -17,6 +17,7 @@ require "prototypes.phase-1.changes.removals"
 require "prototypes.phase-1.recipe.crafting"
 require "prototypes.phase-1.recipe.kiln"
 require "prototypes.phase-1.recipe.melting"
+require "prototypes.phase-1.recipe.research"
 require "prototypes.phase-1.recipe.rolling-drawing"
 require "prototypes.phase-1.recipe.smelting"
 
