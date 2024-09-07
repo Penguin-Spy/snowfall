@@ -5,12 +5,12 @@ local collision_mask_ice_tile = collision_mask_util_extended.get_make_named_coll
 
 local burner_ice_bore = table.deepcopy(data.raw["mining-drill"]["burner-mining-drill"])
 burner_ice_bore.name = "snowfall-burner-ice-bore"
-burner_ice_bore.resource_categories = {"snowfall-internal"}
-burner_ice_bore.collision_mask = {"item-layer", "object-layer", "player-layer", "water-tile", collision_mask_ice_tile}
+burner_ice_bore.resource_categories = { "snowfall-internal" }
+burner_ice_bore.collision_mask = { "item-layer", "object-layer", "player-layer", "water-tile", collision_mask_ice_tile }
 burner_ice_bore.energy_usage = "150kW"  -- same as burner drill
 burner_ice_bore.mining_speed = 0.2
 burner_ice_bore.minable.result = "snowfall-burner-ice-bore"
-burner_ice_bore.placeable_by = {item = "snowfall-burner-ice-bore", count = 1}
+burner_ice_bore.placeable_by = { item = "snowfall-burner-ice-bore", count = 1 }
 burner_ice_bore.fast_replaceable_group = nil
 
 
@@ -18,16 +18,16 @@ local burner_ice_bore_placer = data_util.generate_placer(burner_ice_bore, "simpl
   created_effect = data_util.created_effect("snowfall_placed_ice_bore"),
   picture = burner_ice_bore.animations,
   animations = nil,
-  localised_description = {"",
-    {"entity-description.snowfall-burner-ice-bore"}, "\n",
-    {"",
-      "[font=default-bold][color=#f8e0bb]", {"description.mining-speed"}, ":[/color][/font] ", burner_ice_bore.mining_speed, {"per-second-suffix"},
-      "\n[font=default-bold][color=#f8e0bb]", {"description.efficiency-penalty-range"}, ":[/color][/font] 16",
-      "\n[font=default-bold][color=#f8e0bb]", {"description.pollution"}, ":[/color][/font] " .. burner_ice_bore.energy_source.emissions_per_minute, {"per-minute-suffix"}, "\n",
+  localised_description = { "",
+    { "entity-description.snowfall-burner-ice-bore" }, "\n",
+    { "",
+      "[font=default-bold][color=#f8e0bb]", { "description.mining-speed" }, ":[/color][/font] ", burner_ice_bore.mining_speed, { "per-second-suffix" },
+      "\n[font=default-bold][color=#f8e0bb]", { "description.efficiency-penalty-range" }, ":[/color][/font] 16",
+      "\n[font=default-bold][color=#f8e0bb]", { "description.pollution" }, ":[/color][/font] " .. burner_ice_bore.energy_source.emissions_per_minute, { "per-minute-suffix" }, "\n",
     },
-    {"",
-      "[img=tooltip-category-consumes] [font=default-bold][color=#f8cd48]", {"tooltip-category.consumes"}, " ", {"fluid-name.steam"}, "[/color]\n[color=#f8e0bb]",
-      {"description.max-energy-consumption"}, ":[/color][/font] " .. util.parse_energy(burner_ice_bore.energy_usage) * 0.06, " ", {"si-prefix-symbol-kilo"}, {"si-unit-symbol-watt"}
+    { "",
+      "[img=tooltip-category-consumes] [font=default-bold][color=#f8cd48]", { "tooltip-category.consumes" }, " ", { "fluid-name.steam" }, "[/color]\n[color=#f8e0bb]",
+      { "description.max-energy-consumption" }, ":[/color][/font] " .. util.parse_energy(burner_ice_bore.energy_usage) * 0.06, " ", { "si-prefix-symbol-kilo" }, { "si-unit-symbol-watt" }
     }
   }
 })
@@ -44,25 +44,25 @@ data:extend{
     name = "snowfall-steam-vent-cap",
     icon = "__base__/graphics/icons/pipe-to-ground.png",
     icon_size = 64, icon_mipmaps = 4,
-    flags = {"placeable-neutral", "player-creation"},
-    minable = {mining_time = 0.5, result = "snowfall-steam-vent-cap"},
-    resource_categories = {"geothermal-vent"},
+    flags = { "placeable-neutral", "player-creation" },
+    minable = { mining_time = 0.5, result = "snowfall-steam-vent-cap" },
+    resource_categories = { "geothermal-vent" },
     max_health = 150,
     corpse = "pumpjack-remnants",
     dying_explosion = "pumpjack-explosion",
-    collision_box = {{-1.2, -1.2}, {1.2, 1.2}},
-    selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+    collision_box = { { -1.2, -1.2 }, { 1.2, 1.2 } },
+    selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
     damaged_trigger_effect = data_util.hit_effects.entity(),
-    drawing_box = {{-1.6, -2.5}, {1.5, 1.6}},
+    drawing_box = { { -1.6, -2.5 }, { 1.5, 1.6 } },
     target_temperature = 250,
-    energy_source = {type = "void"},
+    energy_source = { type = "void" },
     output_fluid_box = {
       base_area = 10,
       base_level = 1,
       pipe_covers = pipecoverspictures(),
       pipe_connections = {
         {
-          positions = {{1, -2}, {2, -1}, {-1, 2}, {-2, 1}},
+          positions = { { 1, -2 }, { 2, -1 }, { -1, 2 }, { -2, 1 } },
           type = "output"
         }
       }
@@ -70,13 +70,13 @@ data:extend{
     energy_usage = "90kW",
     mining_speed = 1,
     resource_searching_radius = 0.49,
-    vector_to_place_result = {0, 0},
+    vector_to_place_result = { 0, 0 },
     radius_visualisation_picture = {
       filename = "__base__/graphics/entity/pumpjack/pumpjack-radius-visualization.png",
       width = 12,
       height = 12
     },
-    monitor_visualization_tint = {r = 78, g = 173, b = 255},
+    monitor_visualization_tint = { r = 78, g = 173, b = 255 },
     base_render_layer = "lower-object-above-shadow",
     base_picture = {
       sheets = {
@@ -122,50 +122,51 @@ data:extend{
     circuit_wire_max_distance = default_circuit_wire_max_distance
   }  --[[@as data.MiningDrillPrototype]],
 
-  -- solar heat collector
+  -- solar mirror
+  -- TODO: make 4 versions and have it rotate to face the furnace?
   {
     type = "reactor",
-    name = "snowfall-solar-heat-collector",
-    collision_box = {{-2.29, -2.29}, {2.29, 2.29}},
-    selection_box = {{-2.5, -2.5}, {2.5, 2.5}},
-    icon = "__base__/graphics/icons/stone-furnace.png",
+    name = "snowfall-solar-mirror",
+    collision_box = { { -0.79, -0.79 }, { 0.79, 0.79 } },
+    selection_box = { { -1, -1 }, { 1, 1 } },
+    icon = "__base__/graphics/icons/solar-panel.png",
     icon_size = 64, icon_mipmaps = 4,
-    flags = {"placeable-neutral", "placeable-player", "player-creation"},
-    minable = {mining_time = 0.2, result = "snowfall-solar-heat-collector"},
+    flags = { "placeable-neutral", "placeable-player", "player-creation" },
+    minable = { mining_time = 0.2, result = "snowfall-solar-mirror" },
     max_health = 100,
 
     consumption = "720kW",
-    energy_source = {type = "void"},
+    energy_source = { type = "void" },
     neighbour_bonus = 0,
 
     heat_buffer = {
       default_temperature = 15,
       max_temperature = 500,
       max_transfer = "720kW",
-      specific_heat = "90kJ",
+      specific_heat = "10kJ",
       connections = {
         {
-          position = {0, -2},
+          position = { 0, -0.5 },
           direction = defines.direction.north
         },
         {
-          position = {2, 0},
+          position = { 0.5, 0 },
           direction = defines.direction.east
         },
         {
-          position = {0, 2},
+          position = { 0, 0.5 },
           direction = defines.direction.south
         },
         {
-          position = {-2, 0},
+          position = { -0.5, 0 },
           direction = defines.direction.west
         }
       }
     },
     picture = {
-      filename = data_util.graphics .. "entity/solar-heat-collector.png",
+      filename = data_util.graphics .. "entity/solar-mirror.png",
       size = 320,
-      scale = 0.5
+      scale = 0.25
     },
     working_light_picture = {
       filename = "__core__/graphics/empty.png",
@@ -262,16 +263,44 @@ data:extend{
   {
     type = "assembling-machine",
     name = "snowfall-pneumatic-lab",
-    icons = {{icon = "__base__/graphics/icons/lab.png", icon_size = 64, icon_mipmaps = 4}},
-    flags = {"placeable-neutral", "placeable-player", "player-creation"},
-    minable = {mining_time = 0.2, result = "snowfall-pneumatic-lab"},
+    icons = { { icon = "__base__/graphics/icons/lab.png", icon_size = 64, icon_mipmaps = 4 } },
+    flags = { "placeable-neutral", "placeable-player", "player-creation" },
+    minable = { mining_time = 0.2, result = "snowfall-pneumatic-lab" },
     max_health = 200,
-    collision_box = {{-1.2, -1.2}, {1.2, 1.2}},
-    selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
-    crafting_categories = {"snowfall-pneumatic-research"},
+    collision_box = { { -1.2, -1.2 }, { 1.2, 1.2 } },
+    selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } },
+    crafting_categories = { "snowfall-pneumatic-research" },
     energy_usage = "120kW",
     crafting_speed = 1,
-    energy_source = table.deepcopy(data.raw["mining-drill"]["burner-mining-drill"].energy_source),
+    energy_source = {
+      type = "fluid",
+      burns_fluid = false,
+      scale_fluid_usage = true,
+      effectivity = 1,
+      emissions_per_minute = 12,
+      fluid_box = {
+        production_type = "input-output",
+        filter = "steam",
+        base_area = 2,   -- storage volume of 200 (base_area*height*100)
+        height = 1,      -- default
+        base_level = 0,  -- default
+        pipe_connections = {
+          { type = "input-output", position = { -2, 0 } },
+          { type = "input-output", position = { 2, 0 } },
+        },
+        secondary_draw_orders = { north = -1 },
+        pipe_picture = assembler2pipepictures(),
+        pipe_covers = pipecoverspictures(),
+      },
+      light_flicker = { color = { 0, 0, 0 } },
+      smoke = {
+        {
+          name = "smoke",
+          deviation = { 0.1, 0.1 },
+          frequency = 3
+        }
+      }
+    },
     animation = table.deepcopy(data.raw["lab"]["lab"].off_animation),
     working_visualisations = {
       {
@@ -286,8 +315,8 @@ data:extend{
     name = "snowfall-kiln",
     icon = "__base__/graphics/icons/stone-furnace.png",
     icon_size = 64, icon_mipmaps = 4,
-    flags = {"placeable-neutral", "placeable-player", "player-creation"},
-    minable = {mining_time = 0.2, result = "snowfall-kiln"},
+    flags = { "placeable-neutral", "placeable-player", "player-creation" },
+    minable = { mining_time = 0.2, result = "snowfall-kiln" },
     max_health = 200,
     corpse = "stone-furnace-remnants",
     dying_explosion = "stone-furnace-explosion",
@@ -321,10 +350,10 @@ data:extend{
         percent = 30
       }
     },
-    collision_box = {{-1.29, -0.79}, {1.29, 0.79}},
-    selection_box = {{-1.5, -1}, {1.5, 1}},
+    collision_box = { { -1.29, -0.79 }, { 1.29, 0.79 } },
+    selection_box = { { -1.5, -1 }, { 1.5, 1 } },
     damaged_trigger_effect = data_util.hit_effects.rock(),
-    crafting_categories = {"kiln"},
+    crafting_categories = { "kiln" },
     energy_usage = "90kW",
     crafting_speed = 1,
     energy_source = {
@@ -337,11 +366,11 @@ data:extend{
       specific_heat = "90kJ",
       connections = {
         {
-          position = {0, -0.5},
+          position = { 0, -0.5 },
           direction = defines.direction.north
         },
         {
-          position = {0, 0.5},
+          position = { 0, 0.5 },
           direction = defines.direction.south
         },
       },
@@ -493,8 +522,8 @@ data:extend{
     name = "snowfall-foundry",
     icon = "__base__/graphics/icons/stone-furnace.png",
     icon_size = 64, icon_mipmaps = 4,
-    flags = {"placeable-neutral", "placeable-player", "player-creation"},
-    minable = {mining_time = 0.2, result = "snowfall-foundry"},
+    flags = { "placeable-neutral", "placeable-player", "player-creation" },
+    minable = { mining_time = 0.2, result = "snowfall-foundry" },
     max_health = 200,
     corpse = "stone-furnace-remnants",
     dying_explosion = "stone-furnace-explosion",
@@ -528,10 +557,10 @@ data:extend{
         percent = 30
       }
     },
-    collision_box = {{-1.29, -0.79}, {1.29, 0.79}},
-    selection_box = {{-1.5, -1}, {1.5, 1}},
+    collision_box = { { -1.29, -0.79 }, { 1.29, 0.79 } },
+    selection_box = { { -1.5, -1 }, { 1.5, 1 } },
     damaged_trigger_effect = data_util.hit_effects.rock(),
-    crafting_categories = {"smelting"},
+    crafting_categories = { "smelting" },
     energy_usage = "110kW",
     crafting_speed = 1.2,
     energy_source = {
@@ -544,11 +573,11 @@ data:extend{
       specific_heat = "110kJ",
       connections = {
         {
-          position = {0, -0.5},
+          position = { 0, -0.5 },
           direction = defines.direction.north
         },
         {
-          position = {0, 0.5},
+          position = { 0, 0.5 },
           direction = defines.direction.south
         },
       },
@@ -893,8 +922,8 @@ data:extend{
     name = "snowfall-rolling-machine",
     icon = "__base__/graphics/icons/assembling-machine-1.png",
     icon_size = 64, icon_mipmaps = 4,
-    flags = {"placeable-neutral", "placeable-player", "player-creation"},
-    minable = {mining_time = 0.2, result = "snowfall-rolling-machine"},
+    flags = { "placeable-neutral", "placeable-player", "player-creation" },
+    minable = { mining_time = 0.2, result = "snowfall-rolling-machine" },
     max_health = 300,
     corpse = "assembling-machine-1-remnants",
     dying_explosion = "assembling-machine-1-explosion",
@@ -904,8 +933,8 @@ data:extend{
         percent = 70
       }
     },
-    collision_box = {{-0.75, -0.35}, {0.75, 0.35}},
-    selection_box = {{-1, -0.5}, {1, 0.5}},
+    collision_box = { { -0.75, -0.35 }, { 0.75, 0.35 } },
+    selection_box = { { -1, -0.5 }, { 1, 0.5 } },
     damaged_trigger_effect = data_util.hit_effects.entity(),
     alert_icon_shift = util.by_pixel(-3, -12),
     animation = {
@@ -954,7 +983,7 @@ data:extend{
         }
       }
     },
-    crafting_categories = {"rolling"},
+    crafting_categories = { "rolling" },
     crafting_speed = 4,
     energy_source = {
       type = "electric",
@@ -984,8 +1013,8 @@ data:extend{
     name = "snowfall-drawing-machine",
     icon = "__base__/graphics/icons/assembling-machine-1.png",
     icon_size = 64, icon_mipmaps = 4,
-    flags = {"placeable-neutral", "placeable-player", "player-creation"},
-    minable = {mining_time = 0.2, result = "snowfall-drawing-machine"},
+    flags = { "placeable-neutral", "placeable-player", "player-creation" },
+    minable = { mining_time = 0.2, result = "snowfall-drawing-machine" },
     max_health = 300,
     corpse = "assembling-machine-1-remnants",
     dying_explosion = "assembling-machine-1-explosion",
@@ -995,8 +1024,8 @@ data:extend{
         percent = 70
       }
     },
-    collision_box = {{-0.8, -0.4}, {0.8, 0.4}},
-    selection_box = {{-1, -0.5}, {1, 0.5}},
+    collision_box = { { -0.8, -0.4 }, { 0.8, 0.4 } },
+    selection_box = { { -1, -0.5 }, { 1, 0.5 } },
     damaged_trigger_effect = data_util.hit_effects.entity(),
     alert_icon_shift = util.by_pixel(-3, -12),
     animation = {
@@ -1045,7 +1074,7 @@ data:extend{
         }
       }
     },
-    crafting_categories = {"wire-drawing"},
+    crafting_categories = { "wire-drawing" },
     crafting_speed = 4,
     energy_source = {
       type = "electric",
@@ -1075,8 +1104,8 @@ data:extend{
     name = "snowfall-solid-heat-exchanger",
     icon = "__base__/graphics/icons/stone-furnace.png",
     icon_size = 64, icon_mipmaps = 4,
-    flags = {"placeable-neutral", "placeable-player", "player-creation"},
-    minable = {mining_time = 0.2, result = "snowfall-solid-heat-exchanger"},
+    flags = { "placeable-neutral", "placeable-player", "player-creation" },
+    minable = { mining_time = 0.2, result = "snowfall-solid-heat-exchanger" },
     max_health = 200,
     corpse = "heat-exchanger-remnants",
     dying_explosion = "heat-exchanger-explosion",
@@ -1110,10 +1139,10 @@ data:extend{
         percent = 30
       }
     },
-    collision_box = {{-1.29, -0.79}, {1.29, 0.79}},
-    selection_box = {{-1.5, -1}, {1.5, 1}},
+    collision_box = { { -1.29, -0.79 }, { 1.29, 0.79 } },
+    selection_box = { { -1.5, -1 }, { 1.5, 1 } },
     damaged_trigger_effect = data_util.hit_effects.rock(),
-    crafting_categories = {"snowfall-melting"},
+    crafting_categories = { "snowfall-melting" },
     cant_insert_at_source_message_key = "inventory-restriction.snowfall-cant-be-melted",
     result_inventory_size = 0,
     energy_usage = "90kW",
@@ -1126,8 +1155,8 @@ data:extend{
         pipe_covers = pipecoverspictures(),
         base_area = 10,
         base_level = 1,
-        pipe_connections = {{type = "output", position = {0, -1.5}}},
-        secondary_draw_orders = {north = -1}
+        pipe_connections = { { type = "output", position = { 0, -1.5 } } },
+        secondary_draw_orders = { north = -1 }
       }
     },
 
@@ -1140,7 +1169,7 @@ data:extend{
       minimum_glow_temperature = 1,
       connections = {
         {
-          position = {0, 0.5},
+          position = { 0, 0.5 },
           direction = defines.direction.south
         }
       },

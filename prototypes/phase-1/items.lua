@@ -218,12 +218,12 @@ data:extend{
   -- machines
   {
     type = "item",
-    name = "snowfall-solar-heat-collector",
+    name = "snowfall-solar-mirror",
     icon = "__base__/graphics/icons/solar-panel.png",
     icon_size = 64, icon_mipmaps = 4,
     subgroup = "smelting-machine",
     order = "d[snowfall]-a",
-    place_result = "snowfall-solar-heat-collector",
+    place_result = "snowfall-solar-mirror",
     stack_size = 50
   },
   {

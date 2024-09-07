@@ -10,34 +10,25 @@ if script.active_mods["gvv"] then require("__gvv__.gvv")() end
 local function prepare_map()
   if remote.interfaces["freeplay"] then
     remote.call("freeplay", "set_created_items", {
-      ["pistol"] = 1,
-      ["firearm-magazine"] = 10
+      --["pistol"] = 1,
+      --["firearm-magazine"] = 10
     })
     remote.call("freeplay", "set_ship_items", {
       ["burner-mining-drill"] = 10,
-      ["snowfall-kiln"] = 1,
+      --["snowfall-kiln"] = 1,
       ["snowfall-steam-vent-cap"] = 2,
-      ["snowfall-solar-heat-collector"] = 1,
-      ["firearm-magazine"] = 20
+      ["snowfall-solar-mirror"] = 3,
+      ["snowfall-solid-heat-exchanger"] = 3,
+      ["snowfall-burner-ice-bore"] = 2
     })
     remote.call("freeplay", "set_debris_items", {
       ["lead-plate"] = 10,
-      ["brass-plate"] = 6,
+      ["brass-plate"] = 18,
       ["iron-gear-wheel"] = 2
     })
   else
     game.print("[snowfall] Warning: freeplay interface not found! Snowfall does not support other scenarios yet.\nThe game may crash or it may be impossible to progress.")
   end
-
-  --[[
-  local ship = game.get_surface("crash-site-spaceship")
-  if not ship then
-    error("crash-site-spaceship surface not found!")
-  end
-
-  ---@diagnostic disable-next-line: missing-fields
-  ship.create_entity{name = "stone-furnace", position = {7, 0}}
-  ]]
 end
 
 script.on_event(defines.events.on_script_trigger_effect, function(event)

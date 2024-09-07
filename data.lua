@@ -31,5 +31,3 @@ require "prototypes.phase-1.technology"
 require "prototypes.phase-1.tiles"
 
 data_util = orig_data_util  ---@diagnostic disable-line: lowercase-global
-
-log(serpent.block(data.raw["resource"]["iron-ore"]))

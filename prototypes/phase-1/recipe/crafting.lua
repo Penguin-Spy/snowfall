@@ -83,14 +83,14 @@ data:extend{
   -- machines
   {
     type = "recipe",
-    name = "snowfall-solar-heat-collector",
+    name = "snowfall-solar-mirror",
     ingredients = {
-      {type = "item", name = "stone-brick",  amount = 8},
-      {type = "item", name = "brass-plate",  amount = 15},
-      {type = "item", name = "copper-plate", amount = 5},
+      {type = "item", name = "stone-brick",  amount = 4},
+      {type = "item", name = "brass-plate",  amount = 6},
+      {type = "item", name = "copper-plate", amount = 4},
     },
     results = {
-      {type = "item", name = "snowfall-solar-heat-collector", amount = 1}
+      {type = "item", name = "snowfall-solar-mirror", amount = 1}
     },
     energy_required = 2
   },

@@ -98,8 +98,8 @@ data.raw["inserter"]["burner-inserter"].energy_source = {
 
 -- stone furnace powered by heat
 local stone_furnace = data.raw["furnace"]["stone-furnace"]
-stone_furnace.collision_box = { { -1.29, -0.79 }, { 1.29, 0.79 } }
-stone_furnace.selection_box = { { -1.5, -1 }, { 1.5, 1 } }
+stone_furnace.collision_box = { { -1.79, -1.79 }, { 1.79, 1.79 } }
+stone_furnace.selection_box = { { -2, -2 }, { 2, 2 } }
 stone_furnace.next_upgrade = nil
 stone_furnace.fast_replaceable_group = nil
 stone_furnace.energy_source = {
@@ -108,19 +108,28 @@ stone_furnace.energy_source = {
   minimum_glow_temperature = 250,
   min_working_temperature = 250,
   max_temperature = 350,
-  max_transfer = "90kJ",
-  specific_heat = "90kJ",
+  max_transfer = "720kJ",
+  specific_heat = "45kJ",
   connections = {
     {
-      position = { 0, -0.5 },
+      position = { 0, -1.5 },
       direction = defines.direction.north
     },
     {
-      position = { 0, 0.5 },
+      position = { 1.5, 0 },
+      direction = defines.direction.east
+    },
+    {
+      position = { 0, 1.5 },
       direction = defines.direction.south
     },
+    {
+      position = { -1.5, 0 },
+      direction = defines.direction.west
+    }
   },
 }  --[[@as data.HeatEnergySource]]
+stone_furnace.animation.scale = 1
 
 
 -- make wooden chest stone (visually only, leave prototype name alone)
@@ -174,3 +183,7 @@ data.raw["turret"]["small-worm-turret"].autoplace = nil
 data.raw["turret"]["medium-worm-turret"].autoplace = nil
 data.raw["turret"]["big-worm-turret"].autoplace = nil
 data.raw["turret"]["behemoth-worm-turret"].autoplace = nil
+
+-- remove iron autoplace (for now)
+--TODO: re-add with autoplace that spawns it further away
+data.raw["resource"]["iron-ore"].autoplace = nil
