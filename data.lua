@@ -13,6 +13,7 @@ require "prototypes.phase-1.changes.entities"
 require "prototypes.phase-1.changes.items"
 require "prototypes.phase-1.changes.recipes"
 require "prototypes.phase-1.changes.removals"
+require "prototypes.phase-1.changes.technology"
 
 require "prototypes.phase-1.recipe.crafting"
 require "prototypes.phase-1.recipe.kiln"

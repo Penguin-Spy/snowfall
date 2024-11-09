@@ -33,6 +33,43 @@ local burner_ice_bore_placer = data_util.generate_placer(burner_ice_bore, "simpl
 })
 
 
+-- solar mirror internal reactors
+local function generate_solar_mirror_reactor(name, connection)
+  return {
+    type = "reactor",
+    name = name,
+    selection_box = { { -1, -1 }, { 1, 1 } },
+    icon = "__base__/graphics/icons/solar-panel.png",
+    icon_size = 64,
+    icon_mipmaps = 4,
+    flags = { "placeable-neutral", "placeable-player", "hidden" },
+    max_health = 100,
+
+    consumption = "720kW",
+    energy_source = { type = "void" },
+    neighbour_bonus = 0,
+
+    heat_buffer = {
+      default_temperature = 15,
+      max_temperature = 500,
+      max_transfer = "720kW",
+      specific_heat = "10kJ",
+      connections = {
+        connection
+      }
+    },
+    picture = {
+      filename = "__core__/graphics/empty.png",
+      size = 1
+    },
+    working_light_picture = {
+      filename = "__core__/graphics/empty.png",
+      size = 1
+    }
+  }  --[[@as data.ReactorPrototype]]
+end
+
+
 data:extend{
   -- burner ice bore
   burner_ice_bore,
@@ -123,9 +160,8 @@ data:extend{
   }  --[[@as data.MiningDrillPrototype]],
 
   -- solar mirror
-  -- TODO: make 4 versions and have it rotate to face the furnace?
   {
-    type = "reactor",
+    type = "simple-entity-with-owner",
     name = "snowfall-solar-mirror",
     collision_box = { { -0.79, -0.79 }, { 0.79, 0.79 } },
     selection_box = { { -1, -1 }, { 1, 1 } },
@@ -134,45 +170,22 @@ data:extend{
     flags = { "placeable-neutral", "placeable-player", "player-creation" },
     minable = { mining_time = 0.2, result = "snowfall-solar-mirror" },
     max_health = 100,
+    created_effect = data_util.created_effect("snowfall_placed_solar_mirror"),
 
-    consumption = "720kW",
-    energy_source = { type = "void" },
-    neighbour_bonus = 0,
-
-    heat_buffer = {
-      default_temperature = 15,
-      max_temperature = 500,
-      max_transfer = "720kW",
-      specific_heat = "10kJ",
-      connections = {
-        {
-          position = { 0, -0.5 },
-          direction = defines.direction.north
-        },
-        {
-          position = { 0.5, 0 },
-          direction = defines.direction.east
-        },
-        {
-          position = { 0, 0.5 },
-          direction = defines.direction.south
-        },
-        {
-          position = { -0.5, 0 },
-          direction = defines.direction.west
-        }
-      }
-    },
     picture = {
-      filename = data_util.graphics .. "entity/solar-mirror.png",
-      size = 320,
-      scale = 0.25
-    },
-    working_light_picture = {
-      filename = "__core__/graphics/empty.png",
-      size = 1
+      sheet = {
+        filename = data_util.graphics .. "entity/solar-mirror.png",
+        width = 64,
+        height = 64
+      },
     }
-  }  --[[@as data.ReactorPrototype]],
+  }  --[[@as data.SimpleEntityWithOwnerPrototype]],
+
+  -- solar mirror internal reactors
+  generate_solar_mirror_reactor("snowfall-solar-mirror-reactor-north", { position = { 0, -1 }, direction = defines.direction.north }),
+  generate_solar_mirror_reactor("snowfall-solar-mirror-reactor-east", { position = { 1, 0 }, direction = defines.direction.east }),
+  generate_solar_mirror_reactor("snowfall-solar-mirror-reactor-south", { position = { 0, 1 }, direction = defines.direction.south }),
+  generate_solar_mirror_reactor("snowfall-solar-mirror-reactor-west", { position = { -1, 0 }, direction = defines.direction.west }),
 
   -- crashed ship RTG heat generator
   --[=[]]{
@@ -315,7 +328,7 @@ data:extend{
     name = "snowfall-kiln",
     icon = "__base__/graphics/icons/stone-furnace.png",
     icon_size = 64, icon_mipmaps = 4,
-    flags = { "placeable-neutral", "placeable-player", "player-creation" },
+    flags = { "placeable-neutral", "placeable-player", "player-creation", "not-rotatable" },
     minable = { mining_time = 0.2, result = "snowfall-kiln" },
     max_health = 200,
     corpse = "stone-furnace-remnants",
@@ -350,10 +363,11 @@ data:extend{
         percent = 30
       }
     },
-    collision_box = { { -1.29, -0.79 }, { 1.29, 0.79 } },
-    selection_box = { { -1.5, -1 }, { 1.5, 1 } },
+    collision_box = { { -0.7, -0.7 }, { 0.7, 0.7 } },
+    selection_box = { { -0.8, -1 }, { 0.8, 1 } },
     damaged_trigger_effect = data_util.hit_effects.rock(),
     crafting_categories = { "kiln" },
+    gui_title_key = "gui-assembling-machine.select-recipe-kiln",
     energy_usage = "90kW",
     crafting_speed = 1,
     energy_source = {
@@ -366,13 +380,21 @@ data:extend{
       specific_heat = "90kJ",
       connections = {
         {
-          position = { 0, -0.5 },
+          position = { 0, 0 },
           direction = defines.direction.north
         },
         {
-          position = { 0, 0.5 },
+          position = { 0, 0 },
+          direction = defines.direction.east
+        },
+        {
+          position = { 0, 0 },
           direction = defines.direction.south
         },
+        {
+          position = { 0, 0 },
+          direction = defines.direction.west
+        }
       },
     }  --[[@as data.HeatEnergySource]],
     animation = {
@@ -517,7 +539,7 @@ data:extend{
   }  --[[@as data.AssemblingMachinePrototype]],
 
   -- foundry
-  {
+  --[[{
     type = "assembling-machine",
     name = "snowfall-foundry",
     icon = "__base__/graphics/icons/stone-furnace.png",
@@ -721,7 +743,7 @@ data:extend{
       rotate = false,
       orientation_to_variation = false
     }
-  }  --[[@as data.AssemblingMachinePrototype]],
+  }  --[[@as data.AssemblingMachinePrototype]]  --,
 
   -- caster
   --[[
@@ -1102,7 +1124,7 @@ data:extend{
   {
     type = "furnace",
     name = "snowfall-solid-heat-exchanger",
-    icon = "__base__/graphics/icons/stone-furnace.png",
+    icon = "__base__/graphics/icons/heat-boiler.png",
     icon_size = 64, icon_mipmaps = 4,
     flags = { "placeable-neutral", "placeable-player", "player-creation" },
     minable = { mining_time = 0.2, result = "snowfall-solid-heat-exchanger" },

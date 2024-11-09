@@ -180,7 +180,7 @@ data:extend{
   {
     type = "tool",
     name = "snowfall-material-punchcard",
-    icons = {{icon = graphics .. "icons/material-punchcard.png", icon_size = 64}},
+    icons = { { icon = graphics .. "icons/material-punchcard.png", icon_size = 64 } },
     subgroup = "science-pack",
     order = "a",
     stack_size = 100,
@@ -196,7 +196,7 @@ data:extend{
     type = "item",
     name = "snowfall-burner-ice-bore",
     icons = {
-      {icon = "__base__/graphics/icons/burner-mining-drill.png", icon_size = 64, icon_mipmaps = 4, tint = {r = 0.7, g = 0.85, b = 1, a = 1}}
+      { icon = "__base__/graphics/icons/burner-mining-drill.png", icon_size = 64, icon_mipmaps = 4, tint = { r = 0.7, g = 0.85, b = 1, a = 1 } }
     },
     subgroup = "extraction-machine",
     order = "a[items]-a[burner-mining-drill]-a",
@@ -207,7 +207,7 @@ data:extend{
     type = "item",
     name = "snowfall-steam-vent-cap",
     icons = {
-      {icon = "__base__/graphics/icons/pumpjack.png", icon_size = 64, icon_mipmaps = 4, tint = {r = 0.7, g = 0.85, b = 1, a = 1}}
+      { icon = "__base__/graphics/icons/pumpjack.png", icon_size = 64, icon_mipmaps = 4, tint = { r = 0.7, g = 0.85, b = 1, a = 1 } }
     },
     subgroup = "extraction-machine",
     order = "a[items]-b[pumpjack]-a[steam-vent-cap]",
@@ -229,7 +229,7 @@ data:extend{
   {
     type = "item",
     name = "snowfall-pneumatic-lab",
-    icons = {{icon = "__base__/graphics/icons/lab.png", icon_size = 64, icon_mipmaps = 4}},
+    icons = { { icon = "__base__/graphics/icons/lab.png", icon_size = 64, icon_mipmaps = 4 } },
     subgroup = "production-machine",
     order = "gA",  -- vanilla lab is "g[lab]"
     place_result = "snowfall-pneumatic-lab",
@@ -245,7 +245,7 @@ data:extend{
     place_result = "snowfall-kiln",
     stack_size = 50
   },
-  {
+  --[[{
     type = "item",
     name = "snowfall-foundry",
     icon = "__base__/graphics/icons/stone-furnace.png",
@@ -254,7 +254,7 @@ data:extend{
     order = "d[snowfall]-b",
     place_result = "snowfall-foundry",
     stack_size = 50
-  },
+  },]]
   {
     type = "item",
     name = "snowfall-rolling-machine",

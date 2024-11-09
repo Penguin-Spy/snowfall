@@ -2,6 +2,8 @@
   Control-stage scripting for Snowfall mechanics
 ]]
 
+local util = require "util"
+
 require "scripts.trigger_effects"
 require "scripts.destroy_handling"
 
@@ -38,10 +40,19 @@ end)
 
 script.on_event(defines.events.on_entity_destroyed, destroy_handling.handle_event)
 
+script.on_event(defines.events.on_player_rotated_entity, function(event)
+  if event.entity.name == "snowfall-solar-mirror" then
+    trigger_effects["snowfall_rotated_solar_mirror"](event.entity.unit_number)
+  end
+end)
+
 
 function initalize()
   ---@type table<uint64, destroy_handler_data>
   global.destroy_handler_map = global.destroy_handler_map or {}
+
+  ---@type table<uint64, uint64>
+  global.unit_id_to_destroy_handler_id_map = global.unit_id_to_destroy_handler_id_map or {}
 end
 
 script.on_init(function()

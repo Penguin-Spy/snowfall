@@ -10,7 +10,7 @@ destroy_handling = {}
 -- registers the "trigger_effect" handler name to use when an entity is destroyed
 ---@param entity LuaEntity  the entity to watch for destruction
 ---@param handler string    the trigger_effect handler
----@param param any       an arbitrary parameter passed to the handler
+---@param param any         an arbitrary parameter passed to the handler
 function destroy_handling.register(entity, handler, param)
   local id = script.register_on_entity_destroyed(entity)
 
@@ -18,6 +18,9 @@ function destroy_handling.register(entity, handler, param)
     handler = handler,
     param = param
   }
+  if entity.unit_number then
+    global.unit_id_to_destroy_handler_id_map[entity.unit_number] = id
+  end
 end
 
 -- handle the on_entity_destroyed_event
@@ -28,4 +31,25 @@ function destroy_handling.handle_event(event)
     trigger_effects[handler_data.handler](handler_data.param)
   end
   global.destroy_handler_map[event.registration_number] = nil
+  if event.unit_number then
+    global.unit_id_to_destroy_handler_id_map[event.unit_number] = nil
+  end
+end
+
+-- gets the destroy_handling paramater associated with the given unit number \
+-- provides useful error messages if no paramater can be found
+---@param unit_number uint
+---@return any
+function destroy_handling.get_param_from_unit_number(unit_number)
+  local id = global.unit_id_to_destroy_handler_id_map[unit_number]
+  if not id then
+    error("given unit number was not registered for destroy handling: " .. tostring(unit_number))
+  end
+  local handler_data = global.destroy_handler_map[id]
+  if not handler_data or not handler_data.param then
+    error("given unit number was not registered for destroy handling with a paramater: " .. tostring(unit_number)
+      .. "\nhandler_data: " .. type(handler_data)
+      .. "\nhandler_data.param: " .. handler_data and type(handler_data.param) or "n/a")
+  end
+  return handler_data.param
 end

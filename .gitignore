@@ -3,3 +3,4 @@
 # git update-index --assume-unchanged .vscode/settings.json
 .vscode/settings.json
 *.pdn
+*.IGNORE

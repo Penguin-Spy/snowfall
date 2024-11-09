@@ -118,7 +118,7 @@ data:extend{
     },
     energy_required = 1
   },
-  {
+  --[[{
     type = "recipe",
     name = "snowfall-foundry",
     ingredients = {
@@ -129,7 +129,7 @@ data:extend{
       {type = "item", name = "snowfall-foundry", amount = 1}
     },
     energy_required = 2
-  },
+  },]]
   {
     type = "recipe",
     name = "snowfall-rolling-machine",

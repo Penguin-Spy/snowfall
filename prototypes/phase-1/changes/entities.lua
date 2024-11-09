@@ -96,12 +96,13 @@ data.raw["inserter"]["burner-inserter"].energy_source = {
   light_flicker = { color = { 0, 0, 0 } },
 }
 
--- stone furnace powered by heat
+-- stone furnace as an assembler and powered by heat
 local stone_furnace = data.raw["furnace"]["stone-furnace"]
-stone_furnace.collision_box = { { -1.79, -1.79 }, { 1.79, 1.79 } }
-stone_furnace.selection_box = { { -2, -2 }, { 2, 2 } }
+--stone_furnace.collision_box = { { -0.79, -0.79 }, { 0.79, 0.79 } }
+--stone_furnace.selection_box = { { -1, -1 }, { 1, 1 } }
 stone_furnace.next_upgrade = nil
 stone_furnace.fast_replaceable_group = nil
+table.insert(stone_furnace.flags, "not-rotatable")
 stone_furnace.energy_source = {
   type = "heat",
   default_temperature = 15,
@@ -109,27 +110,65 @@ stone_furnace.energy_source = {
   min_working_temperature = 250,
   max_temperature = 350,
   max_transfer = "720kJ",
-  specific_heat = "45kJ",
+  specific_heat = "15kJ",
   connections = {
     {
-      position = { 0, -1.5 },
+      position = { 0, 0 },
       direction = defines.direction.north
     },
     {
-      position = { 1.5, 0 },
+      position = { 0, 0 },
       direction = defines.direction.east
     },
     {
-      position = { 0, 1.5 },
+      position = { 0, 0 },
       direction = defines.direction.south
     },
     {
-      position = { -1.5, 0 },
+      position = { 0, 0 },
       direction = defines.direction.west
     }
   },
 }  --[[@as data.HeatEnergySource]]
-stone_furnace.animation.scale = 1
+
+-- turn the furnace into an assembling machine
+data.raw["furnace"]["stone-furnace"] = nil
+stone_furnace.type = "assembling-machine"
+---@cast stone_furnace -data.FurnacePrototype,+data.AssemblingMachinePrototype
+stone_furnace.gui_title_key = "gui-assembling-machine.select-recipe-smelting"
+data:extend{ stone_furnace }
+
+-- make the assembling machine 1 steam powered
+local assembler1 = data.raw["assembling-machine"]["assembling-machine-1"]
+assembler1.energy_source = {
+  type = "fluid",
+  burns_fluid = false,
+  scale_fluid_usage = true,
+  effectivity = 1,
+  emissions_per_minute = 8,
+  fluid_box = {
+    production_type = "input-output",
+    filter = "steam",
+    base_area = 1,   -- storage volume of 100 (base_area*height*100)
+    height = 1,      -- default
+    base_level = 0,  -- default
+    pipe_connections = {
+      { type = "input-output", position = { -2, 0 } },
+      { type = "input-output", position = { 2, 0 } },
+    },
+    secondary_draw_orders = { north = -1 },
+    pipe_picture = assembler2pipepictures(),
+    pipe_covers = pipecoverspictures(),
+  },
+  light_flicker = { color = { 0, 0, 0 } },
+  smoke = {
+    {
+      name = "smoke",
+      deviation = { 0.2, 0.2 },
+      frequency = 2
+    }
+  }
+}  --[[@as data.FluidEnergySource]]
 
 
 -- make wooden chest stone (visually only, leave prototype name alone)

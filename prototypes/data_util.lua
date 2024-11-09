@@ -44,10 +44,10 @@ local function add_technology_recipe_unlock(technology_name, recipe)
   if not technology then error("[snowfall.data_util] unknown technology: '" .. tostring(technology_name) .. "', cannot add recipe unlock '" .. tostring(recipe) .. "' to it!") end
   local effects = technology.effects
   if effects then
-    table.insert(effects, {type = "unlock-recipe", recipe = recipe})
+    table.insert(effects, { type = "unlock-recipe", recipe = recipe })
   else
-    table.insert(technology.normal.effects, {type = "unlock-recipe", recipe = recipe})
-    table.insert(technology.expensive.effects, {type = "unlock-recipe", recipe = recipe})
+    table.insert(technology.normal.effects, { type = "unlock-recipe", recipe = recipe })
+    table.insert(technology.expensive.effects, { type = "unlock-recipe", recipe = recipe })
   end
 end
 
@@ -130,13 +130,14 @@ end
 ---@param entity_to_place data.EntityPrototype  the prototype table for the entity to mimic
 ---@param placer_prototype string               the type string for the entity that gets placed
 ---@param additional_properties data.EntityPrototype           additional properties to assign to the placer prototype
+---@return data.EntityPrototype
 local function generate_placer(entity_to_place, placer_prototype, additional_properties)
   local placer = table.deepcopy(entity_to_place)
 
   placer.type = placer_prototype
   placer.name = entity_to_place.name .. "-placer"
-  placer.localised_name = {"entity-name." .. entity_to_place.name}
-  placer.localised_description = {"entity-description." .. entity_to_place.name}
+  placer.localised_name = { "entity-name." .. entity_to_place.name }
+  placer.localised_description = { "entity-description." .. entity_to_place.name }
 
   for k, v in pairs(additional_properties) do
     placer[k] = v
