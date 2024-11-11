@@ -56,8 +56,8 @@ data.raw["item-subgroup"]["intermediate-product"].order = "d"  -- vanilla, defau
 --data.raw["item-subgroup"]["engine-components"].order = "e"     -- from IfIHadANickel, default is "fx"
 
 data.raw["item-subgroup"]["fluid-recipes"].group = "chemistry"
-data.raw["item-subgroup"]["advanced-chemicals"].group = "chemistry"  -- from ThemTharHills
-data.raw["item-subgroup"]["helium"].group = "chemistry"
+--?data.raw["item-subgroup"]["advanced-chemicals"].group = "chemistry"  -- from ThemTharHills
+--?data.raw["item-subgroup"]["helium"].group = "chemistry"
 data.raw["item-subgroup"]["barrel"].group = "chemistry"
 data.raw["item-subgroup"]["fill-barrel"].group = "chemistry"
 data.raw["item-subgroup"]["empty-barrel"].group = "chemistry"

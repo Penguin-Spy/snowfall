@@ -29,15 +29,15 @@ local function rolling(metal)
   }
 end
 
-rolling("iron")
-rolling("copper")
-rolling("zinc")
-rolling("lead")
-rolling("nickel")
---rolling("gold")
-rolling("brass")
---rolling("steel")  -- ?
-rolling("invar")
+--?rolling("iron")
+--?rolling("copper")
+--?rolling("zinc")
+--?rolling("lead")
+--?rolling("nickel")
+--?--rolling("gold")
+--?rolling("brass")
+--?--rolling("steel")  -- ?
+--?rolling("invar")
 
 local function drawing(metal, result_name)
   local ingredient_name = metal .. "-rod"
@@ -58,5 +58,5 @@ local function drawing(metal, result_name)
   }
 end
 
-drawing("copper", "copper-cable")
-drawing("gold", "gold-wire")
+--?drawing("copper", "copper-cable")
+--?drawing("gold", "gold-wire")

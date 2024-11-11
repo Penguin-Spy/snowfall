@@ -8,8 +8,9 @@ data:extend{
     type = "recipe",
     name = "snowfall-material-punchcard",
     ingredients = {
-      { type = "item", name = "nickel-plate", amount = 1 },
-      { type = "item", name = "zinc-plate",   amount = 1 },
+      --?{ type = "item", name = "nickel-plate", amount = 1 },
+      --?{ type = "item", name = "zinc-plate",   amount = 1 },
+      {type = "item", name = "iron-plate", amount = 1}, --x
       { type = "item", name = "stone",        amount = 2 }
     },
     results = {

@@ -1,5 +1,5 @@
-local motor = data.raw["item"]["motor"]
-motor.icons = {
-  {icon = data_util.graphics .. "icons/motor.png", icon_size = 64, icon_mipmaps = 4}
-}
-motor.stack_size = 50
+--?local motor = data.raw["item"]["motor"]
+--?motor.icons = {
+--?  {icon = data_util.graphics .. "icons/motor.png", icon_size = 64, icon_mipmaps = 4}
+--?}
+--?motor.stack_size = 50

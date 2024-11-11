@@ -38,6 +38,7 @@ trigger_effects["snowfall_placed_ice_bore"] = function(event)
     position = real_bore.position,
     amount = 5
   }
+  real_bore.update_connections() -- let the drill know there's a resource under it now
 
   destroy_handling.register(real_bore, "snowfall_removed_ice_bore", {
     resource = resource

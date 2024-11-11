@@ -1,12 +1,12 @@
 -- ice bore & its placer
 
-local collision_mask_util_extended = require("__alien-biomes__/collision-mask-util-extended/data/collision-mask-util-extended")
-local collision_mask_ice_tile = collision_mask_util_extended.get_make_named_collision_mask("not-ice-tile")
+local collision_mask_util = require("collision-mask-util")
 
 local burner_ice_bore = table.deepcopy(data.raw["mining-drill"]["burner-mining-drill"])
 burner_ice_bore.name = "snowfall-burner-ice-bore"
 burner_ice_bore.resource_categories = { "snowfall-internal" }
-burner_ice_bore.collision_mask = { "item-layer", "object-layer", "player-layer", "water-tile", collision_mask_ice_tile }
+burner_ice_bore.collision_mask = collision_mask_util.get_default_mask("mining-drill")
+burner_ice_bore.collision_mask.layers.not_ice_tile = true
 burner_ice_bore.energy_usage = "150kW"  -- same as burner drill
 burner_ice_bore.mining_speed = 0.2
 burner_ice_bore.minable.result = "snowfall-burner-ice-bore"
@@ -21,13 +21,13 @@ local burner_ice_bore_placer = data_util.generate_placer(burner_ice_bore, "simpl
   localised_description = { "",
     { "entity-description.snowfall-burner-ice-bore" }, "\n",
     { "",
-      "[font=default-bold][color=#f8e0bb]", { "description.mining-speed" }, ":[/color][/font] ", burner_ice_bore.mining_speed, { "per-second-suffix" },
+      "[font=default-bold][color=#f8e0bb]", { "description.mining-speed" }, ":[/color][/font] ", tostring(burner_ice_bore.mining_speed), { "per-second-suffix" },
       "\n[font=default-bold][color=#f8e0bb]", { "description.efficiency-penalty-range" }, ":[/color][/font] 16",
-      "\n[font=default-bold][color=#f8e0bb]", { "description.pollution" }, ":[/color][/font] " .. burner_ice_bore.energy_source.emissions_per_minute, { "per-minute-suffix" }, "\n",
+      "\n[font=default-bold][color=#f8e0bb]", { "description.pollution" }, ":[/color][/font] " .. tostring(burner_ice_bore.energy_source.emissions_per_minute.pollution), { "per-minute-suffix" }, "\n",
     },
     { "",
       "[img=tooltip-category-consumes] [font=default-bold][color=#f8cd48]", { "tooltip-category.consumes" }, " ", { "fluid-name.steam" }, "[/color]\n[color=#f8e0bb]",
-      { "description.max-energy-consumption" }, ":[/color][/font] " .. util.parse_energy(burner_ice_bore.energy_usage) * 0.06, " ", { "si-prefix-symbol-kilo" }, { "si-unit-symbol-watt" }
+      { "description.max-energy-consumption" }, ":[/color][/font] " .. tostring(util.parse_energy(burner_ice_bore.energy_usage) * 0.06), " ", { "si-prefix-symbol-kilo" }, { "si-unit-symbol-watt" }
     }
   }
 })
@@ -42,7 +42,8 @@ local function generate_solar_mirror_reactor(name, connection)
     icon = "__base__/graphics/icons/solar-panel.png",
     icon_size = 64,
     icon_mipmaps = 4,
-    flags = { "placeable-neutral", "placeable-player", "hidden" },
+    flags = { "placeable-neutral", "placeable-player" },
+    hidden = true,
     max_health = 100,
 
     consumption = "720kW",
@@ -94,13 +95,13 @@ data:extend{
     target_temperature = 250,
     energy_source = { type = "void" },
     output_fluid_box = {
-      base_area = 10,
-      base_level = 1,
+      volume = 1000,
       pipe_covers = pipecoverspictures(),
       pipe_connections = {
         {
-          positions = { { 1, -2 }, { 2, -1 }, { -1, 2 }, { -2, 1 } },
-          type = "output"
+          direction = defines.direction.north,
+          positions = {{1, -1}, {1, -1}, {-1, 1}, {-1, 1}},
+          flow_direction = "output"
         }
       }
     },
@@ -120,33 +121,18 @@ data:extend{
         {
           filename = data_util.graphics .. "entity/steam-vent-cap.png",
           priority = "extra-high",
-          width = 131,
-          height = 137,
-          shift = util.by_pixel(-2.5, -4.5),
-          hr_version = {
-            filename = data_util.graphics .. "entity/hr-steam-vent-cap.png",
-            priority = "extra-high",
-            width = 261,
-            height = 273,
-            shift = util.by_pixel(-2.25, -4.75),
-            scale = 0.5
-          }
+          width = 261,
+          height = 273,
+          shift = util.by_pixel(-2.25, -4.75),
+          scale = 0.5
         },
         {
           filename = data_util.graphics .. "entity/steam-vent-cap-shadow.png",
-          priority = "extra-high",
-          width = 110,
-          height = 111,
+          width = 220,
+          height = 220,
+          scale = 0.5,
           draw_as_shadow = true,
-          shift = util.by_pixel(6, 0.5),
-          hr_version = {
-            filename = data_util.graphics .. "entity/hr-steam-vent-cap-shadow.png",
-            width = 220,
-            height = 220,
-            scale = 0.5,
-            draw_as_shadow = true,
-            shift = util.by_pixel(6, 0.5)
-          }
+          shift = util.by_pixel(6, 0.5)
         }
       }
     },
@@ -290,16 +276,14 @@ data:extend{
       burns_fluid = false,
       scale_fluid_usage = true,
       effectivity = 1,
-      emissions_per_minute = 12,
+      emissions_per_minute = { pollution = 12 },
       fluid_box = {
         production_type = "input-output",
         filter = "steam",
-        base_area = 2,   -- storage volume of 200 (base_area*height*100)
-        height = 1,      -- default
-        base_level = 0,  -- default
+        volume = 200,
         pipe_connections = {
-          { type = "input-output", position = { -2, 0 } },
-          { type = "input-output", position = { 2, 0 } },
+          { flow_direction = "input-output", position = { -1, 0 }, direction = defines.direction.west },
+          { flow_direction = "input-output", position = { 1, 0 }, direction = defines.direction.east },
         },
         secondary_draw_orders = { north = -1 },
         pipe_picture = assembler2pipepictures(),
@@ -1010,7 +994,7 @@ data:extend{
     energy_source = {
       type = "electric",
       usage_priority = "secondary-input",
-      emissions_per_minute = 4
+      emissions_per_minute = { pollution = 4 }
     },
     energy_usage = "75kW",
     open_sound = data_util.sounds.machine_open,
@@ -1101,7 +1085,7 @@ data:extend{
     energy_source = {
       type = "electric",
       usage_priority = "secondary-input",
-      emissions_per_minute = 4
+      emissions_per_minute = { pollution = 4 }
     },
     energy_usage = "75kW",
     open_sound = data_util.sounds.machine_open,
@@ -1175,9 +1159,10 @@ data:extend{
         production_type = "output",
         pipe_picture = assembler2pipepictures(),
         pipe_covers = pipecoverspictures(),
-        base_area = 10,
-        base_level = 1,
-        pipe_connections = { { type = "output", position = { 0, -1.5 } } },
+        volume = 1000,
+        pipe_connections = {
+          { flow_direction = "output", position = { 0, -0.5 }, direction = defines.direction.north }
+        },
         secondary_draw_orders = { north = -1 }
       }
     },

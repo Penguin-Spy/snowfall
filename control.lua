@@ -38,7 +38,7 @@ script.on_event(defines.events.on_script_trigger_effect, function(event)
   if handler then handler(event) end  -- don't tail call so the debugger is happy :)
 end)
 
-script.on_event(defines.events.on_entity_destroyed, destroy_handling.handle_event)
+script.on_event(defines.events.on_object_destroyed, destroy_handling.handle_event)
 
 script.on_event(defines.events.on_player_rotated_entity, function(event)
   if event.entity.name == "snowfall-solar-mirror" then
@@ -49,10 +49,10 @@ end)
 
 function initalize()
   ---@type table<uint64, destroy_handler_data>
-  global.destroy_handler_map = global.destroy_handler_map or {}
+  storage.destroy_handler_map = storage.destroy_handler_map or {}
 
   ---@type table<uint64, uint64>
-  global.unit_id_to_destroy_handler_id_map = global.unit_id_to_destroy_handler_id_map or {}
+  storage.unit_id_to_destroy_handler_id_map = storage.unit_id_to_destroy_handler_id_map or {}
 end
 
 script.on_init(function()

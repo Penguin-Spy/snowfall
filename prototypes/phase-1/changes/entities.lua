@@ -48,16 +48,14 @@ data.raw["mining-drill"]["burner-mining-drill"].energy_source = {
   burns_fluid = false,
   scale_fluid_usage = true,
   effectivity = 1,
-  emissions_per_minute = 12,
+  emissions_per_minute = { pollution = 12 },
   fluid_box = {
     production_type = "input-output",
     filter = "steam",
-    base_area = 1,   -- storage volume of 100 (base_area*height*100)
-    height = 1,      -- default
-    base_level = 0,  -- default
+    volume = 100,
     pipe_connections = {
-      { type = "input-output", position = { -1.5, 0.5 } },
-      { type = "input-output", position = { 1.5, 0.5 } },
+      { flow_direction = "input-output", position = { -0.5, 0.5 }, direction = defines.direction.west },
+      { flow_direction = "input-output", position = { 0.5, 0.5 }, direction = defines.direction.east },
     },
     secondary_draw_orders = { north = -1 },
     pipe_picture = assembler2pipepictures(),
@@ -82,12 +80,10 @@ data.raw["inserter"]["burner-inserter"].energy_source = {
   fluid_box = {
     production_type = "input-output",
     filter = "steam",
-    base_area = 1,   -- storage volume of 50 (base_area*height*100)
-    height = 0.5,    -- default is 1
-    base_level = 0,  -- default
+    volume = 50,
     pipe_connections = {
-      { type = "input-output", position = { 1, 0 } },
-      { type = "input-output", position = { -1, 0 } },
+      { flow_direction = "input-output", position = { 0, 0 }, direction = defines.direction.west },
+      { flow_direction = "input-output", position = { 0, 0 }, direction = defines.direction.east },
     },
     secondary_draw_orders = { north = -1 },
     --pipe_picture = assembler2pipepictures(),
@@ -145,16 +141,14 @@ assembler1.energy_source = {
   burns_fluid = false,
   scale_fluid_usage = true,
   effectivity = 1,
-  emissions_per_minute = 8,
+  emissions_per_minute = { pollution = 8 },
   fluid_box = {
     production_type = "input-output",
     filter = "steam",
-    base_area = 1,   -- storage volume of 100 (base_area*height*100)
-    height = 1,      -- default
-    base_level = 0,  -- default
+    volume = 100,
     pipe_connections = {
-      { type = "input-output", position = { -2, 0 } },
-      { type = "input-output", position = { 2, 0 } },
+      { flow_direction = "input-output", position = { -1, 0 }, direction = defines.direction.west },
+      { flow_direction = "input-output", position = { 1, 0 }, direction = defines.direction.east },
     },
     secondary_draw_orders = { north = -1 },
     pipe_picture = assembler2pipepictures(),
@@ -225,4 +219,4 @@ data.raw["turret"]["behemoth-worm-turret"].autoplace = nil
 
 -- remove iron autoplace (for now)
 --TODO: re-add with autoplace that spawns it further away
-data.raw["resource"]["iron-ore"].autoplace = nil
+data_util.remove_autoplace("resource", "iron-ore")

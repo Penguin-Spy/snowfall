@@ -4,25 +4,20 @@
   "title": "Snowfall",
   "description": "Crash-landed on an inhospitable frozen moon, you must protect your factory from the elements. With an atmosphere of nitrogen and seas of methane, progressing here will be different than anything you've done before. At least scans of the surface didn't detect any lifeforms...",
   "author": "Penguin_Spy",
-  "factorio_version": "1.1",
+  "factorio_version": "2.0",
   "dependencies": [
-    "BrassTacks",
-    "ThemTharHills",
-    "IfNickel",
-    "bzlead",
-    "bzsilicon",
-    "bzgas",
-    "bztitanium",
+    "? BrassTacks",
+    "? ThemTharHills",
+    "? IfNickel",
+    "? bzlead",
+    "? bzsilicon",
+    "? bztitanium",
     "alien-biomes",
-
-    "thermal-solar-power-lite",
-    "wret-beacon-rebalance-mod",
 
     "Rohlinheatagtmuf_Hdhaotaotfnllsape-atnsasri",
     "RealisticOres",
-    "Realistic_Heat_Glow",
+    "? Realistic_Heat_Glow",
     "informatron",
-    "crash-site-spaceship-surface",
 
     "factorio-crash-site"
   ]

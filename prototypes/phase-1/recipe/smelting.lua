@@ -44,10 +44,10 @@ end
 
 data:extend{
   smelt("iron"),
-  smelt("lead"),
+  --?smelt("lead"),
   smelt("copper"),
-  smelt("zinc"),
-  smelt("nickel"),
-  alloy("copper", 3, "zinc", 1, "brass-plate", 3),
-  alloy("nickel", 2, "iron", 2, "invar-plate", 2)
+  --?smelt("zinc"),
+  --?smelt("nickel"),
+  --?alloy("copper", 3, "zinc", 1, "brass-plate", 3),
+  --?alloy("nickel", 2, "iron", 2, "invar-plate", 2)
 }  --[=[@as data.RecipePrototype[]]=]

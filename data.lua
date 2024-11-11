@@ -22,7 +22,6 @@ require "prototypes.phase-1.recipe.research"
 require "prototypes.phase-1.recipe.rolling-drawing"
 require "prototypes.phase-1.recipe.smelting"
 
---require "prototypes.phase-1.casting" -- this system needs reworking
 require "prototypes.phase-1.entities"
 require "prototypes.phase-1.fluids"
 require "prototypes.phase-1.item-groups"

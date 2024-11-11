@@ -39,31 +39,6 @@ data:extend{
     order = "c[slag]",
     stack_size = 50
   },
-  -- molds
-  {
-    type = "item",
-    name = "snowfall-ingot-mold",
-    icon = graphics .. "icons/placeholder.png", icon_size = 64,
-    subgroup = "processed-stone",
-    order = "c[snowfall-molds]-a",
-    stack_size = 10
-  },
-  {
-    type = "item",
-    name = "snowfall-gear-mold",
-    icon = graphics .. "icons/placeholder.png", icon_size = 64,
-    subgroup = "processed-stone",
-    order = "c[snowfall-molds]-b",
-    stack_size = 10
-  },
-  {
-    type = "item",
-    name = "snowfall-rod-mold",
-    icon = graphics .. "icons/placeholder.png", icon_size = 64,
-    subgroup = "processed-stone",
-    order = "c[snowfall-molds]-c",
-    stack_size = 10
-  },
 
   -- ingots
   {
@@ -82,7 +57,7 @@ data:extend{
     order = data.raw.item["copper-plate"].order,
     stack_size = 50
   },
-  {
+  --[[{ --?
     type = "item",
     name = "lead-ingot",
     icon = graphics_bzlead .. "lead-ingot.png", icon_size = 128,
@@ -137,10 +112,10 @@ data:extend{
     subgroup = "ingots",
     order = data.raw.item["invar-plate"].order,
     stack_size = 50
-  },
+  },]]
 
   -- rods
-  {
+  --[[{ --?
     type = "item",
     name = "copper-rod",
     icon = graphics .. "icons/copper-rod.png", icon_size = 64,
@@ -163,7 +138,7 @@ data:extend{
     subgroup = "intermediate-product",
     order = data.raw.item["gold-plate"].order,
     stack_size = 50
-  },
+  },]]
 
   -- intermediates
   {

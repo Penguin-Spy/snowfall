@@ -12,17 +12,17 @@ local function set_subgroup(subgroup, items)
   end
 end
 
-set_subgroup("processed-stone", {
+--[[set_subgroup("processed-stone", { --?
   "stone-brick", "silica", "silicon"
 })
 
 set_subgroup("advanced-chemicals", {
   "gold-powder"
-})
+})]]
 
 set_subgroup("chemical-products", {
-  "phenol",
-  "bakelite",
+  --?"phenol",
+  --?"bakelite",
   "plastic-bar",
   "sulfur",
   "battery",  -- ThemTharHills moves this again in data-final-fixes. will need to rework batteries later anyways
@@ -35,7 +35,7 @@ set_subgroup("nuclear-products", {
   "uranium-235",
   "uranium-238",
   "uranium-fuel-cell",
-  "used-up-uranium-fuel-cell",
+  "depleted-uranium-fuel-cell",
   "nuclear-fuel",
   "kovarex-enrichment-process",
   "uranium-processing",

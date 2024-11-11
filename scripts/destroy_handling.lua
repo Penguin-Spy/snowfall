@@ -12,40 +12,39 @@ destroy_handling = {}
 ---@param handler string    the trigger_effect handler
 ---@param param any         an arbitrary parameter passed to the handler
 function destroy_handling.register(entity, handler, param)
-  local id = script.register_on_entity_destroyed(entity)
+  local id = script.register_on_object_destroyed(entity)
 
-  global.destroy_handler_map[id] = {
+  storage.destroy_handler_map[id] = {
     handler = handler,
     param = param
   }
   if entity.unit_number then
-    global.unit_id_to_destroy_handler_id_map[entity.unit_number] = id
+    storage.unit_id_to_destroy_handler_id_map[entity.unit_number] = id
   end
 end
 
 -- handle the on_entity_destroyed_event
 ---@param event EventData.on_entity_destroyed
 function destroy_handling.handle_event(event)
-  local handler_data = global.destroy_handler_map[event.registration_number]
+  local handler_data = storage.destroy_handler_map[event.registration_number]
   if handler_data then
     trigger_effects[handler_data.handler](handler_data.param)
   end
-  global.destroy_handler_map[event.registration_number] = nil
-  if event.unit_number then
-    global.unit_id_to_destroy_handler_id_map[event.unit_number] = nil
+  storage.destroy_handler_map[event.registration_number] = nil
+  if event.useful_id then
+    storage.unit_id_to_destroy_handler_id_map[event.useful_id] = nil
   end
 end
 
--- gets the destroy_handling paramater associated with the given unit number \
--- provides useful error messages if no paramater can be found
+-- gets the destroy_handling paramater associated with the given unit number
 ---@param unit_number uint
 ---@return any
 function destroy_handling.get_param_from_unit_number(unit_number)
-  local id = global.unit_id_to_destroy_handler_id_map[unit_number]
+  local id = storage.unit_id_to_destroy_handler_id_map[unit_number]
   if not id then
     error("given unit number was not registered for destroy handling: " .. tostring(unit_number))
   end
-  local handler_data = global.destroy_handler_map[id]
+  local handler_data = storage.destroy_handler_map[id]
   if not handler_data or not handler_data.param then
     error("given unit number was not registered for destroy handling with a paramater: " .. tostring(unit_number)
       .. "\nhandler_data: " .. type(handler_data)
