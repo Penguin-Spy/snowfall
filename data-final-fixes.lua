@@ -1,13 +1,5 @@
---[[ data-final-fixes.lua © Penguin_Spy 2023
+--[[ data-final-fixes.lua © Penguin_Spy 2023-2024
   Modifications to vanilla/dependencies' prototypes that must happen last (after their data-final-fixes.lua)
-]]
-
---[[
-for _, character in pairs(data.raw.character) do
-  -- allow player to do these, but slowly
-  table.insert(character.crafting_categories, "rolling")
-  table.insert(character.crafting_categories, "wire-drawing")
-end
 ]]
 
 -- help alien biomes finish removing vegetation
@@ -16,7 +8,28 @@ if settings.startup["alien-biomes-disable-vegetation"].value == "Enabled" then
   --  prototype.autoplace = nil
   --end
 
-  local autoplace_tile_settings_to_remove = {}
+  local autoplace_tile_settings_to_remove = {
+    "vegetation-green-grass-1" ,
+    "vegetation-green-grass-2" ,
+    "vegetation-green-grass-3" ,
+    "vegetation-green-grass-4" ,
+    "mineral-tan-dirt-1" ,
+    "mineral-tan-dirt-2" ,
+    "mineral-tan-dirt-1" ,
+    "mineral-tan-dirt-2" ,
+    "mineral-tan-dirt-3" ,
+    "mineral-tan-dirt-5" ,
+    "mineral-tan-dirt-4" ,
+    "mineral-tan-dirt-6" ,
+    "vegetation-olive-grass-2" ,
+    "mineral-brown-dirt-1" ,
+    "mineral-brown-dirt-5" ,
+    "mineral-brown-dirt-6" ,
+    "mineral-brown-sand-1" ,
+    "mineral-brown-sand-1" ,
+    "mineral-brown-sand-2" ,
+    "mineral-brown-sand-3" ,
+  }
   for _, prototype in pairs(data.raw['tile']) do
     if string.find(prototype.name, "grass") then
       --prototype.autoplace = nil
@@ -54,4 +67,11 @@ if settings.startup["alien-biomes-disable-vegetation"].value == "Enabled" then
     end
   end
   --data.raw['fish']['fish'].autoplace = nil
+end
+
+data.raw.planet.nauvis.map_gen_settings.autoplace_settings.decorative.settings["cracked-mud-decal"] = nil
+data.raw.planet.nauvis.map_gen_settings.autoplace_settings.decorative.settings["dark-mud-decal"] = nil
+
+for _, planet in pairs(data.raw.planet) do
+  planet.subgroup = "planet"
 end

@@ -16,17 +16,18 @@ burner_ice_bore.fast_replaceable_group = nil
 
 local burner_ice_bore_placer = data_util.generate_placer(burner_ice_bore, "simple-entity-with-owner", {
   created_effect = data_util.created_effect("snowfall_placed_ice_bore"),
-  picture = burner_ice_bore.animations,
-  animations = nil,
+  picture = burner_ice_bore.graphics_set.animation,
+  animations = "nil",
+  minable = "nil",
+  placeable_by = "nil",
+  factoriopedia_alternative = "snowfall-burner-ice-bore", -- this does nothing, but it should.
   localised_description = { "",
-    { "entity-description.snowfall-burner-ice-bore" }, "\n",
-    { "",
-      "[font=default-bold][color=#f8e0bb]", { "description.mining-speed" }, ":[/color][/font] ", tostring(burner_ice_bore.mining_speed), { "per-second-suffix" },
-      "\n[font=default-bold][color=#f8e0bb]", { "description.efficiency-penalty-range" }, ":[/color][/font] 16",
-      "\n[font=default-bold][color=#f8e0bb]", { "description.pollution" }, ":[/color][/font] " .. tostring(burner_ice_bore.energy_source.emissions_per_minute.pollution), { "per-minute-suffix" }, "\n",
-    },
-    { "",
-      "[img=tooltip-category-consumes] [font=default-bold][color=#f8cd48]", { "tooltip-category.consumes" }, " ", { "fluid-name.steam" }, "[/color]\n[color=#f8e0bb]",
+    { "entity-description.snowfall-burner-ice-bore" },
+    "\n[font=default-bold][color=#f8e0bb]", { "description.mining-speed" }, ":[/color][/font] " .. tostring(burner_ice_bore.mining_speed), { "per-second-suffix" },
+    "\n[font=default-bold][color=#f8e0bb]", { "description.efficiency-penalty-range" }, ":[/color][/font] 16",
+    "\n[font=default-bold][color=#f8e0bb]", { "airborne-pollutant-name.pollution" }, ":[/color][/font] " .. tostring(burner_ice_bore.energy_source.emissions_per_minute.pollution), { "per-minute-suffix" },
+    { "", -- inner LocalisedString due to 20 parameter limit
+      "\n[img=tooltip-category-steam] [font=default-bold][color=#f8cd48]", { "tooltip-category.consumes" }, " ", { "fluid-name.steam" }, "[/color]\n[color=#f8e0bb]",
       { "description.max-energy-consumption" }, ":[/color][/font] " .. tostring(util.parse_energy(burner_ice_bore.energy_usage) * 0.06), " ", { "si-prefix-symbol-kilo" }, { "si-unit-symbol-watt" }
     }
   }
@@ -109,11 +110,7 @@ data:extend{
     mining_speed = 1,
     resource_searching_radius = 0.49,
     vector_to_place_result = { 0, 0 },
-    radius_visualisation_picture = {
-      filename = "__base__/graphics/entity/pumpjack/pumpjack-radius-visualization.png",
-      width = 12,
-      height = 12
-    },
+    --radius_visualisation_picture = nil
     monitor_visualization_tint = { r = 78, g = 173, b = 255 },
     base_render_layer = "lower-object-above-shadow",
     base_picture = {
@@ -139,6 +136,7 @@ data:extend{
     vehicle_impact_sound = data_util.sounds.generic_impact,
     open_sound = data_util.sounds.machine_open,
     close_sound = data_util.sounds.machine_close,
+    working_sound = data_util.sounds.pipe,
 
     circuit_wire_connection_points = circuit_connector_definitions["pumpjack"].points,
     circuit_connector_sprites = circuit_connector_definitions["pumpjack"].sprites,

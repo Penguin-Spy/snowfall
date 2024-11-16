@@ -1,7 +1,7 @@
 -- Item group & subgroup definitions
 
 data:extend{
-  -- [[ Intermediate products group ]]
+  ----------------------------------- Intermediate products
   -- raw-resource (b)
   {
     type = "item-subgroup",
@@ -23,7 +23,7 @@ data:extend{
   -- specialized-electronics  (f-zc)
   -- science-pack             (h)
 
-  -- [[ Chemistry group ]]
+  ----------------------------------- Chemistry
   {
     type = "item-group",
     name = "chemistry",
@@ -55,9 +55,28 @@ data:extend{
 data.raw["item-subgroup"]["intermediate-product"].order = "d"  -- vanilla, default is "g"
 --data.raw["item-subgroup"]["engine-components"].order = "e"     -- from IfIHadANickel, default is "fx"
 
+data.raw["item-subgroup"]["fluid"].group = "chemistry" -- default is the "Fluids" group
 data.raw["item-subgroup"]["fluid-recipes"].group = "chemistry"
 --?data.raw["item-subgroup"]["advanced-chemicals"].group = "chemistry"  -- from ThemTharHills
 --?data.raw["item-subgroup"]["helium"].group = "chemistry"
 data.raw["item-subgroup"]["barrel"].group = "chemistry"
 data.raw["item-subgroup"]["fill-barrel"].group = "chemistry"
 data.raw["item-subgroup"]["empty-barrel"].group = "chemistry"
+
+
+------------------------------------- Environment
+data:extend{
+  {
+    type = "item-subgroup",
+    name = "planet",
+    group = "environment",
+    order = "a-a"
+  }
+}
+data.raw["item-subgroup"]["creatures"].order = "a-b"  -- vanilla, default is "a"
+-- trees            (aa)
+-- grass            (b)                               -- rocks
+data.raw["item-subgroup"]["cliffs"].order = "ba"      -- vanilla, default is "a"
+-- mineable-fluids  (ba)
+-- remnants         (dz)    -- tree stumps (hidden)
+-- wrecks           (e)     -- was some alien biomes rocks

@@ -10,6 +10,7 @@ data:extend{
     fuel_value = "20kJ",  -- 1000 units = half of coal
     base_color = {r = 0.25, g = 0.25, b = 0.25},
     flow_color = {r = 0.65, g = 0.65, b = 0.65},
-    order = "a[fluid]-a[methane]"
+    order = "a[fluid]-b[methane]",
+    subgroup = "fluid"
   }
 }

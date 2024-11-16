@@ -15,3 +15,6 @@ data_util.remove_recipe_ingredient("grenade", "coal")
 data_util.remove_recipe_ingredient("poison-capsule", "coal")
 data_util.remove_recipe_ingredient("slowdown-capsule", "coal")
 data_util.remove_recipe_ingredient("explosives", "coal")
+
+-- Oil
+data_util.remove_autoplace("resource", "crude-oil")

@@ -54,7 +54,9 @@ function data_util.generate_placer(entity_to_place, placer_prototype, additional
   placer.hidden = true
 
   for k, v in pairs(additional_properties) do
-    placer[k] = v
+    -- allow removing properties by giving them the string value "nil"
+    if v == "nil" then placer[k] = nil
+    else placer[k] = v end
   end
 
   return placer
