@@ -171,7 +171,7 @@ data:extend{
     type = "item",
     name = "snowfall-burner-ice-bore",
     icons = {
-      { icon = "__base__/graphics/icons/burner-mining-drill.png", icon_size = 64, icon_mipmaps = 4, tint = { r = 0.7, g = 0.85, b = 1, a = 1 } }
+      { icon = "__base__/graphics/icons/burner-mining-drill.png", tint = { r = 0.7, g = 0.85, b = 1, a = 1 } }
     },
     subgroup = "extraction-machine",
     order = "a[items]-a[burner-mining-drill]-a",
@@ -182,11 +182,22 @@ data:extend{
     type = "item",
     name = "snowfall-steam-vent-cap",
     icons = {
-      { icon = "__base__/graphics/icons/pumpjack.png", icon_size = 64, icon_mipmaps = 4, tint = { r = 0.7, g = 0.85, b = 1, a = 1 } }
+      { icon = "__base__/graphics/icons/pumpjack.png", tint = { r = 0.7, g = 0.85, b = 1, a = 1 } }
     },
     subgroup = "extraction-machine",
     order = "a[items]-b[pumpjack]-a[steam-vent-cap]",
     place_result = "snowfall-steam-vent-cap",
+    stack_size = 50
+  }  --[[@as data.ItemPrototype]],
+  {
+    type = "item",
+    name = "snowfall-steam-vent-turbine",
+    icons = {
+      { icon = "__base__/graphics/icons/steam-turbine.png", tint = { r = 0.7, g = 0.85, b = 1, a = 1 } }
+    },
+    subgroup = "extraction-machine",
+    order = "a[items]-b[pumpjack]-b[steam-vent-turbine]",
+    place_result = "snowfall-steam-vent-turbine-placer",
     stack_size = 50
   }  --[[@as data.ItemPrototype]],
 

@@ -42,7 +42,7 @@ data:extend{
     highlight = true,
     minimum = 60000,
     normal = 300000,
-    infinite_depletion_amount = 10,
+    infinite_depletion_amount = 0, -- don't deplete
     resource_patch_search_radius = 12,
     tree_removal_probability = 0.7,
     tree_removal_max_distance = 32 * 32,
@@ -59,8 +59,6 @@ data:extend{
         }
       }
     },
-    --walking_sound = sounds.oil,
-    --driving_sound = oil_driving_sound,
     collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
     selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
     autoplace = resource_autoplace.resource_autoplace_settings{

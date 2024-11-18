@@ -1,14 +1,10 @@
 trigger_effects = {}
 
----@param entity LuaEntity
-local function entity_to_string(entity)
-  return "'" .. tostring(entity.name) .. "'[id=" .. tostring(entity.unit_number) .. ",x=" .. tostring(entity.position.x) .. ",y=" .. tostring(entity.position.y) .. "]"
-end
-
 -- places the entity that a placer entity is for. the placer is destroyed by this function!
 ---@param placer LuaEntity
----@return LuaEntity
+---@return boolean # true if this was a placer, false if its the target entity
 local function place_placer_target(placer)
+  if placer.name:sub(-7) ~= "-placer" then return false end -- not a placer, tell caller to not return early
   local entity = placer.surface.create_entity{
     name = placer.name:sub(0, -8),  -- remove the "-placer" suffix
     direction = placer.direction,
@@ -21,7 +17,7 @@ local function place_placer_target(placer)
     error("creating placer target for " .. tostring(placer.name) .. " failed unexpectedly")
   end
   placer.destroy()
-  return entity
+  return true
 end
 
 
@@ -29,18 +25,17 @@ end
 
 ---@param event EventData.on_script_trigger_effect
 trigger_effects["snowfall_placed_ice_bore"] = function(event)
-  --game.print("placed ice bore. source: " .. entity_to_string(event.source_entity) .. " target: " .. entity_to_string(event.target_entity))
-  local placer = event.source_entity  ---@cast placer -nil
+  local drill = event.source_entity  ---@cast placer -nil
+  if place_placer_target(drill) then return end
 
-  local real_bore = place_placer_target(placer)
-  local resource = real_bore.surface.create_entity{
+  local resource = drill.surface.create_entity{
     name = "snowfall-internal-ice",
-    position = real_bore.position,
+    position = drill.position,
     amount = 5
   }
-  real_bore.update_connections() -- let the drill know there's a resource under it now
+  drill.update_connections() -- let the drill know there's a resource under it now
 
-  destroy_handling.register(real_bore, "snowfall_removed_ice_bore", {
+  destroy_handling.register(drill, "snowfall_removed_ice_bore", {
     resource = resource
   })
 end
@@ -49,6 +44,34 @@ trigger_effects["snowfall_removed_ice_bore"] = function(data)
   local resource = data.resource
   if resource and resource.valid then
     resource.destroy()
+  end
+end
+
+
+-- Steam vent turbine
+---@param event EventData.on_script_trigger_effect
+trigger_effects["snowfall_placed_steam_vent_turbine"] = function(event)
+  local turbine = event.source_entity  ---@cast turbine -nil
+  -- placing the actual turbine will create the drill  
+  if place_placer_target(turbine) then return end
+
+  local drill = turbine.surface.create_entity{
+    name = "snowfall-steam-vent-turbine-internal-drill",
+    direction = turbine.direction,
+    position = turbine.position,
+    force = turbine.force,
+    player = turbine.last_user
+  }
+
+  destroy_handling.register(turbine, "snowfall_removed_steam_vent_turbine", {
+    drill = drill
+  })
+end
+
+trigger_effects["snowfall_removed_steam_vent_turbine"] = function(data)
+  local drill = data.drill
+  if drill and drill.valid then
+    drill.destroy()
   end
 end
 

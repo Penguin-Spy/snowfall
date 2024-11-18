@@ -20,13 +20,14 @@ local function prepare_map()
       ["burner-mining-drill"] = 10,
       --["snowfall-kiln"] = 1,
       ["snowfall-steam-vent-cap"] = 2,
-      ["snowfall-solar-mirror"] = 3,
-      ["snowfall-solid-heat-exchanger"] = 3,
-      ["snowfall-burner-ice-bore"] = 2
+      --["snowfall-solar-mirror"] = 3,
+      --["snowfall-solid-heat-exchanger"] = 3,
+      --["snowfall-burner-ice-bore"] = 2
     })
     remote.call("freeplay", "set_debris_items", {
-      ["lead-plate"] = 10,
-      ["brass-plate"] = 18,
+      --?["lead-plate"] = 10,
+      --?["brass-plate"] = 18,
+      ["iron-plate"] = 10,
       ["iron-gear-wheel"] = 2
     })
     remote.call("freeplay", "set_skip_intro", true)  -- dont show_message_dialog
@@ -39,6 +40,7 @@ end
 local function postpare_map()
   storage.postpare_map_ran = true
 
+  -- do this here after the crash site sets it to 0.7
   local kiwen_lete = game.get_surface("nauvis")
   kiwen_lete.freeze_daytime = true
   kiwen_lete.daytime = 0.68

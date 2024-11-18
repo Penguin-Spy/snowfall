@@ -52,6 +52,7 @@ function data_util.generate_placer(entity_to_place, placer_prototype, additional
   placer.localised_name = { "entity-name." .. entity_to_place.name }
   placer.localised_description = { "entity-description." .. entity_to_place.name }
   placer.hidden = true
+  placer.factoriopedia_alternative = entity_to_place.name -- this does nothing, but it should.
 
   for k, v in pairs(additional_properties) do
     -- allow removing properties by giving them the string value "nil"

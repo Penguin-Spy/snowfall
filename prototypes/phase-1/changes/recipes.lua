@@ -10,6 +10,10 @@ data.raw.recipe["stone-furnace"].ingredients = {
 }
 data.raw.recipe["stone-furnace"].energy_required = 2
 
+-- enable pipes from the start
+data.raw.recipe["pipe"].enabled = true
+data.raw.recipe["pipe-to-ground"].enabled = true
+
 -- make belts & pneumatic inserters take lead/nickel/stone instead of iron
 --?data.raw.recipe["burner-inserter"].ingredients = {
 --?  { type = "item", name = "stone-brick", amount = 1 },
