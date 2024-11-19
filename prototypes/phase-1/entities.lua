@@ -152,45 +152,7 @@ local steam_vent_turbine_placer = data_util.generate_placer(steam_vent_turbine, 
   }
 })
 
-
-
--- solar mirror internal reactors
-local function generate_solar_mirror_reactor(name, connection)
-  return {
-    type = "reactor",
-    name = name,
-    selection_box = { { -1, -1 }, { 1, 1 } },
-    icon = "__base__/graphics/icons/solar-panel.png",
-    icon_size = 64,
-    icon_mipmaps = 4,
-    flags = { "placeable-neutral", "placeable-player" },
-    hidden = true,
-    max_health = 100,
-
-    consumption = "720kW",
-    energy_source = { type = "void" },
-    neighbour_bonus = 0,
-
-    heat_buffer = {
-      default_temperature = 15,
-      max_temperature = 500,
-      max_transfer = "720kW",
-      specific_heat = "10kJ",
-      connections = {
-        connection
-      }
-    },
-    picture = {
-      filename = "__core__/graphics/empty.png",
-      size = 1
-    },
-    working_light_picture = {
-      filename = "__core__/graphics/empty.png",
-      size = 1
-    }
-  }  --[[@as data.ReactorPrototype]]
-end
-
+local spaceship = data.raw.container["crash-site-spaceship"]
 
 data:extend{
   -- burner ice bore
@@ -288,34 +250,6 @@ data:extend{
     vector_to_place_result = { 0, 0 }
   }  --[[@as data.MiningDrillPrototype]],
 
-  -- solar mirror
-  {
-    type = "simple-entity-with-owner",
-    name = "snowfall-solar-mirror",
-    collision_box = { { -0.79, -0.79 }, { 0.79, 0.79 } },
-    selection_box = { { -1, -1 }, { 1, 1 } },
-    icon = "__base__/graphics/icons/solar-panel.png",
-    icon_size = 64, icon_mipmaps = 4,
-    flags = { "placeable-neutral", "placeable-player", "player-creation" },
-    minable = { mining_time = 0.2, result = "snowfall-solar-mirror" },
-    max_health = 100,
-    created_effect = data_util.created_effect("snowfall_placed_solar_mirror"),
-
-    picture = {
-      sheet = {
-        filename = data_util.graphics .. "entity/solar-mirror.png",
-        width = 64,
-        height = 64
-      },
-    }
-  }  --[[@as data.SimpleEntityWithOwnerPrototype]],
-
-  -- solar mirror internal reactors
-  generate_solar_mirror_reactor("snowfall-solar-mirror-reactor-north", { position = { 0, -1 }, direction = defines.direction.north }),
-  generate_solar_mirror_reactor("snowfall-solar-mirror-reactor-east", { position = { 1, 0 }, direction = defines.direction.east }),
-  generate_solar_mirror_reactor("snowfall-solar-mirror-reactor-south", { position = { 0, 1 }, direction = defines.direction.south }),
-  generate_solar_mirror_reactor("snowfall-solar-mirror-reactor-west", { position = { -1, 0 }, direction = defines.direction.west }),
-
   -- pneumatic laboratory
   {
     type = "assembling-machine",
@@ -356,12 +290,14 @@ data:extend{
         }
       }
     },
-    animation = table.deepcopy(data.raw["lab"]["lab"].off_animation),
-    working_visualisations = {
-      {
-        animation = table.deepcopy(data.raw["lab"]["lab"].on_animation)
-      }  --[[@as data.WorkingVisualisation]]
-    },
+    graphics_set = {
+      animation = table.deepcopy(data.raw["lab"]["lab"].off_animation),
+      working_visualisations = {
+        {
+          animation = table.deepcopy(data.raw["lab"]["lab"].on_animation)
+        }  --[[@as data.WorkingVisualisation]]
+      },
+    }
   }  --[[@as data.AssemblingMachinePrototype]],
 
   -- kiln
@@ -413,157 +349,11 @@ data:extend{
     energy_usage = "90kW",
     crafting_speed = 1,
     energy_source = {
-      type = "heat",
-      default_temperature = 15,
-      minimum_glow_temperature = 250,
-      min_working_temperature = 250,
-      max_temperature = 350,
-      max_transfer = "90kJ",
-      specific_heat = "90kJ",
-      connections = {
-        {
-          position = { 0, 0 },
-          direction = defines.direction.north
-        },
-        {
-          position = { 0, 0 },
-          direction = defines.direction.east
-        },
-        {
-          position = { 0, 0 },
-          direction = defines.direction.south
-        },
-        {
-          position = { 0, 0 },
-          direction = defines.direction.west
-        }
-      },
-    }  --[[@as data.HeatEnergySource]],
-    animation = {
-      layers = {
-        {
-          filename = "__base__/graphics/entity/stone-furnace/stone-furnace.png",
-          priority = "extra-high",
-          width = 81,
-          height = 64,
-          frame_count = 1,
-          shift = util.by_pixel(14.5, 2),
-          hr_version =
-          {
-            filename = "__base__/graphics/entity/stone-furnace/hr-stone-furnace.png",
-            priority = "extra-high",
-            width = 151,
-            height = 146,
-            frame_count = 1,
-            shift = util.by_pixel(-0.25, 6),
-            scale = 0.5
-          }
-        },
-        {
-          filename = "__base__/graphics/entity/stone-furnace/stone-furnace-shadow.png",
-          priority = "extra-high",
-          width = 81,
-          height = 64,
-          frame_count = 1,
-          draw_as_shadow = true,
-          shift = util.by_pixel(14.5, 2),
-          hr_version =
-          {
-            filename = "__base__/graphics/entity/stone-furnace/hr-stone-furnace-shadow.png",
-            priority = "extra-high",
-            width = 164,
-            height = 74,
-            frame_count = 1,
-            draw_as_shadow = true,
-            force_hr_shadow = true,
-            shift = util.by_pixel(14.5, 13),
-            scale = 0.5
-          }
-        }
-      }
-    },
-    working_visualisations = {
-      {
-        draw_as_light = true,
-        fadeout = true,
-        effect = "flicker",
-        animation =
-        {
-          layers =
-          {
-            {
-              filename = "__base__/graphics/entity/stone-furnace/stone-furnace-fire.png",
-              priority = "extra-high",
-              line_length = 8,
-              width = 20,
-              height = 49,
-              frame_count = 48,
-              axially_symmetrical = false,
-              direction_count = 1,
-              shift = util.by_pixel(-0.5, 5.5),
-              hr_version =
-              {
-                filename = "__base__/graphics/entity/stone-furnace/hr-stone-furnace-fire.png",
-                priority = "extra-high",
-                line_length = 8,
-                width = 41,
-                height = 100,
-                frame_count = 48,
-                axially_symmetrical = false,
-                direction_count = 1,
-                shift = util.by_pixel(-0.75, 5.5),
-                scale = 0.5
-              }
-            },
-            {
-              filename = "__base__/graphics/entity/stone-furnace/stone-furnace-light.png",
-              blend_mode = "additive",
-              width = 54,
-              height = 74,
-              repeat_count = 48,
-              shift = util.by_pixel(0, 4),
-              hr_version =
-              {
-                filename = "__base__/graphics/entity/stone-furnace/hr-stone-furnace-light.png",
-                blend_mode = "additive",
-                width = 106,
-                height = 144,
-                repeat_count = 48,
-                shift = util.by_pixel(0, 5),
-                scale = 0.5,
-              }
-            },
-          }
-        }
-      },
-      {
-        draw_as_light = true,
-        draw_as_sprite = false,
-        fadeout = true,
-        effect = "flicker",
-        animation =
-        {
-          filename = "__base__/graphics/entity/stone-furnace/stone-furnace-ground-light.png",
-          blend_mode = "additive",
-          draw_as_sprite = false,
-          width = 56,
-          height = 56,
-          repeat_count = 48,
-          shift = util.by_pixel(0, 44),
-          hr_version =
-          {
-            filename = "__base__/graphics/entity/stone-furnace/hr-stone-furnace-ground-light.png",
-            blend_mode = "additive",
-            draw_as_sprite = false,
-            width = 116,
-            height = 110,
-            repeat_count = 48,
-            shift = util.by_pixel(-1, 44),
-            scale = 0.5,
-          }
-        },
-      },
-    },
+      type = "electric",
+      usage_priority = "secondary-input",
+      emissions_per_minute = { pollution = 2 }  -- same as base
+    }  --[[@as data.ElectricEnergySource]],
+    graphics_set = table.deepcopy(data.raw["furnace"]["stone-furnace"].graphics_set),
     water_reflection = {
       pictures =
       {
@@ -786,199 +576,6 @@ data:extend{
       orientation_to_variation = false
     }
   }  --[[@as data.AssemblingMachinePrototype]]  --,
-
-  -- caster
-  --[[
-  {
-    type = "assembling-machine",
-    name = "snowfall-caster",
-    icon = "__base__/graphics/icons/stone-furnace.png",
-    icon_size = 64, icon_mipmaps = 4,
-    flags = {"placeable-neutral", "placeable-player", "player-creation"},
-    minable = {mining_time = 0.2, result = "snowfall-caster"},
-    max_health = 200,
-    corpse = "stone-furnace-remnants",
-    dying_explosion = "stone-furnace-explosion",
-    repair_sound = data_util.sounds.manual_repair,
-    mined_sound = data_util.sounds.deconstruct_bricks(0.8),
-    open_sound = data_util.sounds.machine_open,
-    close_sound = data_util.sounds.machine_close,
-    vehicle_impact_sound = data_util.sounds.car_stone_impact,
-    working_sound = {
-      sound = {
-        {
-          filename = "__base__/sound/furnace.ogg",
-          volume = 0.6
-        }
-      },
-      fade_in_ticks = 4,
-      fade_out_ticks = 20,
-      audible_distance_modifier = 0.4
-    },
-    resistances = {
-      {
-        type = "fire",
-        percent = 90
-      },
-      {
-        type = "explosion",
-        percent = 30
-      },
-      {
-        type = "impact",
-        percent = 30
-      }
-    },
-    collision_box = {{-0.79, -0.79}, {0.79, 0.79}},
-    selection_box = {{-1, -1}, {1, 1}},
-    damaged_trigger_effect = data_util.hit_effects.rock(),
-    crafting_categories = {"snowfall-caster"},
-    energy_usage = "0kW",
-    crafting_speed = 1,
-    energy_source = {
-      type = "void",
-    },
-    animation = {
-      layers = {
-        {
-          filename = "__base__/graphics/entity/stone-furnace/stone-furnace.png",
-          priority = "extra-high",
-          width = 81,
-          height = 64,
-          frame_count = 1,
-          shift = util.by_pixel(14.5, 2),
-          hr_version =
-          {
-            filename = "__base__/graphics/entity/stone-furnace/hr-stone-furnace.png",
-            priority = "extra-high",
-            width = 151,
-            height = 146,
-            frame_count = 1,
-            shift = util.by_pixel(-0.25, 6),
-            scale = 0.5
-          }
-        },
-        {
-          filename = "__base__/graphics/entity/stone-furnace/stone-furnace-shadow.png",
-          priority = "extra-high",
-          width = 81,
-          height = 64,
-          frame_count = 1,
-          draw_as_shadow = true,
-          shift = util.by_pixel(14.5, 2),
-          hr_version =
-          {
-            filename = "__base__/graphics/entity/stone-furnace/hr-stone-furnace-shadow.png",
-            priority = "extra-high",
-            width = 164,
-            height = 74,
-            frame_count = 1,
-            draw_as_shadow = true,
-            force_hr_shadow = true,
-            shift = util.by_pixel(14.5, 13),
-            scale = 0.5
-          }
-        }
-      }
-    },
-    working_visualisations = {
-      {
-        draw_as_light = true,
-        fadeout = true,
-        effect = "flicker",
-        animation =
-        {
-          layers =
-          {
-            {
-              filename = "__base__/graphics/entity/stone-furnace/stone-furnace-fire.png",
-              priority = "extra-high",
-              line_length = 8,
-              width = 20,
-              height = 49,
-              frame_count = 48,
-              axially_symmetrical = false,
-              direction_count = 1,
-              shift = util.by_pixel(-0.5, 5.5),
-              hr_version =
-              {
-                filename = "__base__/graphics/entity/stone-furnace/hr-stone-furnace-fire.png",
-                priority = "extra-high",
-                line_length = 8,
-                width = 41,
-                height = 100,
-                frame_count = 48,
-                axially_symmetrical = false,
-                direction_count = 1,
-                shift = util.by_pixel(-0.75, 5.5),
-                scale = 0.5
-              }
-            },
-            {
-              filename = "__base__/graphics/entity/stone-furnace/stone-furnace-light.png",
-              blend_mode = "additive",
-              width = 54,
-              height = 74,
-              repeat_count = 48,
-              shift = util.by_pixel(0, 4),
-              hr_version =
-              {
-                filename = "__base__/graphics/entity/stone-furnace/hr-stone-furnace-light.png",
-                blend_mode = "additive",
-                width = 106,
-                height = 144,
-                repeat_count = 48,
-                shift = util.by_pixel(0, 5),
-                scale = 0.5,
-              }
-            },
-          }
-        }
-      },
-      {
-        draw_as_light = true,
-        draw_as_sprite = false,
-        fadeout = true,
-        effect = "flicker",
-        animation =
-        {
-          filename = "__base__/graphics/entity/stone-furnace/stone-furnace-ground-light.png",
-          blend_mode = "additive",
-          draw_as_sprite = false,
-          width = 56,
-          height = 56,
-          repeat_count = 48,
-          shift = util.by_pixel(0, 44),
-          hr_version =
-          {
-            filename = "__base__/graphics/entity/stone-furnace/hr-stone-furnace-ground-light.png",
-            blend_mode = "additive",
-            draw_as_sprite = false,
-            width = 116,
-            height = 110,
-            repeat_count = 48,
-            shift = util.by_pixel(-1, 44),
-            scale = 0.5,
-          }
-        },
-      },
-    },
-    water_reflection = {
-      pictures =
-      {
-        filename = "__base__/graphics/entity/stone-furnace/stone-furnace-reflection.png",
-        priority = "extra-high",
-        width = 16,
-        height = 16,
-        shift = util.by_pixel(0, 35),
-        variation_count = 1,
-        scale = 5
-      },
-      rotate = false,
-      orientation_to_variation = false
-    }
-  },
-]]
 
   -- rolling machine
   {
@@ -1476,5 +1073,66 @@ data:extend{
     },
     working_visualisations = nil,  -- todo
     water_reflection = boiler_reflection()
-  }  --[[@as data.FurnacePrototype]]
+  }  --[[@as data.FurnacePrototype]],
+
+  -- crashed spaceship parts
+  { -- lab
+    type = "lab",
+    name = "snowfall-spaceship-lab",
+    localised_name = {"snowfall.spaceship-title", {"entity-name.snowfall-spaceship-lab"}},
+    collision_box = spaceship.collision_box, --{{-1.25, -1.25}, {1.25, 1.25}},
+    selection_box = spaceship.selection_box, --{{-1.5, -1.5}, {1.5, 1.5}},
+    selection_priority = 60,
+    resistances = {{ type = "fire", percent = 100}},
+    hidden = true,
+    open_sound = data_util.sounds.machine_open,
+    close_sound = data_util.sounds.machine_close,
+    energy_usage = "1W",
+    energy_source = {type = "void"},
+    inputs = { "snowfall-material-punchcard" },
+    off_animation = table.deepcopy(data.raw["lab"]["lab"].off_animation),
+    on_animation = table.deepcopy(data.raw["lab"]["lab"].on_animation)
+  } --[[@as data.LabPrototype]],
+  { -- arc furnace
+    type = "furnace",
+    name = "snowfall-spaceship-furnace",
+    localised_name = {"snowfall.spaceship-title", {"entity-name.snowfall-spaceship-furnace"}},
+    collision_box = spaceship.collision_box, --{{-1.25, -1.25}, {1.25, 1.25}},
+    selection_box = spaceship.selection_box, --{{-1.5, -1.5}, {1.5, 1.5}},
+    selection_priority = 60,
+    resistances = {{ type = "fire", percent = 100}},
+    hidden = true,
+    flags = {"no-automated-item-removal", "no-automated-item-insertion"},
+    show_recipe_icon_on_map = false,
+    open_sound = data_util.sounds.machine_open,
+    close_sound = data_util.sounds.machine_close,
+    icon_draw_specification = {shift={0, -0.5}},
+    energy_usage = "1W",
+    energy_source = {type = "void"},
+    source_inventory_size = 1,
+    result_inventory_size = 1,
+    crafting_speed = 1.5,
+    crafting_categories = { "smelting", "kiln" },
+    graphics_set = table.deepcopy(data.raw["furnace"]["electric-furnace"].graphics_set)
+  }  --[[@as data.FurnacePrototype]],
+  { -- assembling machine for material survey
+    type = "assembling-machine",
+    name = "snowfall-spaceship-assembling-machine",
+    localised_name = {"snowfall.spaceship-title", {"entity-name.snowfall-spaceship-lab"}},
+    collision_box = spaceship.collision_box, --{{-1.25, -1.25}, {1.25, 1.25}},
+    selection_box = spaceship.selection_box, --{{-1.5, -1.5}, {1.5, 1.5}},
+    selection_priority = 60,
+    resistances = {{ type = "fire", percent = 100}},
+    hidden = true,
+    flags = {"no-automated-item-removal", "no-automated-item-insertion", "hide-alt-info"},
+    show_recipe_icon_on_map = false,
+    open_sound = data_util.sounds.machine_open,
+    close_sound = data_util.sounds.machine_close,
+    energy_usage = "1W",
+    energy_source = {type = "void"},
+    crafting_speed = 1,
+    crafting_categories = {"snowfall-internal"},
+    fixed_recipe = "snowfall-internal-mineral-survey",
+    graphics_set = table.deepcopy(data.raw["assembling-machine"]["assembling-machine-3"].graphics_set)
+  }  --[[@as data.AssemblingMachinePrototype]],
 }

@@ -6,6 +6,57 @@ local graphics_bzlead = "__bzlead__/graphics/icons/"
 local graphics_bztitanium = "__bztitanium__/graphics/icons/"
 
 data:extend{
+  -- temporary item definitions, while waiting for brevven and planetfall to update their mods
+  {
+    type = "item",
+    name = "lead-ore",
+    icon = graphics .. "temporary-icons/lead-ore.png",
+    subgroup = "raw-resource",
+    order = "c",
+    stack_size = 100
+  },
+  {
+    type = "item",
+    name = "zinc-ore",
+    icon = graphics .. "temporary-icons/zinc-ore.png",
+    subgroup = "raw-resource",
+    order = "d",
+    stack_size = 100
+  },
+  {
+    type = "item",
+    name = "nickel-ore",
+    icon = graphics .. "temporary-icons/nickel-ore.png",
+    subgroup = "raw-resource",
+    order = "e",
+    stack_size = 100
+  },
+  {
+    type = "item",
+    name = "lead-plate",
+    icon = graphics .. "temporary-icons/lead-plate.png",
+    subgroup = "raw-material",
+    order = "c",
+    stack_size = 100
+  },
+  {
+    type = "item",
+    name = "zinc-plate",
+    icon = graphics .. "temporary-icons/zinc-plate.png",
+    subgroup = "raw-material",
+    order = "d",
+    stack_size = 100
+  },
+  {
+    type = "item",
+    name = "nickel-plate",
+    icon = graphics .. "temporary-icons/nickel-plate.png",
+    subgroup = "raw-material",
+    order = "e",
+    stack_size = 100
+  },
+  -- end temp items
+  
   -- resources
   {
     type = "item",
@@ -143,19 +194,36 @@ data:extend{
   -- intermediates
   {
     type = "item",
-    name = "basic-gear",  -- gear actually made from iron. the brass one is "iron-gear-wheel" (the vanilla name) so other mods use it by default
+    name = "basic-gear",  -- gear made from nickel. the brass one is "iron-gear-wheel" (the vanilla name) so other mods use it by default
     icon = "__base__/graphics/icons/iron-gear-wheel.png",
-    icon_size = 64, icon_mipmaps = 4,
     subgroup = "intermediate-product",
-    order = "b",
+    order = "a[basic-intermediates]-a[basic-gear]",
+    stack_size = 100
+  },
+  {
+    type = "item",
+    name = "snowfall-gearbox",
+    icon = graphics .. "/icons/gearbox.png",
+    subgroup = "intermediate-product",
+    order = "a[basic-intermediates]-b[gearbox]",
     stack_size = 100
   },
 
   -- science items
   {
+    type = "item",
+    name = "snowfall-internal-mineral-survey",
+    localised_name = {"technology-name.snowfall-mineral-survey"},
+    icon = "__base__/graphics/icons/science.png",
+    subgroup = "science-pack",
+    order = "z",
+    stack_size = 1,
+    hidden = true
+  },
+  {
     type = "tool",
     name = "snowfall-material-punchcard",
-    icons = { { icon = graphics .. "icons/material-punchcard.png", icon_size = 64 } },
+    icon = graphics .. "icons/material-punchcard.png",
     subgroup = "science-pack",
     order = "a",
     stack_size = 100,
@@ -202,16 +270,6 @@ data:extend{
   }  --[[@as data.ItemPrototype]],
 
   -- machines
-  {
-    type = "item",
-    name = "snowfall-solar-mirror",
-    icon = "__base__/graphics/icons/solar-panel.png",
-    icon_size = 64, icon_mipmaps = 4,
-    subgroup = "smelting-machine",
-    order = "d[snowfall]-a",
-    place_result = "snowfall-solar-mirror",
-    stack_size = 50
-  },
   {
     type = "item",
     name = "snowfall-pneumatic-lab",

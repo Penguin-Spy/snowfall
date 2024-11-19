@@ -12,11 +12,11 @@ local function set_subgroup(subgroup, items)
   end
 end
 
---[[set_subgroup("processed-stone", { --?
-  "stone-brick", "silica", "silicon"
+set_subgroup("processed-stone", {
+  "stone-brick", --?"silica", "silicon"
 })
 
-set_subgroup("advanced-chemicals", {
+--[[set_subgroup("advanced-chemicals", {  --?
   "gold-powder"
 })]]
 

@@ -92,47 +92,16 @@ data.raw["inserter"]["burner-inserter"].energy_source = {
   light_flicker = { color = { 0, 0, 0 } },
 }
 
--- stone furnace as an assembler and powered by heat
+-- stone furnace powered by electricity
 local stone_furnace = data.raw["furnace"]["stone-furnace"]
---stone_furnace.collision_box = { { -0.79, -0.79 }, { 0.79, 0.79 } }
---stone_furnace.selection_box = { { -1, -1 }, { 1, 1 } }
-stone_furnace.next_upgrade = nil
-stone_furnace.fast_replaceable_group = nil
 table.insert(stone_furnace.flags, "not-rotatable")
+-- energy usage is still 90kW
 stone_furnace.energy_source = {
-  type = "heat",
-  default_temperature = 15,
-  minimum_glow_temperature = 250,
-  min_working_temperature = 250,
-  max_temperature = 350,
-  max_transfer = "720kJ",
-  specific_heat = "15kJ",
-  connections = {
-    {
-      position = { 0, 0 },
-      direction = defines.direction.north
-    },
-    {
-      position = { 0, 0 },
-      direction = defines.direction.east
-    },
-    {
-      position = { 0, 0 },
-      direction = defines.direction.south
-    },
-    {
-      position = { 0, 0 },
-      direction = defines.direction.west
-    }
-  },
-}  --[[@as data.HeatEnergySource]]
-
--- turn the furnace into an assembling machine
-data.raw["furnace"]["stone-furnace"] = nil
-stone_furnace.type = "assembling-machine"
----@cast stone_furnace -data.FurnacePrototype,+data.AssemblingMachinePrototype
-stone_furnace.gui_title_key = "gui-assembling-machine.select-recipe-smelting"
-data:extend{ stone_furnace }
+  type = "electric",
+  usage_priority = "secondary-input",
+  emissions_per_minute = { pollution = 2 }  -- same as base
+} --[[@as data.ElectricEnergySource]]
+stone_furnace.result_inventory_size = 2 -- make space for slag
 
 -- make the assembling machine 1 steam powered
 local assembler1 = data.raw["assembling-machine"]["assembling-machine-1"]
@@ -180,14 +149,7 @@ wooden_chest.picture = {
       width = 32,
       height = 36,
       shift = util.by_pixel(0.5, -2),
-      hr_version = {
-        filename = graphics .. "entity/hr-stone-chest.png",
-        priority = "extra-high",
-        width = 62,
-        height = 72,
-        shift = util.by_pixel(0.5, -2),
-        scale = 0.5
-      }
+      scale = 0.5
     },
     {
       filename = "__base__/graphics/entity/wooden-chest/wooden-chest-shadow.png",
@@ -196,18 +158,14 @@ wooden_chest.picture = {
       height = 20,
       shift = util.by_pixel(10, 6.5),
       draw_as_shadow = true,
-      hr_version = {
-        filename = "__base__/graphics/entity/wooden-chest/hr-wooden-chest-shadow.png",
-        priority = "extra-high",
-        width = 104,
-        height = 40,
-        shift = util.by_pixel(10, 6.5),
-        draw_as_shadow = true,
-        scale = 0.5
-      }
+      scale = 0.5
     }
   }
 }
+
+-- remove storage space of the spaceship so that items can't get lost there (we make it probably impossible to open)
+data.raw.container["crash-site-spaceship"].inventory_size = 0
+data.raw.container["crash-site-spaceship"].flags = {"no-automated-item-removal", "no-automated-item-insertion"}
 
 -- remove surface biters
 data.raw["unit-spawner"]["biter-spawner"].autoplace = nil
