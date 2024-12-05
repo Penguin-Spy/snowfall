@@ -23,9 +23,9 @@ function destroy_handling.register(entity, handler, param)
   end
 end
 
--- handle the on_entity_destroyed_event
----@param event EventData.on_entity_destroyed
-function destroy_handling.handle_event(event)
+-- handle the on_object_destroyed
+---@param event EventData.on_object_destroyed
+events.on(events.on_object_destroyed, function(event)
   local handler_data = storage.destroy_handler_map[event.registration_number]
   if handler_data then
     trigger_effects[handler_data.handler](handler_data.param)
@@ -34,7 +34,7 @@ function destroy_handling.handle_event(event)
   if event.useful_id then
     storage.unit_id_to_destroy_handler_id_map[event.useful_id] = nil
   end
-end
+end)
 
 -- gets the destroy_handling paramater associated with the given unit number
 ---@param unit_number uint

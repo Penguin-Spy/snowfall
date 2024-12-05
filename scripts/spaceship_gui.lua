@@ -1,5 +1,3 @@
-local spaceship_gui = {}
-
 local function action(s)
   return {
     mod = script.mod_name,
@@ -21,16 +19,25 @@ local anchors = {
   assembling_machine = { gui = defines.relative_gui_type.assembling_machine_gui, position = defines.relative_gui_position.top, name = "snowfall-spaceship-assembling-machine" },
 }
 
-function spaceship_gui.initalize_player(player)
+events.on(events.initalize_player, function(player)
   local relative = player.gui.relative
   for name, anchor in pairs(anchors) do
     local element = relative[relative_gui_name .. name]
     if element then element.destroy() end
     create_tabs(player, relative_gui_name .. name, anchor)
   end
-end
+end)
 
-function spaceship_gui.on_open(player, entity)
+---@param event EventData.on_gui_opened
+events.on(events.on_gui_opened, function(event)
+  local entity, crash_site = event.entity, storage.crash_site
+  if not entity or not (
+    entity == crash_site.furnace
+    or entity == crash_site.lab
+    or entity == crash_site.assembling_machine
+  ) then return end
+
+  local player = game.get_player(event.player_index)  ---@cast player -nil
   -- set the current entity's tab to disabled to show the "selected" graphics
   if entity.name == "snowfall-spaceship-furnace" then
     player.gui.relative[relative_gui_name.."furnace"].furnace.enabled = false
@@ -41,9 +48,10 @@ function spaceship_gui.on_open(player, entity)
     player.gui.relative[relative_gui_name.."assembling_machine"].furnace.enabled = true
     player.gui.relative[relative_gui_name.."assembling_machine"].research.enabled = false
   end
-end
+end)
 
-function spaceship_gui.on_click(event)
+---@param event EventData.on_gui_click
+events.on(events.on_gui_click, function(event)
   local element = event.element
   if not (element and element.valid) then return end
 
@@ -64,6 +72,4 @@ function spaceship_gui.on_click(event)
       target.teleport(target.position) -- bring it to the front to be selected
     end
   end
-end
-
-return spaceship_gui
+end)

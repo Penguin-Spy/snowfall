@@ -7,7 +7,7 @@ local orig_data_util = data_util  ---@diagnostic disable-line: undefined-global
 data_util = require "prototypes.data_util"  ---@diagnostic disable-line: lowercase-global
 
 -- sorted alphabetically, directories first to match VS Code's file explorer
--- (order of running these files *shouldn't* matter)
+-- (order of running these files *shouldn't* matter) (but it does for now because we deepcopy some stuff)
 
 require "prototypes.phase-1.changes.entities"
 require "prototypes.phase-1.changes.items"

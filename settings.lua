@@ -63,5 +63,9 @@ for _, setting in pairs{
   alien_biomes_set("include-"..setting, true)
 end
 
+-- informatron (force disable "Show at start" so it doesn't interrupt the intro cutscene)
+data.raw["bool-setting"]["informatron-show-at-start"].hidden = true
+data.raw["bool-setting"]["informatron-show-at-start"].default_value = false
+data.raw["bool-setting"]["informatron-show-at-start"].forced_value = false
 
 -- todo: settings for Rohlinheatagtmuf_Hdhaotaotfnllsape-atnsasri

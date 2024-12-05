@@ -1,5 +1,11 @@
 trigger_effects = {}
 
+---@param event EventData.on_script_trigger_effect
+events.on(events.on_script_trigger_effect, function(event)
+  local handler = trigger_effects[event.effect_id]
+  if handler then handler(event) end  -- don't tail call so the debugger is happy :)
+end)
+
 -- places the entity that a placer entity is for. the placer is destroyed by this function!
 ---@param placer LuaEntity
 ---@return boolean # true if this was a placer, false if its the target entity
@@ -25,7 +31,7 @@ end
 
 ---@param event EventData.on_script_trigger_effect
 trigger_effects["snowfall_placed_ice_bore"] = function(event)
-  local drill = event.source_entity  ---@cast placer -nil
+  local drill = event.source_entity  ---@cast drill -nil
   if place_placer_target(drill) then return end
 
   local resource = drill.surface.create_entity{

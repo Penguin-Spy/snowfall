@@ -1,12 +1,14 @@
---[[ control.lua © Penguin_Spy 2023
+--[[ control.lua © Penguin_Spy 2023-2024
   Control-stage scripting for Snowfall mechanics
 ]]
 
-local util = require "util"
+require "util"
+require "scripts.event_handler"
 
 require "scripts.trigger_effects"
 require "scripts.destroy_handling"
-local spaceship_gui = require "scripts.spaceship_gui"
+require "scripts.technology"
+require "scripts.spaceship_gui"
 
 if script.active_mods["gvv"] then require("__gvv__.gvv")() end
 
@@ -34,11 +36,11 @@ local function postpare_map()
   storage.postpare_map_ran = true
 
   -- do this here after the crash site sets it to 0.7
-  local kiwen_lete = game.get_surface("nauvis")
+  local kiwen_lete = game.get_surface("nauvis") ---@cast kiwen_lete -nil
   kiwen_lete.freeze_daytime = true
   kiwen_lete.daytime = 0.68
-  
-  local spaceship = kiwen_lete.find_entity("crash-site-spaceship", {-5,-6})
+
+  local spaceship = kiwen_lete.find_entity("crash-site-spaceship", {-5,-6}) ---@cast spaceship -nil
   storage.crash_site = {
     spaceship = spaceship,
     furnace = kiwen_lete.create_entity{
@@ -60,30 +62,47 @@ local function postpare_map()
   storage.crash_site.lab.backer_name = "Kasane Teto"
 end
 
-script.on_event(defines.events.on_script_trigger_effect, function(event)
-  local handler = trigger_effects[event.effect_id]
-  if handler then handler(event) end  -- don't tail call so the debugger is happy :)
-end)
 
-script.on_event(defines.events.on_object_destroyed, destroy_handling.handle_event)
+local no_sound = {sound=defines.print_sound.never}
+local lea_color = {color={129, 255, 80}}
+script.on_nth_tick(30, function(event)
+  -- crash site lore
+  if event.tick <= (60 * 22) then
+    local second = event.tick / 60
+    if second == 0 then game.print({"snowfall.lea-intro-1"}, no_sound)
+    elseif second == 2.5 then game.print({"snowfall.lea-intro-2"}, no_sound)
+    elseif second == 4 then game.print({"snowfall.lea-intro-3"}, no_sound)
+    elseif second == 5 then game.print({"snowfall.lea-intro-4"}, no_sound)
+    elseif second == 7.5 then for _, player in pairs(game.players) do player.print({"snowfall.lea-intro-5", player.name}, lea_color) end
+    elseif second == 12.5 then game.print({"snowfall.lea-intro-6"}, lea_color)
+    elseif second == 17 then game.print({"snowfall.lea-intro-7"}, lea_color)
+    elseif second == 22 then game.print({"snowfall.lea-intro-8"}, lea_color)
+    end
+  end
 
-script.on_event(defines.events.on_gui_opened, function(event)
-  local entity, crash_site = event.entity, storage.crash_site
-  if entity == crash_site.furnace 
-    or entity == crash_site.lab
-    or entity == crash_site.assembling_machine
-  then
-    spaceship_gui.on_open(game.get_player(event.player_index), entity)
+  -- electronics research failing earlygame
+  for _, force in pairs(game.forces) do
+    if force.current_research and force.current_research.name == "snowfall-fake-electronics" then
+      if force.research_progress > 0.75 then
+        force.print({"snowfall.lea-electronics-research-failed"}, lea_color)
+        -- hide researched electronics, show failed electronics
+        force.technologies["snowfall-fake-electronics"].enabled = false
+        force.technologies["snowfall-fake-electronics-failed"].visible_when_disabled = true
+        force.technologies["snowfall-fake-electronics-failed"].saved_progress = 0.75
+        --force.technologies["snowfall-electromechanics"].saved_progress = 0.5 -- some of the knowledge carries over
+        force.technologies["automation-science-pack"].enabled = true
+        force.cancel_current_research()
+        -- set the most recent research to the failed version (assigning a TechnologyID works)
+        ---@diagnostic disable-next-line: assign-type-mismatch
+        force.previous_research = "snowfall-fake-electronics-failed"
+      elseif force.research_progress > 0.5 and not storage.lore_progress_forces[force.index].electronics_not_working_shown then
+        force.print({"snowfall.lea-electronics-research-not-working"}, lea_color)
+        storage.lore_progress_forces[force.index].electronics_not_working_shown = true
+      end
+    end
   end
 end)
-script.on_event(defines.events.on_gui_click, function(event)
-  spaceship_gui.on_click(event)
-end)
 
-function initalize_player(player)
-  log("Initalizing player "..player.name.."["..player.index.."]")
-  spaceship_gui.initalize_player(player)
-end
 
 function initalize()
   log("Initalizing global data")
@@ -95,8 +114,17 @@ function initalize()
 
   storage.crash_site = storage.crash_site or {}
 
+  ---@type table<integer, table>
+  storage.lore_progress_forces = storage.lore_progress_forces or {}
+  for _, force in pairs(game.forces) do -- also handle forces created/deleted
+    storage.lore_progress_forces[force.index] = storage.lore_progress_forces[force.index] or {}
+  end
+
+  events.raise(events.initalize)
+
   for _, player in pairs(game.players) do
-    initalize_player(player)
+    log("Initalizing player "..player.name.."["..player.index.."]")
+    events.raise(events.initalize_player, player)
   end
 end
 
@@ -113,7 +141,9 @@ script.on_event(defines.events.on_player_created, function(event)
   if not storage.postpare_map_ran then
     postpare_map()
   end
-  initalize_player(game.get_player(event.player_index))
+  local player = game.get_player(event.player_index)  ---@cast player -nil
+  log("Initalizing new player "..player.name.."["..player.index.."]")
+  events.raise(events.initalize_player, player)
 end)
 
 
@@ -125,3 +155,5 @@ Collect material samples:
 - [img=utility/questionmark] Solid sample #2 (0/5)
 - [item=lead-ore] Lead ore (3/5)]])
 end)
+
+events.register_events()
