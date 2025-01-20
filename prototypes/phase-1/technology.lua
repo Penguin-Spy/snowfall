@@ -17,9 +17,10 @@ data:extend{
     icon = data_util.graphics .. "icons/starmap-kiwen-lete.png",
     icon_size = 512,
     essential = true,
-    research_trigger = {
-      type = "craft-item",
-      item = "snowfall-internal-mineral-survey"
+    unit = {
+      count = 1,
+      time = 10,
+      ingredients = {{"snowfall-internal-mineral-survey", 1}}
     },
     effects = {
       {
@@ -32,6 +33,7 @@ data:extend{
       { type = "unlock-recipe", recipe = "zinc-plate", hidden = true},
       { type = "unlock-recipe", recipe = "nickel-plate", hidden = true},
       { type = "unlock-recipe", recipe = "stone-brick", hidden = true},
+      { type = "unlock-recipe", recipe = "snowfall-fire-clay", hidden = true},
       { type = "unlock-recipe", recipe = "snowfall-fire-brick", hidden = true},
       { type = "unlock-recipe", recipe = "basic-gear", hidden = true},
       { type = "unlock-recipe", recipe = "wooden-chest", hidden = true}
@@ -81,6 +83,7 @@ data:extend{
     name = "snowfall-material-punchcard",
     icon = data_util.graphics .. "technology/material-punchcard.png",
     icon_size = 256,
+    essential = true,
     prerequisites = { "snowfall-pneumatics", "snowfall-electric-smelting" },
     research_trigger = {
       type = "craft-item",

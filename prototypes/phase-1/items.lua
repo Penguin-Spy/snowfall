@@ -12,7 +12,7 @@ data:extend{
     name = "lead-ore",
     icon = graphics .. "temporary-icons/lead-ore.png",
     subgroup = "raw-resource",
-    order = "c",
+    order = "d",
     stack_size = 100
   },
   {
@@ -79,7 +79,7 @@ data:extend{
     name = "snowfall-fire-brick",
     icon = graphics .. "icons/fire-brick.png", icon_size = 64,
     subgroup = "processed-stone",
-    order = "b-a[fire-brick]",  -- between stone brick & silica
+    order = "b-b[fire-brick]",  -- between fire clay & silica
     stack_size = 50
   },
   {
@@ -194,6 +194,14 @@ data:extend{
   -- intermediates
   {
     type = "item",
+    name = "snowfall-fire-clay",
+    icon = graphics .. "/icons/fire-clay.png",
+    subgroup = "processed-stone",
+    order = "b-a[fire-clay]", -- after stone brick, before fire brick
+    stack_size = 50
+  },
+  {
+    type = "item",
     name = "basic-gear",  -- gear made from nickel. the brass one is "iron-gear-wheel" (the vanilla name) so other mods use it by default
     icon = "__base__/graphics/icons/iron-gear-wheel.png",
     subgroup = "intermediate-product",
@@ -211,21 +219,22 @@ data:extend{
 
   -- science items
   {
-    type = "item",
+    type = "tool",
     name = "snowfall-internal-mineral-survey",
     localised_name = {"technology-name.snowfall-mineral-survey"},
     icon = "__base__/graphics/icons/science.png",
     subgroup = "science-pack",
-    order = "z",
+    order = "a-a",
+    hidden = true,
     stack_size = 1,
-    hidden = true
+    durability = 1
   },
   {
     type = "tool",
     name = "snowfall-material-punchcard",
     icon = graphics .. "icons/material-punchcard.png",
     subgroup = "science-pack",
-    order = "a",
+    order = "a-b",
     stack_size = 100,
     durability = 1,
     durability_description_key = "description.science-pack-remaining-amount-key",
@@ -278,46 +287,6 @@ data:extend{
     order = "gA",  -- vanilla lab is "g[lab]"
     place_result = "snowfall-pneumatic-lab",
     stack_size = 10
-  },
-  {
-    type = "item",
-    name = "snowfall-kiln",
-    icon = "__base__/graphics/icons/stone-furnace.png",
-    icon_size = 64, icon_mipmaps = 4,
-    subgroup = "smelting-machine",
-    order = "d[snowfall]-a",
-    place_result = "snowfall-kiln",
-    stack_size = 50
-  },
-  --[[{
-    type = "item",
-    name = "snowfall-foundry",
-    icon = "__base__/graphics/icons/stone-furnace.png",
-    icon_size = 64, icon_mipmaps = 4,
-    subgroup = "smelting-machine",
-    order = "d[snowfall]-b",
-    place_result = "snowfall-foundry",
-    stack_size = 50
-  },]]
-  {
-    type = "item",
-    name = "snowfall-rolling-machine",
-    icon = "__base__/graphics/icons/assembling-machine-1.png",
-    icon_size = 64, icon_mipmaps = 4,
-    subgroup = "production-machine",
-    order = "c-a[snowfall]-a",  -- after assembler 3
-    place_result = "snowfall-rolling-machine",
-    stack_size = 50
-  },
-  {
-    type = "item",
-    name = "snowfall-drawing-machine",
-    icon = "__base__/graphics/icons/assembling-machine-1.png",
-    icon_size = 64, icon_mipmaps = 4,
-    subgroup = "production-machine",
-    order = "c-a[snowfall]-b",
-    place_result = "snowfall-drawing-machine",
-    stack_size = 50
   },
   {
     type = "item",

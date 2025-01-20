@@ -92,9 +92,10 @@ data.raw["inserter"]["burner-inserter"].energy_source = {
   light_flicker = { color = { 0, 0, 0 } },
 }
 
--- stone furnace powered by electricity
+-- stone furnace powered by electricity and does kiln recipes
 local stone_furnace = data.raw["furnace"]["stone-furnace"]
 table.insert(stone_furnace.flags, "not-rotatable")
+table.insert(stone_furnace.crafting_categories, "kiln")
 -- energy usage is still 90kW
 stone_furnace.energy_source = {
   type = "electric",

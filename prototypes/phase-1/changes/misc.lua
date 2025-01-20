@@ -31,5 +31,8 @@ for _, name in pairs{"tree-oaktapus-stump", "tree-greypine-stump", "tree-ash-stu
   data.raw.corpse[name].hidden = true
 end
 
+-- put the stone resource with the geothermal vent, since it can't be associated with the stone item (mining it gives 2 things)
+data.raw["resource"]["stone"].subgroup = "mineable-fluids"
 
-data.raw["resource"]["stone"].subgroup = "mineable-fluids"  -- to put it with the geothermal vent, since it can't be associated with the stone item (mining it gives 2 things)
+-- make stone brick not have a boosted movement speed (since it's used for factory floors, and outside snow is already slow anyways)
+data.raw.tile["stone-path"].walking_speed_modifier = nil

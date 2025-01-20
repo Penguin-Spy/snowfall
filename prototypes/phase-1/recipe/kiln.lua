@@ -10,14 +10,13 @@ data:extend{
     name = "snowfall-fire-brick",
     category = "kiln",
     ingredients = {
-      {type = "item", name = "stone",              amount = 2},
-      {type = "item", name = "snowfall-kaolinite", amount = 3}
+      {type = "item", name = "snowfall-fire-clay", amount = 4}
     },
     results = {
       {type = "item", name = "snowfall-fire-brick", amount = 2}
     },
     energy_required = 5,
-    always_show_products = true
+    --always_show_products = true
   }  --[[@as data.RecipePrototype]]
 }
 

@@ -9,7 +9,7 @@ local function alien_biomes_set(name, enabled)
   data.raw["string-setting"]["alien-biomes-" .. name].default_value = enabled and "Enabled" or "Disabled"
 end
 
-alien_biomes_set("disable-vegetation", true)
+alien_biomes_set("disable-vegetation", false)
 alien_biomes_set("include-inland-shallows", false)
 alien_biomes_set("include-rivers", true)
 

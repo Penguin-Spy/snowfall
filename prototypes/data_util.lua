@@ -42,8 +42,8 @@ end
 -- generates a dummy "placer entity" to use it's placement restrictions for a different entity type
 ---@param entity_to_place data.EntityPrototype  the prototype table for the entity to mimic
 ---@param placer_prototype string               the type string for the entity that gets placed
----@param additional_properties data.EntityPrototype           additional properties to assign to the placer prototype
----@return data.EntityPrototype
+---@param additional_properties table           additional properties to assign to the placer prototype
+---@return table
 function data_util.generate_placer(entity_to_place, placer_prototype, additional_properties)
   local placer = table.deepcopy(entity_to_place)
 

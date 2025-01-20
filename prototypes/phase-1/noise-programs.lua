@@ -58,3 +58,50 @@ data.raw["noise-function"]["elevation_nauvis_function"].expression = "wlc_elevat
   tan mineral:        60 - 100
   violet mineral:     60 - 100
 ]]
+
+-- remove vegetation (not using the alien biomes setting, since it prints an annoying message at the start of the game)
+local nauvis_map_gen = data.raw.planet.nauvis.map_gen_settings ---@cast nauvis_map_gen -nil
+local nauvis_tile_settings = nauvis_map_gen.autoplace_settings.tile.settings
+local nauvis_decorative_settings = nauvis_map_gen.autoplace_settings.decorative.settings
+
+-- prevent alien biomes re-adding excluded biome tiles when remapping base game tiles
+for old in pairs(alien_biomes.tile_alias) do
+  nauvis_tile_settings[old] = nil
+end
+
+-- remove any decorative that is even remotely alive
+local block_decorative_words = {"grass", "asterisk", "fluff", "garballo", "bush", "croton", "pita", "cane"}
+for _, decorative in pairs(data.raw["optimized-decorative"]) do
+  for _, word in pairs(block_decorative_words) do
+    if string.find(decorative.name, word) then
+      nauvis_decorative_settings[decorative.name] = nil
+    end
+  end
+end
+
+-- no trees or fish either
+nauvis_map_gen.autoplace_controls["trees"] = nil
+nauvis_map_gen.autoplace_settings.entity.settings["fish"] = nil
+
+-- remove some decoratives that spawn on ice because of the adjusted noise expressions
+nauvis_decorative_settings["cracked-mud-decal"] = nil
+nauvis_decorative_settings["dark-mud-decal"] = nil
+
+local function tiles_with_any_tag(tags)
+  return alien_biomes.list_tiles(alien_biomes.require_tag(alien_biomes.all_tiles(), tags))
+end
+local function tiles_with_all_tags(tags)
+  return alien_biomes.list_tiles(alien_biomes.require_tags(alien_biomes.all_tiles(), tags))
+end
+
+-- prevent rock patch decoratives from spawning on snow
+data.raw["optimized-decorative"]["sand-decal-white"].autoplace.tile_restriction = tiles_with_all_tags{"dirt", "white"}
+data.raw["optimized-decorative"]["stone-decal-white"].autoplace.tile_restriction = tiles_with_all_tags{"dirt", "white"}
+
+-- puddle also on snow 7 & 8 (lumpy old ice)
+data.raw["optimized-decorative"]["puddle-decal"].autoplace.tile_restriction = tiles_with_any_tag{"dirt", "grass", "snow-0", "snow-1", "snow-7", "snow-8"}
+
+-- craters also on snow 2, 3, 8, & 9 (hard snow, old ice)
+for _, crater in pairs { "crater1-large", "crater2-medium", "crater4-small" } do
+  data.raw["optimized-decorative"][crater].autoplace.tile_restriction = tiles_with_any_tag{"dirt", "sand", "snow-2", "snow-3", "snow-8", "snow-9"}
+end

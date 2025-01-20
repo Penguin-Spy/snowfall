@@ -76,7 +76,9 @@ script.on_nth_tick(30, function(event)
     elseif second == 7.5 then for _, player in pairs(game.players) do player.print({"snowfall.lea-intro-5", player.name}, lea_color) end
     elseif second == 12.5 then game.print({"snowfall.lea-intro-6"}, lea_color)
     elseif second == 17 then game.print({"snowfall.lea-intro-7"}, lea_color)
-    elseif second == 22 then game.print({"snowfall.lea-intro-8"}, lea_color)
+    elseif second == 22 then
+      game.print({"snowfall.lea-intro-8"}, lea_color)
+      for _, force in pairs(game.forces) do if #force.players > 0 then force.add_research("snowfall-mineral-survey") end end
     end
   end
 
@@ -147,13 +149,28 @@ script.on_event(defines.events.on_player_created, function(event)
 end)
 
 
-commands.add_command("snowfall", "debugging command", function(command)
+commands.add_command("snowfall", "<survey|resources>", function(command)
   local player = game.get_player(command.player_index)  --[[@as LuaPlayer]]
-  player.set_goal_description([[
-Collect material samples:
-- [img=utility/questionmark] Solid sample #1 (0/5)
-- [img=utility/questionmark] Solid sample #2 (0/5)
-- [item=lead-ore] Lead ore (3/5)]])
+
+  local paramaters = command.parameter and util.split(command.parameter, " ") or {}
+  if paramaters[1] == "survey" then
+    player.force.technologies["snowfall-mineral-survey"].researched = true
+
+  elseif paramaters[1] == "resources" then
+    player.insert{name="zinc-ore", count = 10}
+    player.insert{name="lead-ore", count = 10}
+    player.insert{name="nickel-ore", count = 10}
+
+  elseif paramaters[1] == "reveal-techs" then -- note that this reveals all versions of the fake electronics
+    for _, tech in pairs(player.force.technologies) do
+      tech.enabled = true
+    end
+
+  else
+    player.print[[/snowfall <survey|resources>
+  survey    - completes the mineral survey research
+  resources - gives 10 zinc, lead, & nickel ore]]
+  end
 end)
 
 events.register_events()
