@@ -18,3 +18,6 @@ data_util.remove_recipe_ingredient("explosives", "coal")
 
 -- Oil
 data_util.remove_autoplace("resource", "crude-oil")
+
+-- remove BZ's silica from bricks recipe
+data.raw.recipe["silica"] = nil

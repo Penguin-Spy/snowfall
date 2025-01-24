@@ -300,6 +300,65 @@ data:extend{
     }
   }  --[[@as data.AssemblingMachinePrototype]],
 
+  {
+    type = "furnace",
+    name = "snowfall-pneumatic-pulverizer",
+    icon = data_util.graphics .. "icons/pneumatic-pulverizer.png",
+    flags = { "placeable-neutral", "placeable-player", "player-creation" },
+    minable = { mining_time = 0.2, result = "snowfall-pneumatic-pulverizer" },
+    max_health = 100,
+    collision_box = { { -0.8, -0.8 }, { 0.8, 0.8 } },
+    selection_box = { { -1, -1 }, { 1, 1 } },
+    source_inventory_size = 1,
+    result_inventory_size = 3,
+    crafting_categories = { "snowfall-pulverizing" },
+    crafting_speed = 1,
+    cant_insert_at_source_message_key = "inventory-restriction.snowfall-cant-be-pulverized",
+    energy_source = {
+      type = "fluid",
+      burns_fluid = false,
+      scale_fluid_usage = true,
+      effectivity = 1,
+      emissions_per_minute = { pollution = 4 },
+      fluid_box = {
+        production_type = "input-output",
+        filter = "steam",
+        volume = 100,
+        pipe_connections = {
+          { flow_direction = "input-output", position = { -0.5, 0.5 }, direction = defines.direction.west },
+          { flow_direction = "input-output", position = { 0.5, 0.5 }, direction = defines.direction.east },
+        },
+        secondary_draw_orders = { north = -1 },
+        pipe_covers = pipecoverspictures(),
+      },
+      light_flicker = { color = { 0, 0, 0 } },
+      smoke = {{
+        name = "smoke",
+        north_position = { -0.55, 0.3 }, east_position = { -0.55, 0.3 },
+        south_position = { -0.55, 0.3 }, west_position = { -0.55, 0.3 },
+        deviation = { 0.1, 0.1 },
+        frequency = 3
+      }}
+    } --[[@as data.FluidEnergySource]],
+    energy_usage = "140kW",
+    working_sound = {
+      sound = sound_variations("__base__/sound/burner-mining-drill", 2, 0.6, volume_multiplier("tips-and-tricks", 0.8)),
+      fade_in_ticks = 4,
+      fade_out_ticks = 20
+    },
+    open_sound = data_util.sounds.machine_open,
+    close_sound = data_util.sounds.machine_close,
+
+    graphics_set = {
+      animation = {
+        layers = {
+          data_util.load_spritter_sprite(data_util.graphics .. "entity/pulverizer", {}),
+          data_util.load_spritter_sprite(data_util.graphics .. "entity/pulverizer-shadow", {draw_as_shadow=true, repeat_count=60})
+        }
+      }
+    }
+  } --[[@as data.FurnacePrototype]],
+
   -- Solid Heat Exchanger
   {
     type = "furnace",

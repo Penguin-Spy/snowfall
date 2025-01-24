@@ -83,7 +83,7 @@ end
 function data_util.remove_autoplace(prototype_type, name, control_name, settings_name)
   control_name = control_name or name
   settings_name = settings_name or name
-  local group = (prototype_type == "tile" and tile) or (prototype_type == "optimized-decorative" and "decorative") or "entity"
+  local group = (prototype_type == "tile" and "tile") or (prototype_type == "optimized-decorative" and "decorative") or "entity"
 
   -- remove entity's autoplace and the control prototype
   data.raw[prototype_type][name].autoplace = nil
@@ -110,6 +110,29 @@ function data_util.remove_autoplace(prototype_type, name, control_name, settings
       planet.map_gen_settings.autoplace_settings[group].settings[settings_name] = nil
     end
   end
+end
+
+function data_util.load_spritter_sprite(path, extra)
+  local sprite_data = require(path)
+  extra.width = sprite_data.width
+  extra.height = sprite_data.height
+  extra.scale = sprite_data.scale
+  extra.shift = sprite_data.shift
+  extra.line_length = sprite_data.line_length
+  extra.frame_count = sprite_data.sprite_count
+
+  extra.filename = path .. ".png"
+  return extra
+end
+
+--- Generates an icon with a smaller 'detail' icon in the top left.
+---@param main data.ItemID|string   the main icon; value is the name of the item to use the icon of, or a path to an image to use as the icon
+---@param detail data.ItemID|string the detail icon; same value as `main`
+---@return data.IconData[]
+function data_util.icon_with_detail(main, detail)
+  local main_icon_path = main:sub(1, 1) == "_" and main or data.raw.item[main].icon
+  local detail_icon_path = detail:sub(1, 1) == "_" and detail or data.raw.item[detail].icon
+  return {{ icon = main_icon_path }, { icon = detail_icon_path, scale = 0.3, shift = {-7, -7} } }
 end
 
 return data_util

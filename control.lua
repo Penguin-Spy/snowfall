@@ -169,7 +169,8 @@ commands.add_command("snowfall", "<survey|resources>", function(command)
   else
     player.print[[/snowfall <survey|resources>
   survey    - completes the mineral survey research
-  resources - gives 10 zinc, lead, & nickel ore]]
+  resources - gives 10 zinc, lead, & nickel ore
+  reveal-techs - reveal all techs in the tech tree; will break stuff]]
   end
 end)
 

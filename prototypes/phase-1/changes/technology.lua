@@ -73,6 +73,13 @@ electronics.unit = {
 -- put some stuff earlier
 rebase_technologies("automation-science-pack", "snowfall-material-punchcard", {"lamp", "logistics", "radar", "automation"})
 
+-- remove BZ's silica-processing tech
+data.raw.technology["silica-processing"] = nil
+for _, tech in pairs{"concrete", "silicon-processing", "fiber-optics"} do
+  util.remove_from_list(data.raw.technology[tech].prerequisites, "silica-processing")
+end
+table.insert(data.raw.technology["fiber-optics"].prerequisites, "logistic-science-pack")
+
 -- hide military techs for now
 -- TODO: move these later in the tech tree and un-hide them when enemies are discovered
 for _, name in pairs{"gun-turret", "military", "military-2"} do

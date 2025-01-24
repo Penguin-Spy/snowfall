@@ -100,20 +100,20 @@ data:extend{
     enabled = false,
     energy_required = 2
   },
-  --[[{
+  {
     type = "recipe",
-    name = "snowfall-pneumatic-crusher",
+    name = "snowfall-pneumatic-pulverizer",
     ingredients = {
       {type = "item", name = "stone-brick", amount = 2},
       {type = "item", name = "basic-gear", amount = 6},
       {type = "item", name = "lead-plate", amount = 4},
     },
     results = {
-      {type = "item", name = "snowfall-pneumatic-crusher", amount = 1}
+      {type = "item", name = "snowfall-pneumatic-pulverizer", amount = 1}
     },
     enabled = false,
     energy_required = 1
-  },]]
+  },
   {
     type = "recipe",
     name = "snowfall-solid-heat-exchanger",

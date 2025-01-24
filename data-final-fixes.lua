@@ -5,3 +5,6 @@
 for _, planet in pairs(data.raw.planet) do
   planet.subgroup = "planet"
 end
+
+-- temp fix for bzlead bug
+data.raw.furnace["snowfall-spaceship-furnace"].result_inventory_size = 1

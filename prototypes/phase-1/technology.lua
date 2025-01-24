@@ -95,6 +95,23 @@ data:extend{
       { type = "unlock-recipe", recipe = "snowfall-pneumatic-lab" }
     }
   },
+  {
+    type = "technology",
+    name = "snowfall-pneumatic-pulverizer",
+    icon = data_util.graphics .. "technology/pneumatic-pulverizer.png",
+    icon_size = 256,
+    prerequisites = { "snowfall-material-punchcard" },
+    unit = {
+      count = 10,
+      time = 15,
+      ingredients = {{"snowfall-material-punchcard", 1}}
+    },
+    effects = {
+      { type = "unlock-recipe", recipe = "snowfall-pneumatic-pulverizer" },
+      { type = "unlock-recipe", recipe = "snowfall-pulverizing-stone" },
+      { type = "unlock-recipe", recipe = "snowfall-pulverizing-slag" }
+    }
+  },
   { -- fake electronics to be researched earlygame
     type = "technology",
     name = "snowfall-fake-electronics",

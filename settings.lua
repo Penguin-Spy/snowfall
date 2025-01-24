@@ -2,17 +2,23 @@
   overrides other mods' settings to fit snowfall's theming
 ]]
 
--- alien biomes config
-local function alien_biomes_set(name, enabled)
-  data.raw["string-setting"]["alien-biomes-" .. name].hidden = true
-  data.raw["string-setting"]["alien-biomes-" .. name].allowed_values = { enabled and "Enabled" or "Disabled" }
-  data.raw["string-setting"]["alien-biomes-" .. name].default_value = enabled and "Enabled" or "Disabled"
+local function set_bool(name, enabled)
+  local setting = data.raw["bool-setting"][name]
+  setting.hidden = true
+  setting.default_value = enabled
+  setting.forced_value = enabled
+end
+local function set_string(name, value)
+  local setting = data.raw["string-setting"][name]
+  setting.hidden = true
+  setting.default_value = value
+  setting.allowed_values = { value }
 end
 
-alien_biomes_set("disable-vegetation", false)
-alien_biomes_set("include-inland-shallows", false)
-alien_biomes_set("include-rivers", true)
-
+-- alien biomes config
+set_string("alien-biomes-disable-vegetation", "Disabled")
+set_string("alien-biomes-include-inland-shallows", "Disabled")
+set_string("alien-biomes-include-rivers", "Enabled")
 -- disable biomes we don't want
 for _, setting in pairs{
   "grass-blue",
@@ -44,7 +50,7 @@ for _, setting in pairs{
   "sand-tan",
   "sand-violet",
 } do
-  alien_biomes_set("include-"..setting, false)
+  set_string("alien-biomes-include-"..setting, "Disabled")
 end
 -- make sure the biomes we do want are enabled
 for _, setting in pairs{
@@ -60,12 +66,18 @@ for _, setting in pairs{
   "dirt-dustyrose",
   "sand-dustyrose",
 } do
-  alien_biomes_set("include-"..setting, true)
+  set_string("alien-biomes-include-"..setting, "Enabled")
 end
 
 -- informatron (force disable "Show at start" so it doesn't interrupt the intro cutscene)
-data.raw["bool-setting"]["informatron-show-at-start"].hidden = true
-data.raw["bool-setting"]["informatron-show-at-start"].default_value = false
-data.raw["bool-setting"]["informatron-show-at-start"].forced_value = false
+set_bool("informatron-show-at-start", false)
+
+-- BZ lead
+set_bool("bzlead-byproduct", false)
+set_string("bzlead-more-entities", "no")
+
+-- BZ silica
+set_string("bzsilicon-more-intermediates", "yes")
+
 
 -- todo: settings for Rohlinheatagtmuf_Hdhaotaotfnllsape-atnsasri

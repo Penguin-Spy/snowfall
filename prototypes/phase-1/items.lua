@@ -9,14 +9,6 @@ data:extend{
   -- temporary item definitions, while waiting for brevven and planetfall to update their mods
   {
     type = "item",
-    name = "lead-ore",
-    icon = graphics .. "temporary-icons/lead-ore.png",
-    subgroup = "raw-resource",
-    order = "d",
-    stack_size = 100
-  },
-  {
-    type = "item",
     name = "zinc-ore",
     icon = graphics .. "temporary-icons/zinc-ore.png",
     subgroup = "raw-resource",
@@ -29,14 +21,6 @@ data:extend{
     icon = graphics .. "temporary-icons/nickel-ore.png",
     subgroup = "raw-resource",
     order = "e",
-    stack_size = 100
-  },
-  {
-    type = "item",
-    name = "lead-plate",
-    icon = graphics .. "temporary-icons/lead-plate.png",
-    subgroup = "raw-material",
-    order = "c",
     stack_size = 100
   },
   {
@@ -56,7 +40,7 @@ data:extend{
     stack_size = 100
   },
   -- end temp items
-  
+
   -- resources
   {
     type = "item",
@@ -108,7 +92,7 @@ data:extend{
     order = data.raw.item["copper-plate"].order,
     stack_size = 50
   },
-  --[[{ --?
+  {
     type = "item",
     name = "lead-ingot",
     icon = graphics_bzlead .. "lead-ingot.png", icon_size = 128,
@@ -116,7 +100,7 @@ data:extend{
     order = data.raw.item["lead-plate"].order,
     stack_size = 50
   },
-  {
+  --[[{ --?
     type = "item",
     name = "zinc-ingot",
     icon = graphics_BrassTacks .. "zinc-ingot.png", icon_size = 64,
@@ -139,7 +123,7 @@ data:extend{
     subgroup = "ingots",
     order = data.raw.item["gold-plate"].order,
     stack_size = 50
-  },
+  },]]
   {
     type = "item",
     name = "titanium-ingot",
@@ -148,6 +132,7 @@ data:extend{
     order = data.raw.item["titanium-plate"].order,
     stack_size = 50
   },
+  --[[{ --?
   {
     type = "item",
     name = "brass-ingot",
@@ -282,7 +267,7 @@ data:extend{
   {
     type = "item",
     name = "snowfall-pneumatic-lab",
-    icons = { { icon = "__base__/graphics/icons/lab.png", icon_size = 64, icon_mipmaps = 4 } },
+    icon = "__base__/graphics/icons/lab.png",
     subgroup = "production-machine",
     order = "gA",  -- vanilla lab is "g[lab]"
     place_result = "snowfall-pneumatic-lab",
@@ -290,9 +275,17 @@ data:extend{
   },
   {
     type = "item",
+    name = "snowfall-pneumatic-pulverizer",
+    icon = graphics .. "icons/pneumatic-pulverizer.png",
+    subgroup = "smelting-machine",
+    order = "a-b[snowfall-pneumatic-pulverizer]",
+    place_result = "snowfall-pneumatic-pulverizer",
+    stack_size = 50
+  },
+  {
+    type = "item",
     name = "snowfall-solid-heat-exchanger",
     icon = "__base__/graphics/icons/heat-boiler.png",
-    icon_size = 64, icon_mipmaps = 4,
     subgroup = "smelting-machine",
     order = "d[snowfall]-c",
     place_result = "snowfall-solid-heat-exchanger",
