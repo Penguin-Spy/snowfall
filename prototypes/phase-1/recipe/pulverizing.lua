@@ -9,6 +9,8 @@ data:extend{
     type = "recipe",
     name = "snowfall-pulverizing-stone",
     icons = data_util.icon_with_detail("silica", "stone"),
+    subgroup = "processed-stone",
+    order = "b-c[pulverizing-stone]",
     category = "snowfall-pulverizing",
     ingredients = {{type = "item", name = "stone", amount = 1}},
     results = {
@@ -16,13 +18,14 @@ data:extend{
       {type = "item", name = "snowfall-kaolinite", amount = 1, probability = 0.05}
     },
     enabled = false,
-    energy_required = 2,
-    --always_show_products = true
+    energy_required = 2
   }  --[[@as data.RecipePrototype]],
   {
     type = "recipe",
     name = "snowfall-pulverizing-slag",
     icons = data_util.icon_with_detail("silica", "slag"),
+    subgroup = "processed-stone",
+    order = "b-d[pulverizing-slag]",
     category = "snowfall-pulverizing",
     ingredients = {{type = "item", name = "slag", amount = 1}},
     results = {
@@ -31,8 +34,5 @@ data:extend{
     enabled = false,
     energy_required = 2,
     show_amount_in_title = false
-    --always_show_products = true
   }  --[[@as data.RecipePrototype]]
 }
-
-log(serpent.block(data.raw.recipe["snowfall-pulverizing-stone"]))

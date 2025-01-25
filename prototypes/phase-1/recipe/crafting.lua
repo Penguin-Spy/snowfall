@@ -17,25 +17,25 @@ data:extend{
     type = "recipe",
     name = "basic-gear",  -- gear made from nickel. the brass one is "iron-gear-wheel" (the vanilla name) so other mods use it by default
     ingredients = {
-      {type = "item", name = "nickel-plate", amount = 1}
+      {type = "item", name = "nickel-plate", amount = 2}
     },
     results = {
-      {type = "item", name = "basic-gear", amount = 2}
+      {type = "item", name = "basic-gear", amount = 1}
     },
+    enabled = false,
     energy_required = 0.5
   },
   {
     type = "recipe",
-    name = "snowfall-gearbox",
+    name = "snowfall-spring",
     ingredients = {
-      {type = "item", name = "basic-gear", amount = 2},
       {type = "item", name = "nickel-plate", amount = 1}
     },
     results = {
-      {type = "item", name = "snowfall-gearbox", amount = 1}
+      {type = "item", name = "snowfall-spring", amount = 1}
     },
     enabled = false,
-    energy_required = 0.5
+    energy_required = 1
   },
 
   ---- entities ----
@@ -44,10 +44,10 @@ data:extend{
   {
     type = "recipe",
     name = "snowfall-burner-ice-bore",
-    ingredients = { -- TODO: different recipe (so it's not too similar to the pneumatic drill)
+    ingredients = {
       {type = "item", name = "stone-brick", amount = 4},
       {type = "item", name = "lead-plate",  amount = 2},
-      {type = "item", name = "snowfall-gearbox", amount = 1},
+      {type = "item", name = "snowfall-spring", amount = 1},
     },
     results = {
       {type = "item", name = "snowfall-burner-ice-bore", amount = 1}

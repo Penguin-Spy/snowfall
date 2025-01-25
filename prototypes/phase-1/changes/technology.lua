@@ -38,9 +38,9 @@ table.insert(stone_wall.effects, {type = "unlock-recipe", recipe = "gate"})
 -- automation is pneumatic and depends on interiors
 local automation = data.raw.technology["automation"]
 automation.prerequisites = { "snowfall-material-punchcard", "stone-wall" }
--- gearbox, belt, assembler, (other mods' stuff), no longserter
+-- spring, belt, assembler, (other mods' stuff), no longserter
 table.insert(automation.effects, 1, {type = "unlock-recipe", recipe = "transport-belt"})
-table.insert(automation.effects, 1, {type = "unlock-recipe", recipe = "snowfall-gearbox"})
+table.insert(automation.effects, 1, {type = "unlock-recipe", recipe = "snowfall-spring"})
 data_util.remove_technology_recipe_unlock("automation", "long-handed-inserter")
 
 -- logistics also depends on interiors

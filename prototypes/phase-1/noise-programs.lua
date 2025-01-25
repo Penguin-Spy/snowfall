@@ -24,11 +24,11 @@ data:extend{
 
 -- locale key provided by alien biomes
 data.raw["autoplace-control"]["cold"].localised_name = {"autoplace-control-names.temperature"}
--- these control things that have been removed
-data.raw["autoplace-control"]["trees"].hidden = true
-data.raw["autoplace-control"]["hot"].hidden = true
+-- these control things that have been removed, but can't be hidden without outright removing them (which breaks a lot of autoplace stuff)
+--data.raw["autoplace-control"]["trees"].hidden = true
+--data.raw["autoplace-control"]["hot"].hidden = true
 -- it doesn't seem like alien biomes uses this one at all
-data.raw["autoplace-control"]["starting_area_moisture"].hidden = true
+--data.raw["autoplace-control"]["starting_area_moisture"].hidden = true
 
 -- put starting area resources closer
 data.raw["noise-function"]["resource_autoplace_all_patches"].local_expressions.starting_resource_placement_radius = 60

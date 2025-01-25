@@ -33,10 +33,10 @@ data:extend{
       { type = "unlock-recipe", recipe = "zinc-plate", hidden = true},
       { type = "unlock-recipe", recipe = "nickel-plate", hidden = true},
       { type = "unlock-recipe", recipe = "stone-brick", hidden = true},
+      { type = "unlock-recipe", recipe = "wooden-chest", hidden = true},
       { type = "unlock-recipe", recipe = "snowfall-fire-clay", hidden = true},
       { type = "unlock-recipe", recipe = "snowfall-fire-brick", hidden = true},
       { type = "unlock-recipe", recipe = "basic-gear", hidden = true},
-      { type = "unlock-recipe", recipe = "wooden-chest", hidden = true}
     }
   },
   {

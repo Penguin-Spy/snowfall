@@ -15,8 +15,8 @@ data:extend{
     results = {
       {type = "item", name = "snowfall-fire-brick", amount = 2}
     },
-    energy_required = 5,
-    --always_show_products = true
+    enabled = false,
+    energy_required = 5
   }  --[[@as data.RecipePrototype]]
 }
 

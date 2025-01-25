@@ -2,7 +2,7 @@ data:extend{
   {
     type = "fluid",
     name = "methane",
-    icon = data_util.graphics .. "icons/methane.png", icon_size = 64,
+    icon = data_util.graphics .. "icons/methane.png",
     default_temperature = -179,
     max_temperature = 25,
     gas_temperature = -161.5,

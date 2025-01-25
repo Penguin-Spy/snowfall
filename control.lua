@@ -14,21 +14,18 @@ if script.active_mods["gvv"] then require("__gvv__.gvv")() end
 
 -- runs when the save is first created, before the freeplay crash site has been created
 local function prepare_map()
-  if remote.interfaces["freeplay"] then
-    remote.call("freeplay", "set_created_items", {
-      --["pistol"] = 1,
-      --["firearm-magazine"] = 10
-    })
-    remote.call("freeplay", "set_ship_items", {})
-    remote.call("freeplay", "set_debris_items", {
-      ["lead-plate"] = 10,
-      --?["brass-plate"] = 18,
-      ["basic-gear"] = 2
-    })
-    remote.call("freeplay", "set_skip_intro", true)  -- dont show_message_dialog
-  else
-    game.print{"snowfall.error-no-freeplay-interface"}
-  end
+  if not remote.interfaces["freeplay"] then error{"snowfall.error-incompatible-scenario", serpent.line(script.level)} end
+  remote.call("freeplay", "set_created_items", {
+    --["pistol"] = 1,
+    --["firearm-magazine"] = 10
+  })
+  remote.call("freeplay", "set_ship_items", {})
+  remote.call("freeplay", "set_debris_items", {
+    ["lead-plate"] = 10,
+    --?["brass-plate"] = 18,
+    ["basic-gear"] = 2
+  })
+  remote.call("freeplay", "set_skip_intro", true)  -- dont show_message_dialog
 end
 
 -- runs when the first player is created, after the freeplay crash site has been created
@@ -41,6 +38,7 @@ local function postpare_map()
   kiwen_lete.daytime = 0.68
 
   local spaceship = kiwen_lete.find_entity("crash-site-spaceship", {-5,-6}) ---@cast spaceship -nil
+  if not spaceship then error{"snowfall.error-incompatible-scenario", serpent.line(script.level)} end
   storage.crash_site = {
     spaceship = spaceship,
     furnace = kiwen_lete.create_entity{

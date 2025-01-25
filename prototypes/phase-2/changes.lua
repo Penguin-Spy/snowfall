@@ -15,7 +15,7 @@ data.raw.recipe["pipe-to-ground"].ingredients = {
 --steam_vent.autoplace.starting_area_amount = 150
 --steam_vent.order = "aaa"
 
--- hidden at the start, unlocked by mineral survey
-for _, name in pairs{"copper-plate", "lead-plate", "zinc-plate", "nickel-plate", "stone-brick", "snowfall-fire-brick", "basic-gear", "wooden-chest", "iron-plate"} do
+-- hidden at the start, unlocked by mineral survey (except for iron)
+for _, name in pairs{"copper-plate", "lead-plate", "zinc-plate", "nickel-plate", "stone-brick", "wooden-chest", "iron-plate"} do
   data.raw.recipe[name].enabled = false
 end

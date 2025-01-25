@@ -254,7 +254,7 @@ data:extend{
   {
     type = "assembling-machine",
     name = "snowfall-pneumatic-lab",
-    icons = { { icon = "__base__/graphics/icons/lab.png", icon_size = 64, icon_mipmaps = 4 } },
+    icon = "__base__/graphics/icons/lab.png",
     flags = { "placeable-neutral", "placeable-player", "player-creation" },
     minable = { mining_time = 0.2, result = "snowfall-pneumatic-lab" },
     max_health = 200,
@@ -364,7 +364,6 @@ data:extend{
     type = "furnace",
     name = "snowfall-solid-heat-exchanger",
     icon = "__base__/graphics/icons/heat-boiler.png",
-    icon_size = 64, icon_mipmaps = 4,
     flags = { "placeable-neutral", "placeable-player", "player-creation" },
     minable = { mining_time = 0.2, result = "snowfall-solid-heat-exchanger" },
     max_health = 200,

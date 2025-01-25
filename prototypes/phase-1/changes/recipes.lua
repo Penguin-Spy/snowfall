@@ -57,8 +57,9 @@ data.raw.recipe["burner-mining-drill"].ingredients = {
 }
 data.raw.recipe["assembling-machine-1"].ingredients = {
   { type = "item", name = "stone-brick", amount = 6 },
-  { type = "item", name = "snowfall-gearbox", amount = 2 },
-  { type = "item", name = "copper-plate",  amount = 2 },
+  { type = "item", name = "basic-gear", amount = 4 },
+  { type = "item", name = "snowfall-spring", amount = 2 },
+  { type = "item", name = "lead-plate", amount = 4 },
 }
 
 -- make walls & gates cheap
