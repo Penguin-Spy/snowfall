@@ -6,7 +6,7 @@ local graphics_bzlead = "__bzlead__/graphics/icons/"
 local graphics_bztitanium = "__bztitanium__/graphics/icons/"
 
 data:extend{
-  -- temporary item definitions, while waiting for brevven and planetfall to update their mods
+  -- temporary item definitions, while waiting for planetfall to update their mods
   {
     type = "item",
     name = "zinc-ore",
@@ -38,6 +38,30 @@ data:extend{
     subgroup = "raw-material",
     order = "e",
     stack_size = 100
+  },
+  {
+    type = "item",
+    name = "brass-plate",
+    icon = graphics .. "temporary-icons/brass-plate.png",
+    subgroup = "raw-material",
+    order = "f",
+    stack_size = 100
+  },
+  {
+    type = "item",
+    name = "brass-balls",
+    icon = graphics .. "temporary-icons/brass-balls.png",
+    subgroup = "intermediate-product",
+    order = "a[basic-intermediates]-ca",
+    stack_size = 100
+  },
+  {
+    type = "item",
+    name = "bearing",
+    icon = graphics .. "temporary-icons/bearing.png",
+    subgroup = "intermediate-product",
+    order = "a[basic-intermediates]-cb",
+    stack_size = 50
   },
   -- end temp items
 
@@ -186,7 +210,7 @@ data:extend{
   {
     type = "item",
     name = "snowfall-fire-clay",
-    icon = graphics .. "/icons/fire-clay.png",
+    icon = graphics .. "icons/fire-clay.png",
     subgroup = "processed-stone",
     order = "b-a[fire-clay]", -- after stone brick, before fire brick
     stack_size = 50
@@ -202,10 +226,29 @@ data:extend{
   {
     type = "item",
     name = "snowfall-spring",
-    icon = graphics .. "/icons/spring.png",
+    icon = graphics .. "icons/spring.png",
     subgroup = "intermediate-product",
     order = "a[basic-intermediates]-b[spring]",
     stack_size = 50
+  },
+  {
+    type = "item",
+    name = "snowfall-steam-engine",
+    icon = graphics .. "icons/steam-engine.png",
+    subgroup = "intermediate-product",
+    order = "c[advanced-intermediates]-aa",
+    stack_size = 20
+  },
+  { -- see fluids.lua for the filled canister item generation
+    type = "item",
+    name = "empty-canister",
+    icons = {
+      { icon = data_util.graphics .. "icons/pressurized-canister.png" },
+      { icon = data_util.graphics .. "icons/pressurized-canister-mask.png" }
+    },
+    subgroup = "intermediate-product",
+    order = "b",
+    stack_size = 5
   },
 
   -- science items

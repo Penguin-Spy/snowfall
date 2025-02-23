@@ -46,13 +46,14 @@ data_util.remove_technology_recipe_unlock("automation", "long-handed-inserter")
 -- logistics also depends on interiors
 data.raw.technology["logistics"].prerequisites = { "snowfall-material-punchcard", "stone-wall" }
 
--- automation science pack depends on material punchcard and automation
+-- automation science pack depends on automation and pulverizing
 local automation_pack = data.raw.technology["automation-science-pack"]
-automation_pack.prerequisites = { "snowfall-material-punchcard", "automation" }
+automation_pack.icon = data_util.graphics .. "technology/manufacturing-punchcard.png"
+automation_pack.prerequisites = { "automation", "snowfall-pneumatic-pulverizer" }
 automation_pack.research_trigger = nil
 automation_pack.unit = {
   count = 20,
-  time = 15,
+  time = 5,
   ingredients = {
     {"snowfall-material-punchcard", 1}
   }
@@ -60,7 +61,7 @@ automation_pack.unit = {
 
 -- electronics comes later in progression
 local electronics = data.raw.technology["electronics"]
-electronics.prerequisites = { "automation-science-pack" } -- TODO: build the tech tree out to where electronics can be made
+electronics.prerequisites = { "logistic-science-pack" } -- TODO: build the tech tree out to where electronics can be made
 electronics.research_trigger = nil
 electronics.unit = {
   count = 10,
@@ -79,6 +80,21 @@ for _, tech in pairs{"concrete", "silicon-processing", "fiber-optics"} do
   util.remove_from_list(data.raw.technology[tech].prerequisites, "silica-processing")
 end
 table.insert(data.raw.technology["fiber-optics"].prerequisites, "logistic-science-pack")
+
+-- cars & mini trains depend on steam engine
+local car, mini_trains = data.raw.technology["automobilism"], data.raw.technology["mini-trains"]
+car.prerequisites = {"snowfall-pressurized-steam"}
+car.unit.count = 50 -- cheaper car tech
+car.unit.ingredients = {
+  {"snowfall-material-punchcard", 1},
+  {"automation-science-pack", 1}
+}
+mini_trains.prerequisites = {"snowfall-pressurized-steam", "logistics"}
+mini_trains.unit.ingredients = {
+  {"snowfall-material-punchcard", 1},
+  {"automation-science-pack", 1}
+}
+table.insert(mini_trains.effects, 1, {type = "unlock-recipe", recipe = "rail"})
 
 -- hide military techs for now
 -- TODO: move these later in the tech tree and un-hide them when enemies are discovered

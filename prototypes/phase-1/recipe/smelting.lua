@@ -29,7 +29,7 @@ local function alloy(first, first_amount, second, second_amount, result, result_
     type = "recipe",
     name = result,
     energy_required = 16,
-    category = "smelting",
+    category = "alloying",
     ingredients = {
       {type = "item", name = first .. "-ore",  amount = first_amount},
       {type = "item", name = second .. "-ore", amount = second_amount}
@@ -48,6 +48,11 @@ data:extend{
   smelt("copper"),
   smelt("zinc"),
   smelt("nickel"),
-  --?alloy("copper", 3, "zinc", 1, "brass-plate", 3),
+  alloy("copper", 2, "zinc", 1, "brass-plate", 3),
   --?alloy("nickel", 2, "iron", 2, "invar-plate", 2)
 }  --[=[@as data.RecipePrototype[]]=]
+
+data:extend{{
+  type = "recipe-category",
+  name = "alloying"
+}}

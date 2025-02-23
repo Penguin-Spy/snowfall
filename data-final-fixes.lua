@@ -15,6 +15,3 @@ data.raw["map-gen-presets"].default = {
     order = "a"
   }
 }
-
--- temp fix for bzlead bug
-data.raw.furnace["snowfall-spaceship-furnace"].result_inventory_size = 1

@@ -34,12 +34,12 @@ data.raw.recipe["light-armor"].enabled = false
 -- make belts & pneumatic machines take lead/nickel/stone instead of iron
 data.raw.recipe["burner-inserter"].ingredients = {
   { type = "item", name = "stone-brick", amount = 1 },
-  { type = "item", name = "basic-gear",  amount = 1 },
   { type = "item", name = "lead-plate",  amount = 1 },
+  { type = "item", name = "basic-gear",  amount = 1 },
 }
 data.raw.recipe["transport-belt"].ingredients = {
-  { type = "item", name = "basic-gear", amount = 1 },
   { type = "item", name = "lead-plate", amount = 1 },
+  { type = "item", name = "basic-gear", amount = 1 },
 }
 data.raw.recipe["underground-belt"].ingredients = {
   { type = "item", name = "lead-plate", amount = 10 },
@@ -57,9 +57,9 @@ data.raw.recipe["burner-mining-drill"].ingredients = {
 }
 data.raw.recipe["assembling-machine-1"].ingredients = {
   { type = "item", name = "stone-brick", amount = 6 },
+  { type = "item", name = "lead-plate", amount = 4 },
   { type = "item", name = "basic-gear", amount = 4 },
   { type = "item", name = "snowfall-spring", amount = 2 },
-  { type = "item", name = "lead-plate", amount = 4 },
 }
 
 -- make walls & gates cheap
@@ -68,11 +68,11 @@ data.raw.recipe["stone-wall"].ingredients = {
 }
 data.raw.recipe["gate"].ingredients = {
   { type = "item", name = "stone-wall", amount = 1 },
+  { type = "item", name = "lead-plate", amount = 2 },
   { type = "item", name = "basic-gear", amount = 2 },
-  { type = "item", name = "lead-plate", amount = 2 }
 }
 
--- make lamps & radars not take circuits (don't ask how the radar works. i don't know)
+-- make lamps, radars, and repair packs not take circuits (don't ask how the radar works. i don't know)
 data.raw.recipe["small-lamp"].ingredients = {
   { type = "item", name = "stone-brick", amount = 1 },
   { type = "item", name = "copper-cable",  amount = 4 }
@@ -81,6 +81,41 @@ data.raw.recipe["radar"].ingredients = {
   { type = "item", name = "stone-brick", amount = 6 },
   { type = "item", name = "zinc-plate",  amount = 4 },
   { type = "item", name = "basic-gear",  amount = 4 }
+}
+data.raw.recipe["repair-pack"].ingredients = {
+  { type = "item", name = "stone-brick", amount = 1 },
+  { type = "item", name = "lead-plate",  amount = 1 },
+  { type = "item", name = "copper-plate",  amount = 1 },
+}
+
+-- replace ingredients of red science, now "Manufacturing data punchcard"
+data.raw.recipe["automation-science-pack"].ingredients = {
+  { type = "item", name = "copper-cable", amount = 2 },
+  { type = "item", name = "basic-gear", amount = 1 },
+  { type = "item", name = "silica", amount = 2 },
+}
+
+-- replace ingredients of car & mini trains
+data.raw.recipe["car"].ingredients = {
+  { type = "item", name = "lead-plate", amount = 4 },
+  { type = "item", name = "basic-gear", amount = 4 },
+  { type = "item", name = "snowfall-steam-engine", amount = 1 },
+}
+data.raw.recipe["mini-locomotive"].ingredients = {
+  { type = "item", name = "lead-plate", amount = 10 },
+  { type = "item", name = "basic-gear", amount = 6 },
+  { type = "item", name = "snowfall-spring", amount = 4 },
+  { type = "item", name = "snowfall-steam-engine", amount = 2 },
+}
+data.raw.recipe["mini-cargo-wagon"].ingredients = {
+  { type = "item", name = "lead-plate", amount = 6 },
+  { type = "item", name = "basic-gear", amount = 8 },
+  { type = "item", name = "snowfall-spring", amount = 4 },
+}
+data.raw.recipe["mini-fluid-wagon"].ingredients = {
+  { type = "item", name = "lead-plate", amount = 8 },
+  { type = "item", name = "basic-gear", amount = 6 },
+  { type = "item", name = "snowfall-spring", amount = 4 },
 }
 
 -- [[ remove unneeded items/recipes ]]

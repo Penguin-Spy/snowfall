@@ -104,6 +104,19 @@ stone_furnace.energy_source = {
 } --[[@as data.ElectricEnergySource]]
 stone_furnace.result_inventory_size = 2 -- make space for slag
 
+-- steel furnace powered by electricity, is assembler, does alloying recipes
+local steel_furnace = data.raw.furnace["steel-furnace"]
+steel_furnace.type = "assembling-machine"
+steel_furnace.crafting_categories = { "alloying" }
+steel_furnace.energy_source = {
+  type = "electric",
+  usage_priority = "secondary-input",
+  emissions_per_minute = { pollution = 2 }  -- same as base
+} --[[@as data.ElectricEnergySource]]
+
+data.raw.furnace["steel-furnace"] = nil
+data:extend{steel_furnace}
+
 -- make the assembling machine 1 steam powered
 local assembler1 = data.raw["assembling-machine"]["assembling-machine-1"]
 assembler1.energy_source = {
@@ -134,6 +147,11 @@ assembler1.energy_source = {
   }
 }  --[[@as data.FluidEnergySource]]
 
+-- make car & mini train powered by steam
+data.raw.car["car"].energy_source.burnt_inventory_size = 1
+data.raw.car["car"].energy_source.fuel_categories = {"steam"}
+data.raw.locomotive["mini-locomotive"].energy_source.burnt_inventory_size = 1
+data.raw.locomotive["mini-locomotive"].energy_source.fuel_categories = {"steam"}
 
 -- make wooden chest stone (visually only, leave prototype name alone)
 data.raw.item["wooden-chest"].icon = graphics .. "icons/stone-chest.png"

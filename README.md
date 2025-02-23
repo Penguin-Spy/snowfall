@@ -28,9 +28,13 @@ for LLMs, generative AI, or other forms of machine learning or neural
 networks.
 
 ## Attribution
-- `graphics/icons/ice.png` from https://www.vecteezy.com/png/9384604-ice-cube-clipart-design-illustration
-- `graphics/icons/methane.png` By Ben Mills - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=6643505
-- `graphics/icons/kaolinite.png`, `graphics/icons/fire-clay.png`, and `graphics/icons/fire-brick.png` from TerraFirmaCraft (temporary)
-- `graphics/icons/spring.png`, `graphcis/icons/slag-(1,2,3,4).png` from https://github.com/malcolmriley/unused-renders/  (CC BY-4.0)
+- `icons/ice.png` from https://www.vecteezy.com/png/9384604-ice-cube-clipart-design-illustration
+- `icons/methane.png` By Ben Mills - Own work, Public Domain, https://commons.wikimedia.org/w/index.php?curid=6643505
+- `icons/kaolinite.png`, `icons/fire-clay.png`, and `icons/fire-brick.png` from TerraFirmaCraft (temporary)
+- https://github.com/malcolmriley/unused-renders/  (CC BY-4.0):
+  - `icons/spring.png`
+  - `icons/slag-(1,2,3,4).png`
+  - `icons/pressurized-canister.png` & `icons/pressurized-canister-mask.png` (modified)
+  - `technology/pressurized-steam.png`
 - various items in the `temporary-icons` are from ~~brevven and~~ planetfall's mods temporarily until they can update the mods
   snowfall depends on to Factorio 2.0

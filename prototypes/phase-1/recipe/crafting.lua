@@ -1,4 +1,28 @@
 data:extend{
+  -- temporary recipe definitions, while waiting for planetfall to update their mods
+  {
+    type = "recipe",
+    name = "brass-balls",
+    category = "advanced-crafting",
+    ingredients = {{type = "item", name = "brass-plate", amount = 1}},
+    results = {{type = "item", name = "brass-balls", amount = 2}},
+    enabled = false,
+    energy_required = 0.5
+  },
+  {
+    type = "recipe",
+    name = "bearing",
+    category = "advanced-crafting",
+    ingredients = {
+      {type = "item", name = "brass-plate", amount = 2},
+      {type = "item", name = "brass-balls", amount = 4}
+    },
+    results = {{type = "item", name = "bearing", amount = 1}},
+    enabled = false,
+    energy_required = 4
+  },
+  -- end temp items
+
   -- intermediates
   {
     type = "recipe",
@@ -36,6 +60,33 @@ data:extend{
     },
     enabled = false,
     energy_required = 1
+  },
+  {
+    type = "recipe",
+    name = "snowfall-steam-engine",
+    category = "advanced-crafting",
+    ingredients = {
+      {type = "item", name = "brass-plate", amount = 4},
+      {type = "item", name = "snowfall-spring", amount = 2},
+      {type = "item", name = "bearing", amount = 2}
+    },
+    results = {
+      {type = "item", name = "snowfall-steam-engine", amount = 1}
+    },
+    enabled = false,
+    energy_required = 15
+  },
+  {
+    type = "recipe",
+    name = "empty-canister",
+    ingredients = {
+      {type = "item", name = "brass-plate", amount = 1}
+    },
+    results = {
+      {type = "item", name = "empty-canister", amount = 1}
+    },
+    enabled = false,
+    energy_required = 0.5
   },
 
   ---- entities ----

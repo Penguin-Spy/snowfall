@@ -9,6 +9,7 @@ require "scripts.trigger_effects"
 require "scripts.destroy_handling"
 require "scripts.technology"
 require "scripts.spaceship_gui"
+require "scripts.misc"
 
 if script.active_mods["gvv"] then require("__gvv__.gvv")() end
 
@@ -156,7 +157,6 @@ commands.add_command("snowfall", "<survey|resources>", function(command)
 
   elseif paramaters[1] == "resources" then
     player.insert{name="zinc-ore", count = 10}
-    player.insert{name="lead-ore", count = 10}
     player.insert{name="nickel-ore", count = 10}
 
   elseif paramaters[1] == "reveal-techs" then -- note that this reveals all versions of the fake electronics
@@ -164,11 +164,15 @@ commands.add_command("snowfall", "<survey|resources>", function(command)
       tech.enabled = true
     end
 
+  elseif paramaters[1] == "initalize" then
+    initalize()
+
   else
     player.print[[/snowfall <survey|resources>
   survey    - completes the mineral survey research
-  resources - gives 10 zinc, lead, & nickel ore
-  reveal-techs - reveal all techs in the tech tree; will break stuff]]
+  resources - gives 10 zinc & nickel ore
+  reveal-techs - reveal all techs in the tech tree; will break stuff
+  initalize    - re-initalize all data, as though on_configuration_changed was raised]]
   end
 end)
 

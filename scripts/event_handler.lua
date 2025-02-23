@@ -4,13 +4,11 @@ events = table.deepcopy(defines.events)
 events.initalize = -1
 events.initalize_player = -2
 
----@alias EventID (defines.events)|(string)|(integer)
-
----@type table<EventID, fun(event:EventData)[]>
+---@type table<LuaEventType, fun(event:EventData)[]>
 local handlers = {}
 
 -- Register a handler to run on the specified event(s).
----@param event EventID|(EventID)[]  The event(s) or custom-input to invoke the handler on.
+---@param event (LuaEventType)|((LuaEventType)[])  The event(s) or custom-input to invoke the handler on.
 ---@param handler fun(event: EventData) The handler for this event.
 ---@overload fun(event:-1, handler: fun())
 ---@overload fun(event:-2, handler: fun(player:LuaPlayer))
@@ -25,7 +23,7 @@ function events.on(event, handler)
 end
 
 -- Raise an event for all listeners in this mod only.
----@param event EventID
+---@param event LuaEventType
 ---@param data any
 function events.raise(event, data)
   for _, handler in pairs(handlers[event]) do

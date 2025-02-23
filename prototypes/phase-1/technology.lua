@@ -136,6 +136,47 @@ data:extend{
     effects = fake_electronics_effects,
     unit = fake_electronics_cost
   },
+
+  -- after Manufacturing research
+
+  {
+    type = "technology",
+    name = "snowfall-brass-alloying",
+    icon = "__base__/graphics/technology/advanced-material-processing.png", icon_size = 256,
+    prerequisites = { "automation-science-pack" },
+    unit = {
+      count = 20,
+      time = 10,
+      ingredients = {
+        {"snowfall-material-punchcard", 1},
+        {"automation-science-pack", 1}
+      }
+    },
+    effects = {
+      { type = "unlock-recipe", recipe = "steel-furnace" },
+      { type = "unlock-recipe", recipe = "brass-plate" }
+    }
+  },
+  {
+    type = "technology",
+    name = "snowfall-pressurized-steam",
+    icon = data_util.graphics .. "technology/pressurized-steam.png", icon_size = 256,
+    prerequisites = { "snowfall-brass-alloying" },
+    unit = {
+      count = 30,
+      time = 10,
+      ingredients = {
+        {"snowfall-material-punchcard", 1},
+        {"automation-science-pack", 1}
+      }
+    },
+    effects = {
+      { type = "unlock-recipe", recipe = "brass-balls" },
+      { type = "unlock-recipe", recipe = "bearing" },
+      { type = "unlock-recipe", recipe = "snowfall-steam-engine" },
+      { type = "unlock-recipe", recipe = "empty-canister" }
+    }
+  },
   --[[{
     type = "technology",
     name = "snowfall-electromechanics",
