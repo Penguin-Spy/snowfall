@@ -1,17 +1,28 @@
--- replaces a pack ingredient for a list of techs, and updates prerequsistes on the tech that unlocks the pack if necessary
+-- replaces a prerequisite for a list of techs
+---@param old_tech string
+---@param new_tech string
+---@param techs string[]
+local function rebase_technologies(old_tech, new_tech, techs)
+  for _, name in pairs(techs) do
+    local tech = data.raw.technology[name]
+    for i, prereq in pairs(tech.prerequisites) do
+      if prereq == old_tech then
+        tech.prerequisites[i] = new_tech
+      end
+    end
+  end
+end
+
+-- replaces a pack ingredient for a list of techs
 ---@param old_pack string
 ---@param new_pack string
 ---@param techs string[]
-local function rebase_technologies(old_pack, new_pack, techs)
+local function replace_tech_ingredients(old_pack, new_pack, techs)
+  -- replace direct prerequisite on pack
+  rebase_technologies(old_pack, new_pack, techs)
+  -- replace pack in research cost
   for _, name in pairs(techs) do
     local tech = data.raw.technology[name]
-    -- replace direct prerequisite on pack
-    for i, prereq in pairs(tech.prerequisites) do
-      if prereq == old_pack then
-        tech.prerequisites[i] = new_pack
-      end
-    end
-    -- replace pack in research cost
     for _, pack in pairs(tech.unit.ingredients) do
       if pack[1] == old_pack then
         pack[1] = new_pack
@@ -72,7 +83,14 @@ electronics.unit = {
 }
 
 -- put some stuff earlier
-rebase_technologies("automation-science-pack", "snowfall-material-punchcard", {"lamp", "logistics", "radar", "automation"})
+replace_tech_ingredients("automation-science-pack", "snowfall-material-punchcard", {"lamp", "logistics", "radar", "automation"})
+
+-- electric drill depends on electromechanics
+data.raw.technology["electric-mining-drill"].prerequisites = {"snowfall-electromechanics"}
+table.insert(data.raw.technology["electric-mining-drill"].unit.ingredients, 1, {"snowfall-material-punchcard", 1})
+
+-- move fast inserter later (to solid state electronics eventually)
+data.raw.technology["fast-inserter"].prerequisites = {"snowfall-electric-inserter", "electronics"}
 
 -- remove BZ's silica-processing tech
 data.raw.technology["silica-processing"] = nil
@@ -98,6 +116,6 @@ table.insert(mini_trains.effects, 1, {type = "unlock-recipe", recipe = "rail"})
 
 -- hide military techs for now
 -- TODO: move these later in the tech tree and un-hide them when enemies are discovered
-for _, name in pairs{"gun-turret", "military", "military-2"} do
+for _, name in pairs{"gun-turret", "military", "military-2", "repair-pack"} do
   data.raw.technology[name].enabled = false
 end

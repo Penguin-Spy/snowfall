@@ -228,7 +228,7 @@ data:extend{
     name = "snowfall-spring",
     icon = graphics .. "icons/spring.png",
     subgroup = "intermediate-product",
-    order = "a[basic-intermediates]-b[spring]",
+    order = "a[basic-intermediates]-ca[spring]",
     stack_size = 50
   },
   {
@@ -249,6 +249,30 @@ data:extend{
     subgroup = "intermediate-product",
     order = "b",
     stack_size = 5
+  },
+  {
+    type = "item",
+    name = "relay",
+    icon = graphics .. "icons/relay.png",
+    subgroup = "intermediate-product",
+    order = "a[basic-intermediates]-cb[relay]",
+    stack_size = 100
+  },
+  {
+    type = "item",
+    name = "snowfall-sequence-motor",
+    icon = graphics .. "icons/sequence-motor.png",
+    subgroup = "intermediate-product",
+    order = "a[basic-intermediates]-cd[sequence-motor]",
+    stack_size = 50
+  },
+  {
+    type = "item",
+    name = "snowfall-state-rotor",
+    icon = graphics .. "icons/state-rotor.png",
+    subgroup = "intermediate-product",
+    order = "a[basic-intermediates]-ce[state-rotor]",
+    stack_size = 50
   },
 
   -- science items
@@ -329,6 +353,15 @@ data:extend{
     subgroup = "smelting-machine",
     order = "a-b[snowfall-pneumatic-pulverizer]",
     place_result = "snowfall-pneumatic-pulverizer",
+    stack_size = 50
+  },
+  {
+    type = "item",
+    name = "snowfall-canister-filler",
+    icon = graphics .. "icons/canister-filler.png",
+    subgroup = "smelting-machine",
+    order = "a-b[snowfall-canister-filler]",
+    place_result = "snowfall-canister-filler",
     stack_size = 50
   },
   {

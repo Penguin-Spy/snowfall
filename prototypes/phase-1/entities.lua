@@ -300,7 +300,7 @@ data:extend{
     }
   }  --[[@as data.AssemblingMachinePrototype]],
 
-  {
+  { -- pneumatic pulverizer
     type = "furnace",
     name = "snowfall-pneumatic-pulverizer",
     icon = data_util.graphics .. "icons/pneumatic-pulverizer.png",
@@ -358,6 +358,69 @@ data:extend{
       }
     }
   } --[[@as data.FurnacePrototype]],
+
+  { -- canister filler
+    type = "assembling-machine",
+    name = "snowfall-canister-filler",
+    icon = data_util.graphics .. "icons/canister-filler.png",
+    flags = { "placeable-neutral", "placeable-player", "player-creation" },
+    minable = { mining_time = 0.2, result = "snowfall-canister-filler" },
+    max_health = 50,
+    collision_box = { { -0.4, -0.4 }, { 0.4, 0.4 } },
+    selection_box = { { -0.5, -0.5 }, { 0.5, 0.5 } },
+    crafting_categories = { "canister" },
+    crafting_speed = 1,
+    fluid_boxes = {
+      {
+        production_type = "input",
+        filter = "steam",
+        volume = 100,
+        pipe_connections = {
+          { flow_direction = "input", position = { 0, 0 }, direction = defines.direction.north }
+        },
+        secondary_draw_orders = { north = -1 },
+        pipe_picture = assembler2pipepictures(),
+        pipe_covers = pipecoverspictures(),
+      }
+    },
+    energy_source = {
+      type = "void"
+    } --[[@as data.VoidEnergySource]],
+    energy_usage = "1W",
+    working_sound = {
+      sound = {
+        filename = "__base__/sound/pump.ogg",
+        volume = 0.6,
+        audible_distance_modifier = 0.4,
+        modifiers = {volume_multiplier("tips-and-tricks", 0.8)}
+      },
+      fade_in_ticks = 4,
+      fade_out_ticks = 20
+    },
+    open_sound = data_util.sounds.machine_open,
+    close_sound = data_util.sounds.machine_close,
+
+    icon_draw_specification = {scale = 0.75},
+    graphics_set = {
+      animation = {
+        layers = {
+          {
+            filename = data_util.graphics .. "entity/canister-filler/base.png",
+            size = {128, 128},
+            shift = util.by_pixel(.25 * 64, -0.2 * 64),
+            scale = 0.5
+          },
+          {
+            filename = data_util.graphics .. "entity/canister-filler/shadow.png",
+            size = {128, 128},
+            shift = util.by_pixel(.25 * 64, -0.2 * 64),
+            scale = 0.5,
+            draw_as_shadow = true
+          }
+        }
+      }
+    }
+  } --[[@as data.AssemblingMachinePrototype]],
 
   -- Solid Heat Exchanger
   {

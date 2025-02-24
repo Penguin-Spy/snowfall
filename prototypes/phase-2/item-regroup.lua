@@ -30,14 +30,3 @@ set_subgroup("chemical-products", {
   "solid-fuel",
   "rocket-fuel"
 })
-
-set_subgroup("nuclear-products", {
-  "uranium-235",
-  "uranium-238",
-  "uranium-fuel-cell",
-  "depleted-uranium-fuel-cell",
-  "nuclear-fuel",
-  "kovarex-enrichment-process",
-  "uranium-processing",
-  "nuclear-fuel-reprocessing"
-})

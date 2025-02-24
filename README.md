@@ -15,7 +15,7 @@ general gameplay:
 
 
 # License
-Copyright © Penguin_Spy 2023-2024
+Copyright © Penguin_Spy 2023-2025
 
 This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -36,5 +36,7 @@ networks.
   - `icons/slag-(1,2,3,4).png`
   - `icons/pressurized-canister.png` & `icons/pressurized-canister-mask.png` (modified)
   - `technology/pressurized-steam.png`
+  - `technology/electromechanics.png`
+  - `icons/relay.png`, `icons/sequence-motor.png`, `icons/state-rotor.png`
 - various items in the `temporary-icons` are from ~~brevven and~~ planetfall's mods temporarily until they can update the mods
   snowfall depends on to Factorio 2.0

@@ -71,7 +71,8 @@ data.raw["mining-drill"]["burner-mining-drill"].energy_source = {
   }
 }
 
--- same with burner inserter
+-- burner inserter powered by steam & no filters
+data.raw["inserter"]["burner-inserter"].filter_count = 0
 data.raw["inserter"]["burner-inserter"].energy_source = {
   type = "fluid",
   burns_fluid = false,
@@ -91,6 +92,8 @@ data.raw["inserter"]["burner-inserter"].energy_source = {
   },
   light_flicker = { color = { 0, 0, 0 } },
 }
+-- also no filters for the basic electric inserter
+data.raw["inserter"]["inserter"].filter_count = 0
 
 -- stone furnace powered by electricity and does kiln recipes
 local stone_furnace = data.raw["furnace"]["stone-furnace"]

@@ -21,7 +21,7 @@ data:extend{
   -- cable                    (f-z)
   -- generic-circuits         (f-zb)
   -- specialized-electronics  (f-zc)
-  -- science-pack             (h)
+  -- science-pack             (y)
 
   ----------------------------------- Chemistry
   {
@@ -41,15 +41,10 @@ data:extend{
     group = "chemistry",
     order = "c"
   },
-  {
-    type = "item-subgroup",
-    name = "nuclear-products",
-    group = "chemistry",
-    order = "ca"
-  },
-  -- barrel       (d)
-  -- fill-barrel  (e)
-  -- empty-barrel (f)
+  -- uranium-processing (ca)
+  -- barrel             (d)
+  -- fill-barrel        (e)
+  -- empty-barrel       (f)
 }
 
 data.raw["item-subgroup"]["intermediate-product"].order = "d"  -- vanilla, default is "g"
@@ -59,6 +54,8 @@ data.raw["item-subgroup"]["fluid"].group = "chemistry" -- default is the "Fluids
 data.raw["item-subgroup"]["fluid-recipes"].group = "chemistry"
 --?data.raw["item-subgroup"]["advanced-chemicals"].group = "chemistry"  -- from ThemTharHills
 --?data.raw["item-subgroup"]["helium"].group = "chemistry"
+data.raw["item-subgroup"]["uranium-processing"].group = "chemistry" -- vanilla, default is the intermediate products group, order "i"
+data.raw["item-subgroup"]["uranium-processing"].order = "ca"
 data.raw["item-subgroup"]["barrel"].group = "chemistry"
 data.raw["item-subgroup"]["fill-barrel"].group = "chemistry"
 data.raw["item-subgroup"]["empty-barrel"].group = "chemistry"

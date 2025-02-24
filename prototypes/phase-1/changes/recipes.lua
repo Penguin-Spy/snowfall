@@ -94,6 +94,19 @@ data.raw.recipe["automation-science-pack"].ingredients = {
   { type = "item", name = "basic-gear", amount = 1 },
   { type = "item", name = "silica", amount = 2 },
 }
+data.raw.recipe["automation-science-pack"].category = "snowfall-pneumatic-research"
+
+-- electromechanics ingredients for electric drill & inserter
+data.raw.recipe["electric-mining-drill"].ingredients = {
+  { type = "item", name = "lead-plate", amount = 10 },
+  { type = "item", name = "basic-gear", amount = 5 },
+  { type = "item", name = "snowfall-sequence-motor", amount = 3 },
+}
+data.raw.recipe["inserter"].ingredients = {
+  { type = "item", name = "lead-plate", amount = 1 },
+  { type = "item", name = "basic-gear", amount = 1 },
+  { type = "item", name = "snowfall-sequence-motor", amount = 1 },
+}
 
 -- replace ingredients of car & mini trains
 data.raw.recipe["car"].ingredients = {

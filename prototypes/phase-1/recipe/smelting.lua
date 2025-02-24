@@ -29,6 +29,7 @@ local function alloy(first, first_amount, second, second_amount, result, result_
     type = "recipe",
     name = result,
     energy_required = 16,
+    enabled = false,
     category = "alloying",
     ingredients = {
       {type = "item", name = first .. "-ore",  amount = first_amount},

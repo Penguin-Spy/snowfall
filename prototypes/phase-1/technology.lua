@@ -14,8 +14,7 @@ data:extend{
   {
     type = "technology",
     name = "snowfall-mineral-survey",
-    icon = data_util.graphics .. "icons/starmap-kiwen-lete.png",
-    icon_size = 512,
+    icon = data_util.graphics .. "icons/starmap-kiwen-lete.png", icon_size = 512,
     essential = true,
     unit = {
       count = 1,
@@ -42,8 +41,7 @@ data:extend{
   {
     type = "technology",
     name = "snowfall-pneumatics",
-    icon = "__base__/graphics/technology/steam-power.png",
-    icon_size = 256,
+    icon = "__base__/graphics/technology/steam-power.png", icon_size = 256,
     order = "a",
     prerequisites = { "snowfall-mineral-survey" },
     research_trigger = {
@@ -62,8 +60,7 @@ data:extend{
   {
     type = "technology",
     name = "snowfall-electric-smelting",
-    icon = "__base__/graphics/technology/advanced-material-processing-2.png",
-    icon_size = 256,
+    icon = "__base__/graphics/technology/advanced-material-processing-2.png", icon_size = 256,
     order = "b",
     prerequisites = { "snowfall-mineral-survey" },
     research_trigger = {
@@ -81,8 +78,7 @@ data:extend{
   {
     type = "technology",
     name = "snowfall-material-punchcard",
-    icon = data_util.graphics .. "technology/material-punchcard.png",
-    icon_size = 256,
+    icon = data_util.graphics .. "technology/material-punchcard.png", icon_size = 256,
     essential = true,
     prerequisites = { "snowfall-pneumatics", "snowfall-electric-smelting" },
     research_trigger = {
@@ -98,8 +94,7 @@ data:extend{
   {
     type = "technology",
     name = "snowfall-pneumatic-pulverizer",
-    icon = data_util.graphics .. "technology/pneumatic-pulverizer.png",
-    icon_size = 256,
+    icon = data_util.graphics .. "technology/pneumatic-pulverizer.png", icon_size = 256,
     prerequisites = { "snowfall-material-punchcard" },
     unit = {
       count = 10,
@@ -117,8 +112,7 @@ data:extend{
     name = "snowfall-fake-electronics",
     localised_name = {"technology-name.electronics"},
     localised_description = {"technology-description.electronics"},
-    icon = "__base__/graphics/technology/electronics.png",
-    icon_size = 256,
+    icon = "__base__/graphics/technology/electronics.png", icon_size = 256,
     -- enabled by default, visible_when_disabled defaults to false to hide it during runtime
     prerequisites = { "snowfall-material-punchcard" },
     effects = fake_electronics_effects,
@@ -128,8 +122,7 @@ data:extend{
     type = "technology",
     name = "snowfall-fake-electronics-failed",
     localised_name = {"snowfall.technology-failed", {"technology-name.electronics"}},
-    icon = "__base__/graphics/technology/electronics.png",
-    icon_size = 256,
+    icon = "__base__/graphics/technology/electronics.png", icon_size = 256,
     enabled = false,  -- will never be enabled
     -- visible_when_disabled defaults to false and changes during runtime
     prerequisites = { "snowfall-material-punchcard" },
@@ -141,8 +134,46 @@ data:extend{
 
   {
     type = "technology",
+    name = "snowfall-electromechanics",
+    icon = data_util.graphics .. "technology/electromechanics.png", icon_size = 256,
+    order = "a",
+    prerequisites = { "automation-science-pack" },
+    unit = {
+      count = 25,
+      time = 10,
+      ingredients = {
+        {"snowfall-material-punchcard", 1},
+        {"automation-science-pack", 1}
+      }
+    },
+    effects = {
+      { type = "unlock-recipe", recipe = "relay" },
+      { type = "unlock-recipe", recipe = "snowfall-sequence-motor" },
+      { type = "unlock-recipe", recipe = "snowfall-state-rotor" },
+    }
+  },
+  {
+    type = "technology",
+    name = "snowfall-electric-inserter",
+    icon = "__base__/graphics/technology/inserter-capacity.png", icon_size = 256,
+    prerequisites = { "snowfall-electromechanics" },
+    unit = {
+      count = 20,
+      time = 10,
+      ingredients = {
+        {"snowfall-material-punchcard", 1},
+        {"automation-science-pack", 1}
+      }
+    },
+    effects = {
+      { type = "unlock-recipe", recipe = "inserter" }
+    }
+  },
+  {
+    type = "technology",
     name = "snowfall-brass-alloying",
     icon = "__base__/graphics/technology/advanced-material-processing.png", icon_size = 256,
+    order = "m",
     prerequisites = { "automation-science-pack" },
     unit = {
       count = 20,
@@ -174,7 +205,9 @@ data:extend{
       { type = "unlock-recipe", recipe = "brass-balls" },
       { type = "unlock-recipe", recipe = "bearing" },
       { type = "unlock-recipe", recipe = "snowfall-steam-engine" },
-      { type = "unlock-recipe", recipe = "empty-canister" }
+      { type = "unlock-recipe", recipe = "snowfall-canister-filler" },
+      { type = "unlock-recipe", recipe = "empty-canister" },
+      { type = "unlock-recipe", recipe = "steam-canister" },
     }
   },
   --[[{

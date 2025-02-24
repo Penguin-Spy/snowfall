@@ -88,6 +88,46 @@ data:extend{
     enabled = false,
     energy_required = 0.5
   },
+  {
+    type = "recipe",
+    name = "relay",
+    ingredients = {
+      {type = "item", name = "nickel-plate", amount = 1},
+      {type = "item", name = "copper-cable", amount = 1}
+    },
+    results = {
+      {type = "item", name = "relay", amount = 1}
+    },
+    enabled = false,
+    energy_required = 0.5
+  },
+  {
+    type = "recipe",
+    name = "snowfall-sequence-motor",
+    ingredients = {
+      {type = "item", name = "nickel-plate", amount = 2},
+      {type = "item", name = "copper-cable", amount = 2}
+    },
+    results = {
+      {type = "item", name = "snowfall-sequence-motor", amount = 1}
+    },
+    enabled = false,
+    energy_required = 1
+  },
+  {
+    type = "recipe",
+    name = "snowfall-state-rotor",
+    ingredients = {
+      {type = "item", name = "stone-brick", amount = 1},
+      {type = "item", name = "copper-plate", amount = 1},
+      {type = "item", name = "copper-cable", amount = 2}
+    },
+    results = {
+      {type = "item", name = "snowfall-state-rotor", amount = 1}
+    },
+    enabled = false,
+    energy_required = 1
+  },
 
   ---- entities ----
 
@@ -161,6 +201,20 @@ data:extend{
     },
     results = {
       {type = "item", name = "snowfall-pneumatic-pulverizer", amount = 1}
+    },
+    enabled = false,
+    energy_required = 1
+  },
+  {
+    type = "recipe",
+    name = "snowfall-canister-filler",
+    ingredients = {
+      {type = "item", name = "stone-brick", amount = 2},
+      {type = "item", name = "brass-plate", amount = 2},
+      {type = "item", name = "pipe", amount = 2},
+    },
+    results = {
+      {type = "item", name = "snowfall-canister-filler", amount = 1}
     },
     enabled = false,
     energy_required = 1
