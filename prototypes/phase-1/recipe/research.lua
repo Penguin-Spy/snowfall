@@ -30,7 +30,7 @@ data:extend{
     hidden = true,
     energy_usage = "1W",
     energy_source = { type = "void" },
-    inputs = { "snowfall-internal-mineral-survey", "snowfall-material-punchcard", "automation-science-pack" }
+    inputs = { "snowfall-internal-mineral-survey" }
   },
 
   {

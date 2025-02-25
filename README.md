@@ -38,5 +38,6 @@ networks.
   - `technology/pressurized-steam.png`
   - `technology/electromechanics.png`
   - `icons/relay.png`, `icons/sequence-motor.png`, `icons/state-rotor.png`
+  - `technology/electrolysis.png`
 - various items in the `temporary-icons` are from ~~brevven and~~ planetfall's mods temporarily until they can update the mods
   snowfall depends on to Factorio 2.0

@@ -107,6 +107,23 @@ data:extend{
       { type = "unlock-recipe", recipe = "snowfall-pulverizing-slag" }
     }
   },
+  {
+    type = "technology",
+    name = "snowfall-ice-bore",
+    icon = data_util.graphics .. "technology/ice-bore.png", icon_size = 256,
+    localised_description = {"entity-description.snowfall-burner-ice-bore"},
+    prerequisites = { "snowfall-pneumatic-pulverizer" },
+    unit = {
+      count = 10,
+      time = 10,
+      ingredients = {
+        {"snowfall-material-punchcard", 1},
+      }
+    },
+    effects = {
+      { type = "unlock-recipe", recipe = "snowfall-burner-ice-bore" },
+    }
+  },
   { -- fake electronics to be researched earlygame
     type = "technology",
     name = "snowfall-fake-electronics",
@@ -171,10 +188,28 @@ data:extend{
   },
   {
     type = "technology",
+    name = "snowfall-electrolysis",
+    icon = data_util.graphics .. "technology/electrolysis.png", icon_size = 256,
+    prerequisites = { "automation-science-pack", "snowfall-ice-bore" },
+    unit = {
+      count = 15,
+      time = 10,
+      ingredients = {
+        {"snowfall-material-punchcard", 1},
+        {"automation-science-pack", 1}
+      }
+    },
+    effects = {
+      { type = "unlock-recipe", recipe = "snowfall-electrolyzer" },
+      { type = "unlock-recipe", recipe = "snowfall-electrolysis-of-water" },
+    }
+  },
+  {
+    type = "technology",
     name = "snowfall-brass-alloying",
     icon = "__base__/graphics/technology/advanced-material-processing.png", icon_size = 256,
     order = "m",
-    prerequisites = { "automation-science-pack" },
+    prerequisites = { "snowfall-electrolysis" },
     unit = {
       count = 20,
       time = 10,

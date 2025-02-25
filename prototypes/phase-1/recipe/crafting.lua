@@ -138,7 +138,7 @@ data:extend{
     ingredients = {
       {type = "item", name = "stone-brick", amount = 4},
       {type = "item", name = "lead-plate",  amount = 2},
-      {type = "item", name = "snowfall-spring", amount = 1},
+      {type = "item", name = "basic-gear", amount = 6},
     },
     results = {
       {type = "item", name = "snowfall-burner-ice-bore", amount = 1}
@@ -215,6 +215,21 @@ data:extend{
     },
     results = {
       {type = "item", name = "snowfall-canister-filler", amount = 1}
+    },
+    enabled = false,
+    energy_required = 1
+  },
+  {
+    type = "recipe",
+    name = "snowfall-electrolyzer",
+    ingredients = {
+      {type = "item", name = "stone-brick", amount = 4},
+      {type = "item", name = "copper-plate", amount = 2},
+      {type = "item", name = "nickel-plate", amount = 4},
+      {type = "item", name = "pipe", amount = 2},
+    },
+    results = {
+      {type = "item", name = "snowfall-electrolyzer", amount = 1}
     },
     enabled = false,
     energy_required = 1

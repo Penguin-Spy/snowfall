@@ -168,8 +168,8 @@ wooden_chest.picture = {
     {
       filename = graphics .. "entity/stone-chest.png",
       priority = "extra-high",
-      width = 32,
-      height = 36,
+      width = 62,
+      height = 72,
       shift = util.by_pixel(0.5, -2),
       scale = 0.5
     },

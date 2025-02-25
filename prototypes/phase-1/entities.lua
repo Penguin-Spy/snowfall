@@ -421,6 +421,68 @@ data:extend{
       }
     }
   } --[[@as data.AssemblingMachinePrototype]],
+  { -- electrolyzer
+    type = "assembling-machine",
+    name = "snowfall-electrolyzer",
+    icon = data_util.graphics .. "icons/electrolyzer.png",
+    flags = { "placeable-neutral", "placeable-player", "player-creation" },
+    minable = { mining_time = 0.2, result = "snowfall-electrolyzer" },
+    max_health = 100,
+    collision_box = {{-1.2, -1.2}, {1.2, 1.2}},
+    selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+    crafting_categories = { "electrolysis" },
+    crafting_speed = 1,
+    fluid_boxes = {
+      {
+        production_type = "output",
+        filter = "oxygen",
+        volume = 100,
+        pipe_connections = {
+          { flow_direction = "output", position = { -1, 0 }, direction = defines.direction.west }
+        },
+        secondary_draw_orders = { north = -1 },
+        pipe_picture = assembler2pipepictures(),
+        pipe_covers = pipecoverspictures(),
+      },
+      {
+        production_type = "output",
+        filter = "hydrogen",
+        volume = 100,
+        pipe_connections = {
+          { flow_direction = "output", position = { 1, 0 }, direction = defines.direction.east }
+        },
+        secondary_draw_orders = { north = -1 },
+        pipe_picture = assembler2pipepictures(),
+        pipe_covers = pipecoverspictures(),
+      }
+    },
+    energy_source ={
+      type = "electric",
+      usage_priority = "secondary-input",
+      emissions_per_minute = { pollution = 3 }
+    },
+    energy_usage = "150kW",
+    working_sound = {
+      sound = {
+        filename = "__base__/sound/pump.ogg",
+        volume = 0.45,
+        audible_distance_modifier = 0.5
+      },
+      fade_in_ticks = 4,
+      fade_out_ticks = 20
+    },
+    open_sound = data_util.sounds.machine_open,
+    close_sound = data_util.sounds.machine_close,
+
+    graphics_set = {
+      animation = {
+        layers = {
+          data_util.load_spritter_sprite(data_util.graphics .. "entity/electrolyzer/model", {}),
+          data_util.load_spritter_sprite(data_util.graphics .. "entity/electrolyzer/shadow", {draw_as_shadow=true, repeat_count=60})
+        }
+      }
+    }
+  } --[[@as data.AssemblingMachinePrototype]],
 
   -- Solid Heat Exchanger
   {
@@ -751,7 +813,7 @@ data:extend{
     close_sound = data_util.sounds.machine_close,
     energy_usage = "1W",
     energy_source = {type = "void"},
-    inputs = { "snowfall-material-punchcard" },
+    inputs = { "snowfall-material-punchcard", "automation-science-pack" },
     off_animation = table.deepcopy(data.raw["lab"]["lab"].off_animation),
     on_animation = table.deepcopy(data.raw["lab"]["lab"].on_animation)
   } --[[@as data.LabPrototype]],

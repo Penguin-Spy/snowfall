@@ -32,5 +32,6 @@ require "prototypes.phase-1.technology"
 require "prototypes.phase-1.tiles"
 
 require "prototypes.phase-1.recipe.pulverizing" -- must happen after items
+require "prototypes.phase-1.recipe.electrolysis" -- must happen after fluids
 
 data_util = orig_data_util  ---@diagnostic disable-line: lowercase-global

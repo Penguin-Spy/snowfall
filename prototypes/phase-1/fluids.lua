@@ -1,19 +1,45 @@
 data:extend{
+  -- pure fluids & gases
   {
     type = "fluid",
     name = "methane",
     icon = data_util.graphics .. "icons/methane.png",
     default_temperature = -179,
-    max_temperature = 25,
+    -- max_temperature = 25,
     gas_temperature = -161.5,
     heat_capacity = "0.1kJ",
-    fuel_value = "20kJ",  -- 1000 units = half of coal
     base_color = {r = 0.25, g = 0.25, b = 0.25},
     flow_color = {r = 0.65, g = 0.65, b = 0.65},
-    order = "a[fluid]-b[methane]",
+    order = "a[fluid]-c[gas]-c[methane]",
+    subgroup = "fluid"
+  },
+  {
+    type = "fluid",
+    name = "oxygen",
+    icon = data_util.graphics .. "icons/oxygen.png",
+    default_temperature = 15,
+    -- max_temperature = 15,
+    gas_temperature = -182.962,
+    heat_capacity = "0.1kJ",  -- todo: figure out how to calculate heat capacities from real-life values
+    base_color = {r = 0.65, g = 0.25, b = 0.25},
+    flow_color = {r = 0.65, g = 0.25, b = 0.25},
+    order = "a[fluid]-c[gas]-a[oxygen]",
+    subgroup = "fluid"
+  },
+  {
+    type = "fluid",
+    name = "hydrogen",
+    icon = data_util.graphics .. "icons/hydrogen.png",
+    default_temperature = 15,
+    -- max_temperature = 15,
+    gas_temperature = -252.879,
+    heat_capacity = "0.1kJ",
+    base_color = {r = 0.95, g = 0.95, b = 0.95},
+    flow_color = {r = 0.95, g = 0.95, b = 0.95},
+    order = "a[fluid]-c[gas]-b[hydrogen]",
     subgroup = "fluid"
   }
-}
+} --[[@as (data.FluidPrototype[])]]
 
 -- see items.lua for the empty canister
 

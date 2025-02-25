@@ -351,7 +351,7 @@ data:extend{
     name = "snowfall-pneumatic-pulverizer",
     icon = graphics .. "icons/pneumatic-pulverizer.png",
     subgroup = "smelting-machine",
-    order = "a-b[snowfall-pneumatic-pulverizer]",
+    order = "az[snowfall-pneumatic-pulverizer]",
     place_result = "snowfall-pneumatic-pulverizer",
     stack_size = 50
   },
@@ -360,8 +360,17 @@ data:extend{
     name = "snowfall-canister-filler",
     icon = graphics .. "icons/canister-filler.png",
     subgroup = "smelting-machine",
-    order = "a-b[snowfall-canister-filler]",
+    order = "z", -- TODO: a subgroup for stuff like this?
     place_result = "snowfall-canister-filler",
+    stack_size = 50
+  },
+  {
+    type = "item",
+    name = "snowfall-electrolyzer",
+    icon = graphics .. "icons/electrolyzer.png",
+    subgroup = "production-machine",
+    order = "cz[snowfall-electrolyzer]",
+    place_result = "snowfall-electrolyzer",
     stack_size = 50
   },
   {
