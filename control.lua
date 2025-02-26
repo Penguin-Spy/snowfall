@@ -23,10 +23,10 @@ local function prepare_map()
   remote.call("freeplay", "set_ship_items", {})
   remote.call("freeplay", "set_debris_items", {
     ["lead-plate"] = 10,
-    --?["brass-plate"] = 18,
     ["basic-gear"] = 2
   })
   remote.call("freeplay", "set_skip_intro", true)  -- dont show_message_dialog
+  remote.call("silo_script", "set_no_victory", true)
 end
 
 -- runs when the first player is created, after the freeplay crash site has been created

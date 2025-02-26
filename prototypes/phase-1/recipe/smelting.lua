@@ -37,7 +37,7 @@ local function alloy(first, first_amount, second, second_amount, result, result_
     },
     results = {
       {type = "item", name = result, amount = result_amount},
-      {type = "item", name = "slag", amount = 1,            probability = 0.5}
+      {type = "item", name = "slag", amount = 1,            probability = 0.3}
     },
     main_product = result
   }

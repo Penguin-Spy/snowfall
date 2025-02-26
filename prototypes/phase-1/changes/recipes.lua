@@ -108,6 +108,18 @@ data.raw.recipe["inserter"].ingredients = {
   { type = "item", name = "snowfall-sequence-motor", amount = 1 },
 }
 
+-- steel furnace, now "Alloy forge"
+data.raw.recipe["steel-furnace"].ingredients = {
+  { type = "item", name = "stone-brick", amount = 6 },
+  { type = "item", name = "snowfall-fire-brick", amount = 8 },
+  { type = "item", name = "lead-plate", amount = 6 },
+  { type = "item", name = "pipe", amount = 2 },
+}
+data.raw.recipe["offshore-pump"].ingredients = {
+  { type = "item", name = "basic-gear", amount = 2 },
+  { type = "item", name = "pipe", amount = 3 },
+}
+
 -- replace ingredients of car & mini trains
 data.raw.recipe["car"].ingredients = {
   { type = "item", name = "lead-plate", amount = 4 },

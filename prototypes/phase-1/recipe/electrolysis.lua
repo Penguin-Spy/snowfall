@@ -14,11 +14,11 @@ data:extend{
     },
     subgroup = "fluid-recipes",
     ingredients = {
-      {type = "item", name = "ice", amount = 1} -- 1 ice is 10 water (100 steam)
+      {type = "item", name = "ice", amount = 1} -- 1 ice is 20 water
     },
     results = {
-      {type = "fluid", name = "oxygen", amount = 50},    -- 2 water -> 1 o2 + 2 h2,  so 10 -> 50 & 100
-      {type = "fluid", name = "hydrogen", amount = 100}, -- gases are 10x units of liquid
+      {type = "fluid", name = "oxygen", amount = 100},    -- 2 water -> 1 o2 + 2 h2,  so 20 -> 100 & 200
+      {type = "fluid", name = "hydrogen", amount = 200},  -- gases are 10x units of liquid
     },
     enabled = false,
     energy_required = 4

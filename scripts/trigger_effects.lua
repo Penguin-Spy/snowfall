@@ -80,3 +80,28 @@ trigger_effects["snowfall_removed_steam_vent_turbine"] = function(data)
     drill.destroy()
   end
 end
+
+
+-- Steel furnace fuel mixer
+---@param event EventData.on_script_trigger_effect
+trigger_effects["snowfall_placed_steel_furnace"] = function(event)
+  local steel_furnace = event.source_entity  ---@cast steel_furnace -nil
+
+  local mixer = steel_furnace.surface.create_entity{
+    name = "snowfall-internal-steel-furnace-fuel-mixer",
+    direction = steel_furnace.direction,
+    position = steel_furnace.position,
+    force = steel_furnace.force,
+    player = steel_furnace.last_user
+  }
+
+  destroy_handling.register(steel_furnace, "snowfall_removed_steel_furnace", {
+    mixer = mixer
+  })
+end
+trigger_effects["snowfall_removed_steel_furnace"] = function(data)
+  local mixer = data.mixer
+  if mixer and mixer.valid then
+    mixer.destroy()
+  end
+end

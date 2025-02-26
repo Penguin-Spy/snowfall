@@ -5,7 +5,6 @@ data:extend{
     name = "methane",
     icon = data_util.graphics .. "icons/methane.png",
     default_temperature = -179,
-    -- max_temperature = 25,
     gas_temperature = -161.5,
     heat_capacity = "0.1kJ",
     base_color = {r = 0.25, g = 0.25, b = 0.25},
@@ -18,7 +17,6 @@ data:extend{
     name = "oxygen",
     icon = data_util.graphics .. "icons/oxygen.png",
     default_temperature = 15,
-    -- max_temperature = 15,
     gas_temperature = -182.962,
     heat_capacity = "0.1kJ",  -- todo: figure out how to calculate heat capacities from real-life values
     base_color = {r = 0.65, g = 0.25, b = 0.25},
@@ -31,13 +29,31 @@ data:extend{
     name = "hydrogen",
     icon = data_util.graphics .. "icons/hydrogen.png",
     default_temperature = 15,
-    -- max_temperature = 15,
     gas_temperature = -252.879,
     heat_capacity = "0.1kJ",
     base_color = {r = 0.95, g = 0.95, b = 0.95},
     flow_color = {r = 0.95, g = 0.95, b = 0.95},
     order = "a[fluid]-c[gas]-b[hydrogen]",
     subgroup = "fluid"
+  },
+
+  -- mixed fluids & gases
+  {
+    type = "fluid",
+    name = "snowfall-internal-methane-fuel-mix",
+    icon = data_util.graphics .. "icons/methane.png",
+    localised_name = {"fluid-name.methane"},
+    hidden = true,
+    factoriopedia_alternative = "methane",
+    default_temperature = -179,
+    gas_temperature = -161.5,
+    heat_capacity = "0.1kJ",
+    fuel_value = "20kJ",  -- 1000 units = half of coal
+    base_color = {r = 0.35, g = 0.25, b = 0.25},
+    flow_color = {r = 0.70, g = 0.65, b = 0.65},
+    order = "a[fluid]-c[gas]-d[methane-fuel-mix]",
+    subgroup = "fluid",
+    auto_barrel = false
   }
 } --[[@as (data.FluidPrototype[])]]
 

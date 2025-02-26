@@ -10,7 +10,7 @@ data.raw["offshore-pump"]["offshore-pump"].fluid_box.filter = "methane"
 data.raw["resource"]["stone"].minable.result = nil
 data.raw["resource"]["stone"].minable.results = {
   { type = "item", name = "stone",              amount = 1 },
-  { type = "item", name = "snowfall-kaolinite", amount = 1, probability = 0.5 },
+  { type = "item", name = "snowfall-kaolinite", amount = 1, probability = 0.35 },
 }
 
 -- replace coal in rocks with kaolinite
@@ -107,15 +107,30 @@ stone_furnace.energy_source = {
 } --[[@as data.ElectricEnergySource]]
 stone_furnace.result_inventory_size = 2 -- make space for slag
 
--- steel furnace powered by electricity, is assembler, does alloying recipes
-local steel_furnace = data.raw.furnace["steel-furnace"]
+-- steel furnace powered by methane fuel mix, is assembler, does alloying recipes
+local steel_furnace = data.raw.furnace["steel-furnace"] --[[@as data.AssemblingMachinePrototype]]
 steel_furnace.type = "assembling-machine"
 steel_furnace.crafting_categories = { "alloying" }
 steel_furnace.energy_source = {
-  type = "electric",
-  usage_priority = "secondary-input",
+  type = "fluid",
+  burns_fluid = true,
+  scale_fluid_usage = true,
+  effectivity = 1,
+  fluid_box = {
+    production_type = "input",
+    filter = "snowfall-internal-methane-fuel-mix",
+    volume = 50,
+    pipe_connections = {
+      { flow_direction = "input-output", position = { 0, 0.5 }, direction = defines.direction.north },
+    },
+    hide_connection_info = true
+  },
+  light_flicker = { color = { 0, 0, 0 } },
   emissions_per_minute = { pollution = 2 }  -- same as base
-} --[[@as data.ElectricEnergySource]]
+} --[[@as data.FluidEnergySource]]
+table.insert(steel_furnace.flags, "not-rotatable") -- TODO: allow flipping (and rotating?) because of fluid inputs; rotate the fuel mixer with it
+steel_furnace.created_effect = data_util.created_effect("snowfall_placed_steel_furnace")
+steel_furnace.gui_title_key = "gui-assembling-machine.select-recipe-smelting"
 
 data.raw.furnace["steel-furnace"] = nil
 data:extend{steel_furnace}
@@ -186,8 +201,12 @@ wooden_chest.picture = {
 }
 
 -- remove storage space of the spaceship so that items can't get lost there (we make it probably impossible to open)
-data.raw.container["crash-site-spaceship"].inventory_size = 0
-data.raw.container["crash-site-spaceship"].flags = {"no-automated-item-removal", "no-automated-item-insertion"}
+local spaceship = data.raw.container["crash-site-spaceship"]
+spaceship.inventory_size = 0
+spaceship.flags = {"no-automated-item-removal", "no-automated-item-insertion"}
+-- adjust collision & selection box to line up with tile grid (because inserting into the lab)
+spaceship.collision_box = {{-8.8, -2.8}, {6.8, 4.8}}
+spaceship.selection_box = {{-9, -3}, {7, 5}}
 
 -- remove surface biters
 data.raw["unit-spawner"]["biter-spawner"].autoplace = nil

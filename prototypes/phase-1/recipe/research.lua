@@ -1,9 +1,5 @@
 data:extend{
   {
-    type = "recipe-category",
-    name = "snowfall-internal"
-  },
-  {
     type = "recipe",
     name = "snowfall-internal-mineral-survey",
     localised_name = {"technology-name.snowfall-mineral-survey"},
@@ -46,12 +42,10 @@ data:extend{
       { type = "item", name = "stone",        amount = 2 }
     },
     results = {
-      { type = "item", name = "snowfall-material-punchcard", amount = 1, probability = 0.75 }
+      { type = "item", name = "snowfall-material-punchcard", amount = 1 }
     },
     energy_required = 5,
     category = "snowfall-pneumatic-research",
-    show_amount_in_title = false,
-    always_show_products = true,
     enabled = false
   }  --[[@as data.RecipePrototype]],
 }

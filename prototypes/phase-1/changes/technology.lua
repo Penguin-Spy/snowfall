@@ -69,6 +69,7 @@ automation_pack.unit = {
     {"snowfall-material-punchcard", 1}
   }
 }
+table.insert(automation_pack.effects, {type = "unlock-recipe", recipe = "snowfall-mechanical-calculator"})
 
 -- electronics comes later in progression
 local electronics = data.raw.technology["electronics"]
@@ -81,6 +82,8 @@ electronics.unit = {
     {"snowfall-material-punchcard", 1}
   }
 }
+-- steel processing also will come later
+data.raw.technology["steel-processing"].prerequisites = { "logistic-science-pack" }
 
 -- put some stuff earlier
 replace_tech_ingredients("automation-science-pack", "snowfall-material-punchcard", {"lamp", "logistics", "radar", "automation"})
@@ -119,3 +122,16 @@ table.insert(mini_trains.effects, 1, {type = "unlock-recipe", recipe = "rail"})
 for _, name in pairs{"gun-turret", "military", "military-2", "repair-pack"} do
   data.raw.technology[name].enabled = false
 end
+
+-- temporary victory condition
+local victory = data.raw.technology["rocket-silo"]
+victory.unit = nil
+victory.research_trigger = {
+  type = "craft-item",
+  item = "mini-locomotive"
+}
+victory.prerequisites = { "mini-trains", "electric-mining-drill"}
+victory.effects = {}
+victory.localised_name = {"", {"gui-game-finished.victory"}, {"snowfall.victory-disclaimer"}}
+victory.localised_description = {"snowfall.victory-final-message"}
+data.raw.technology["space-science-pack"].prerequisites = { "production-science-pack", "utility-science-pack" }

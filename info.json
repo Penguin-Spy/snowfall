@@ -1,6 +1,6 @@
 {
   "name": "snowfall",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "title": "Snowfall",
   "description": "Crash-landed on an inhospitable frozen moon, you must protect your factory from the elements. With an atmosphere of nitrogen and seas of methane, progressing here will be different than anything you've done before. At least scans of the surface didn't detect any lifeforms...",
   "author": "Penguin_Spy",
@@ -9,6 +9,7 @@
     "? BrassTacks",
     "? ThemTharHills",
     "? IfNickel",
+    "? LasingAround",
     "bzlead",
     "bzsilicon",
     "bztitanium",

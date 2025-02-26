@@ -21,6 +21,7 @@ require "prototypes.phase-1.recipe.melting"
 require "prototypes.phase-1.recipe.research"
 require "prototypes.phase-1.recipe.smelting"
 
+require "prototypes.phase-1.internal"
 require "prototypes.phase-1.entities" -- must happen after changes.entities (TODO: remove deepcopy of burner drills)
 require "prototypes.phase-1.fluids"
 require "prototypes.phase-1.item-groups"

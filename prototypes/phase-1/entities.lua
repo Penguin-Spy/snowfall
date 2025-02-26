@@ -799,13 +799,63 @@ data:extend{
     water_reflection = boiler_reflection()
   }  --[[@as data.FurnacePrototype]],
 
+  { -- alloy forge internal fuel converting assembler
+    type = "assembling-machine",
+    name = "snowfall-internal-steel-furnace-fuel-mixer",
+    collision_box = data.raw["assembling-machine"]["steel-furnace"].collision_box,
+    selection_box = data.raw["assembling-machine"]["steel-furnace"].selection_box,
+    collision_mask = {layers = {}},
+    flags = {"not-rotatable"},
+    show_recipe_icon = false,
+    show_recipe_icon_on_map = false,
+    resistances = {{ type = "fire", percent = 100}},
+    selectable_in_game = false,
+    hidden = true,
+    crafting_categories = {"snowfall-internal"},
+    crafting_speed = 1,
+    fixed_recipe = "snowfall-internal-methane-fuel-mix",
+    fluid_boxes = {
+      {
+        production_type = "input",
+        filter = "oxygen",
+        volume = 100,
+        pipe_connections = {
+          { flow_direction = "input", position = { -0.5, 0.5 }, direction = defines.direction.west }
+        },
+        pipe_picture = assembler2pipepictures(),
+        pipe_covers = pipecoverspictures(),
+      },
+      {
+        production_type = "input",
+        filter = "methane",
+        volume = 100,
+        pipe_connections = {
+          { flow_direction = "input", position = { 0.5, 0.5 }, direction = defines.direction.east }
+        },
+        pipe_picture = assembler2pipepictures(),
+        pipe_covers = pipecoverspictures(),
+      },
+      {
+        production_type = "output",
+        filter = "snowfall-internal-methane-fuel-mix",
+        volume = 10,
+        pipe_connections = {
+          { flow_direction = "output", position = { 0, -0.5 }, direction = defines.direction.south }
+        },
+        hide_connection_info = true
+      }
+    },
+    energy_source = {type = "void"},
+    energy_usage = "1W",
+  } --[[@as data.AssemblingMachinePrototype]],
+
   -- crashed spaceship parts
   { -- lab
     type = "lab",
     name = "snowfall-spaceship-lab",
     localised_name = {"snowfall.spaceship-title", {"entity-name.snowfall-spaceship-lab"}},
-    collision_box = spaceship.collision_box, --{{-1.25, -1.25}, {1.25, 1.25}},
-    selection_box = spaceship.selection_box, --{{-1.5, -1.5}, {1.5, 1.5}},
+    collision_box = spaceship.collision_box,
+    selection_box = spaceship.selection_box,
     selection_priority = 60,
     resistances = {{ type = "fire", percent = 100}},
     hidden = true,
@@ -815,14 +865,20 @@ data:extend{
     energy_source = {type = "void"},
     inputs = { "snowfall-material-punchcard", "automation-science-pack" },
     off_animation = table.deepcopy(data.raw["lab"]["lab"].off_animation),
-    on_animation = table.deepcopy(data.raw["lab"]["lab"].on_animation)
+    on_animation = table.deepcopy(data.raw["lab"]["lab"].on_animation),
+    allowed_module_categories = {"snowfall-spaceship-module"},
+    module_slots = 4, -- max +400% speed (5 labs worth)
+    icons_positioning = {
+      {inventory_index = defines.inventory.lab_modules, shift = {0, 1.5}},
+      -- {inventory_index = defines.inventory.lab_input, shift = {0, 0.0}, max_icons_per_row = 6, separation_multiplier = 0.9}
+    },
   } --[[@as data.LabPrototype]],
   { -- arc furnace
     type = "furnace",
     name = "snowfall-spaceship-furnace",
     localised_name = {"snowfall.spaceship-title", {"entity-name.snowfall-spaceship-furnace"}},
-    collision_box = spaceship.collision_box, --{{-1.25, -1.25}, {1.25, 1.25}},
-    selection_box = spaceship.selection_box, --{{-1.5, -1.5}, {1.5, 1.5}},
+    collision_box = spaceship.collision_box,
+    selection_box = spaceship.selection_box,
     selection_priority = 60,
     resistances = {{ type = "fire", percent = 100}},
     hidden = true,
@@ -843,8 +899,8 @@ data:extend{
     type = "assembling-machine",
     name = "snowfall-spaceship-assembling-machine",
     localised_name = {"snowfall.spaceship-title", {"entity-name.snowfall-spaceship-lab"}},
-    collision_box = spaceship.collision_box, --{{-1.25, -1.25}, {1.25, 1.25}},
-    selection_box = spaceship.selection_box, --{{-1.5, -1.5}, {1.5, 1.5}},
+    collision_box = spaceship.collision_box,
+    selection_box = spaceship.selection_box,
     selection_priority = 60,
     resistances = {{ type = "fire", percent = 100}},
     hidden = true,

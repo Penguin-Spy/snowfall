@@ -52,7 +52,7 @@ data:extend{
     name = "brass-balls",
     icon = graphics .. "temporary-icons/brass-balls.png",
     subgroup = "intermediate-product",
-    order = "a[basic-intermediates]-ca",
+    order = "c[advanced-intermediates]-a[brass]-a",
     stack_size = 100
   },
   {
@@ -60,7 +60,7 @@ data:extend{
     name = "bearing",
     icon = graphics .. "temporary-icons/bearing.png",
     subgroup = "intermediate-product",
-    order = "a[basic-intermediates]-cb",
+    order = "c[advanced-intermediates]-a[brass]-b",
     stack_size = 50
   },
   -- end temp items
@@ -228,7 +228,7 @@ data:extend{
     name = "snowfall-spring",
     icon = graphics .. "icons/spring.png",
     subgroup = "intermediate-product",
-    order = "a[basic-intermediates]-ca[spring]",
+    order = "a[basic-intermediates]-b[spring]",
     stack_size = 50
   },
   {
@@ -236,7 +236,7 @@ data:extend{
     name = "snowfall-steam-engine",
     icon = graphics .. "icons/steam-engine.png",
     subgroup = "intermediate-product",
-    order = "c[advanced-intermediates]-aa",
+    order = "c[advanced-intermediates]-a[brass]-c",
     stack_size = 20
   },
   { -- see fluids.lua for the filled canister item generation
@@ -255,7 +255,7 @@ data:extend{
     name = "relay",
     icon = graphics .. "icons/relay.png",
     subgroup = "intermediate-product",
-    order = "a[basic-intermediates]-cb[relay]",
+    order = "a[basic-intermediates]-c[electromechanic]-a[relay]",
     stack_size = 100
   },
   {
@@ -263,7 +263,7 @@ data:extend{
     name = "snowfall-sequence-motor",
     icon = graphics .. "icons/sequence-motor.png",
     subgroup = "intermediate-product",
-    order = "a[basic-intermediates]-cd[sequence-motor]",
+    order = "a[basic-intermediates]-c[electromechanic]-b[sequence-motor]",
     stack_size = 50
   },
   {
@@ -271,7 +271,7 @@ data:extend{
     name = "snowfall-state-rotor",
     icon = graphics .. "icons/state-rotor.png",
     subgroup = "intermediate-product",
-    order = "a[basic-intermediates]-ce[state-rotor]",
+    order = "a[basic-intermediates]-c[electromechanic]-c[state-rotor]",
     stack_size = 50
   },
 
@@ -298,6 +298,18 @@ data:extend{
     durability_description_key = "description.science-pack-remaining-amount-key",
     durability_description_value = "description.science-pack-remaining-amount-value"
   }  --[[@as data.ToolPrototype]],
+  {
+    type = "module",
+    name = "snowfall-mechanical-calculator",
+    icon = graphics .. "icons/mechanical-calculator.png", -- TODO: better icon for this (i.e. not a titanium bearing)
+    subgroup = "module",
+    order = "a[c-snowfall-spaceship-module]", -- after "a[beacon]" before "a[speed]"
+    flags = {"not-stackable"},
+    stack_size = 1,
+    category = "snowfall-spaceship-module",
+    tier = 0,
+    effect = { speed = 1 }, -- 100% bonus
+  } --[[@as data.ModulePrototype]],
 
   ---- entities ----
 

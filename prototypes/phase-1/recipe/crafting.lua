@@ -129,6 +129,23 @@ data:extend{
     energy_required = 1
   },
 
+  -- modules
+  {
+    type = "recipe",
+    name = "snowfall-mechanical-calculator",
+    ingredients = {
+      {type = "item", name = "zinc-plate", amount = 4},
+      {type = "item", name = "basic-gear", amount = 10},
+      {type = "item", name = "snowfall-spring", amount = 5},
+      {type = "item", name = "copper-cable", amount = 4}
+    },
+    results = {
+      {type = "item", name = "snowfall-mechanical-calculator", amount = 1}
+    },
+    enabled = false,
+    energy_required = 5
+  },
+
   ---- entities ----
 
   -- drills

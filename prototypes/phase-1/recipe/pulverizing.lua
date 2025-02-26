@@ -14,7 +14,7 @@ data:extend{
     category = "snowfall-pulverizing",
     ingredients = {{type = "item", name = "stone", amount = 1}},
     results = {
-      {type = "item", name = "silica", amount_min = 0, amount_max = 2, probability = 0.2},
+      {type = "item", name = "silica", amount_min = 0, amount_max = 2, probability = 0.6},
       {type = "item", name = "snowfall-kaolinite", amount = 1, probability = 0.05}
     },
     enabled = false,
@@ -29,7 +29,7 @@ data:extend{
     category = "snowfall-pulverizing",
     ingredients = {{type = "item", name = "slag", amount = 1}},
     results = {
-      {type = "item", name = "silica", amount = 1, probability = 0.15}
+      {type = "item", name = "silica", amount = 1, probability = 0.2}
     },
     enabled = false,
     energy_required = 2,

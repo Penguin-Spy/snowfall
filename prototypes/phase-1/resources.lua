@@ -2,11 +2,6 @@ local resource_autoplace = require("resource-autoplace")
 resource_autoplace.initialize_patch_set("geothermal-vent", true)
 
 data:extend{
-  {
-    type = "resource-category",
-    name = "snowfall-internal",
-    hidden = true
-  },
   { -- Ice bore hidden resource
     type = "resource",
     name = "snowfall-internal-ice",

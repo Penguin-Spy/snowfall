@@ -220,7 +220,8 @@ data:extend{
     },
     effects = {
       { type = "unlock-recipe", recipe = "steel-furnace" },
-      { type = "unlock-recipe", recipe = "brass-plate" }
+      { type = "unlock-recipe", recipe = "brass-plate" },
+      { type = "unlock-recipe", recipe = "offshore-pump" }
     }
   },
   {
