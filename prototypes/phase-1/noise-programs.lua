@@ -1,14 +1,34 @@
 data:extend{
+  -- additional noise debug expressions
   {
     type = "noise-function",
     name = "slider_to_linear_center",
     parameters = {"slider_value", "center", "deviation"},
     expression = "slider_to_linear(slider_value, center - deviation, center + deviation)"
   },
+  --[[{
+    type = "noise-expression",
+    name = "debug_scale",
+    expression = noise_debug.temp_control("scale", "coverage") .. "^2" -- 1/36 to 36, still centered on 1
+  },
+  { -- redefines distance
+    type = "noise-expression",
+    name = "distance",
+    expression = "distance_from_nearest_point{x = scaled_x, y = scaled_y, points = starting_positions}"
+  },
+  { type = "noise-expression", name = "scaled_x", expression = "x*debug_scale" },
+  { type = "noise-expression", name = "scaled_y", expression = "y*debug_scale" },]]
+
+  {
+    type = "autoplace-control",
+    name = "snowfall_islands",
+    category = "terrain",
+    can_be_disabled = false
+  },
   {
     type = "noise-expression",
     name = "elevation",
-    expression = "snowfall_elevation_combined_islands + snowfall_elevation_detail"
+    expression = "(snowfall_elevation_combined_islands + snowfall_elevation_detail) * 20"
   },
   {
     type = "noise-expression",
@@ -23,107 +43,78 @@ data:extend{
   {
     type = "noise-expression",
     name = "snowfall_elevation_islands_limit",
-    expression = "min(1,max(debug_scaled_distance/radius - 1,0))",
+    expression = "min(1,max(distance*slope/radius - slope,0))",
     local_expressions = {
-      -- radius = "slider_to_linear_center(" .. noise_debug.temp_control("start", "scale") .. ", 500, 500)"
-      radius = 1000,
+      radius = "starting_area_radius * 4",
+      slope = 7
     }
   },
   {
     type = "noise-expression",
     name = "snowfall_elevation_islands",
-    -- output is 0+ (usually maxes out at 1, but can get higher in large cells)
-    expression = [[1 - falloff * voronoi_spot_noise{
-x = x * debug_thing_scale,
-y = y * debug_thing_scale,
-seed0 = map_seed,
-seed1 = 1337,
-grid_size = 400 * separation,
-distance_type = 2,
-jitter = 1}]],
+    expression = [[
+      1 - falloff * voronoi_spot_noise{
+        x = x,
+        y = y,
+        seed0 = map_seed,
+        seed1 = 1337,
+        grid_size = 75 * separation,
+        distance_type = 3,
+        jitter = 1
+      }
+    ]],
     local_expressions = {
-      -- falloff = "slider_to_linear_center(" .. noise_debug.temp_control("island", "scale") .. ", 4, 2)",
-      falloff = 3,
-      --separation = "slider_to_linear_center(" .. noise_debug.temp_control("island", "scale") .. ", 12, 4)",
-      separation = 12,
+      falloff = "slider_to_linear_center(1/control:snowfall_islands:size, 3.5, 0.5)",     -- Coverage
+      separation = "slider_to_linear_center(1/control:snowfall_islands:frequency, 8, 4)", -- Scale
     }
   },
   {
     type = "noise-expression",
     name = "snowfall_elevation_starting_island",
-    expression = "1 - 2 * debug_scaled_distance * 1/radius",
+    expression = "1 - 2 * distance * 1/radius",
     local_expressions = {
-      -- radius = "slider_to_linear_center(" .. noise_debug.temp_control("start", "scale") .. ", 1000, 900)"
-      radius = 1000,
+      radius = "starting_area_radius * 4"
     }
   },
   {
     type = "noise-expression",
     name = "snowfall_elevation_detail",
     -- output is -2 to about 3
-    expression = "nauvis_detail * strength",
+    expression = "detail * strength",
     local_expressions = {
-      distance = "debug_scaled_distance",
-      x = "x*debug_thing_scale",
-      y = "y*debug_thing_scale",
-      -- strength = "slider_to_linear_center(" .. noise_debug.temp_control("island", "coverage") .. ", 0.25, 0.25)", -- 0.125
-      -- strength = "log2("..noise_debug.temp_control("island", "coverage")..")/16 + 0.25"
-      strength = 1/16 + 0.25
+      strength = 1/16 + 0.25,
+      detail = [[
+        variable_persistence_multioctave_noise{
+          x = x,
+          y = y,
+          seed0 = map_seed,
+          seed1 = 600,
+          input_scale = segmentation_multiplier / 14,
+          output_scale = 0.03,
+          offset_x = 10000 / segmentation_multiplier,
+          octaves = 5,
+          persistence = persistence
+        }
+      ]],
+      persistence = [[
+        clamp(
+          amplitude_corrected_multioctave_noise{
+            x = x,
+            y = y,
+            seed0 = map_seed,
+            seed1 = 500,
+            octaves = 5,
+            input_scale = segmentation_multiplier / 2,
+            offset_x = 10000 / segmentation_multiplier,
+            persistence = 0.7,
+            amplitude = 0.5
+          } + 0.55,
+          0.5,
+          0.65
+        )
+      ]],
+      segmentation_multiplier = "1.5 * control:water:frequency * control:snowfall_islands:frequency"
     }
-  },
-  --[[{
-    type = "noise-expression",
-    name = "snowfall_elevation_macro",
-    -- output is -1 to 1?
-    expression = "nauvis_macro * strength",
-    local_expressions = {
-      strength = "slider_to_linear_center(" .. noise_debug.temp_control("macro", "coverage") .. ", 1, 0.9)",
-    }
-  },]]
-
-  {
-    type = "noise-expression",
-    name = "debug_thing_scale",
-    -- expression = "slider_to_linear(" .. noise_debug.temp_control("scale", "coverage") .. ", 0.1, 10)"
-    expression = "1"
-  },
-  {
-    type = "noise-expression",
-    name = "debug_scaled_distance",
-    expression = "distance * debug_thing_scale"
-  },
-  {
-    type = "noise-expression",
-    name = "nauvis_segmentation_multiplier",
-    -- expression = "1.5 * control:water:frequency"
-    expression = "1.5 * 1/6"
-  },
-  {
-    type = "noise-expression",
-    name = "nauvis_persistance",
-    expression = "clamp(amplitude_corrected_multioctave_noise{x = x * debug_thing_scale,\z
-                                                              y = y * debug_thing_scale,\z
-                                                              seed0 = map_seed,\z
-                                                              seed1 = 500,\z
-                                                              octaves = 5,\z
-                                                              input_scale = nauvis_segmentation_multiplier / 2,\z
-                                                              offset_x = 10000 / nauvis_segmentation_multiplier,\z
-                                                              persistence = 0.7,\z
-                                                              amplitude = 0.5} + 0.55,\z
-                      0.5, 0.65)"
-  },
-  {
-    type = "noise-expression",
-    name = "nauvis_detail", -- the small scale details with variable persistance for a mix of smooth and jagged coastline
-    expression = "variable_persistence_multioctave_noise{x = x * debug_thing_scale,\z
-                                                         y = y * debug_thing_scale,\z
-                                                         seed0 = map_seed,\z
-                                                         seed1 = 600,\z
-                                                         input_scale = nauvis_segmentation_multiplier / 14,\z
-                                                         output_scale = 0.03,\z
-                                                         offset_x = 10000 / nauvis_segmentation_multiplier,\z
-                                                         octaves = 5,\z
-                                                         persistence = nauvis_persistance}"
   },
 }
 
@@ -137,7 +128,7 @@ jitter = 1}]],
 -- facet 3 is lumpy paralellograms
 -- pyramid 0,1,2 are weird (2 is smooth, 0&1 are "evil")
 
--- remove other elevation types
+-- remove other elevation types (elevation_lakes is used by ore autoplace (for some reason...))
 data.raw["noise-expression"]["elevation_lakes"].intended_property = nil
 data.raw["noise-expression"]["elevation_island"] = nil
 
@@ -167,19 +158,26 @@ data:extend{
   } -- (60 * starting_area_weight)
 }
 
+-- add island control to nauvis
+data.raw.planet.nauvis.map_gen_settings.autoplace_controls["snowfall_islands"] = {}
+
 -- locale key provided by alien biomes
 data.raw["autoplace-control"]["cold"].localised_name = {"autoplace-control-names.temperature"}
--- these control things that have been removed, but can't be hidden without outright removing them (which breaks a lot of autoplace stuff)
---data.raw["autoplace-control"]["trees"].hidden = true
---data.raw["autoplace-control"]["hot"].hidden = true
--- it doesn't seem like alien biomes uses this one at all
---data.raw["autoplace-control"]["starting_area_moisture"].hidden = true
+
+-- remove unused autoplace controls
+data.raw["autoplace-control"]["trees"] = nil
+for _, tree in pairs(data.raw["tree"]) do
+  tree.autoplace = nil
+end
+data.raw["autoplace-control"]["hot"] = nil
+data.raw["autoplace-control"]["starting_area_moisture"] = nil
+-- controls are removed from nauvis in data-final-fixes (after alien biomes)
 
 -- put starting area resources closer
 data.raw["noise-function"]["resource_autoplace_all_patches"].local_expressions.starting_resource_placement_radius = 60
 data.raw["noise-function"]["resource_autoplace_all_patches"].local_expressions.starting_patches_split = 1
 -- remove the starting lake (it's methane now, which we don't need early game)
-data.raw["noise-function"]["elevation_nauvis_function"].expression = "wlc_elevation" -- originally "min(wlc_elevation, starting_lake)"
+data.raw["noise-function"]["elevation_nauvis_function"].expression = "wlc_elevation"
 
 
 --[[
