@@ -18,7 +18,7 @@ end
 -- alien biomes config
 set_string("alien-biomes-disable-vegetation", "Disabled")
 set_string("alien-biomes-include-inland-shallows", "Disabled")
-set_string("alien-biomes-include-rivers", "Enabled")
+set_string("alien-biomes-include-rivers", "Disabled")
 -- disable biomes we don't want
 for _, setting in pairs{
   "grass-blue",

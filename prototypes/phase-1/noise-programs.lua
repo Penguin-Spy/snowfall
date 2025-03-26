@@ -1,5 +1,150 @@
 data:extend{
   {
+    type = "noise-function",
+    name = "slider_to_linear_center",
+    parameters = {"slider_value", "center", "deviation"},
+    expression = "slider_to_linear(slider_value, center - deviation, center + deviation)"
+  },
+  {
+    type = "noise-expression",
+    name = "elevation",
+    expression = "snowfall_elevation_combined_islands + snowfall_elevation_detail"
+  },
+  {
+    type = "noise-expression",
+    name = "snowfall_elevation_combined_islands",
+    expression = "max(snowfall_elevation_islands_limited, snowfall_elevation_starting_island)"
+  },
+  {
+    type = "noise-expression",
+    name = "snowfall_elevation_islands_limited",
+    expression = "snowfall_elevation_islands_limit * (snowfall_elevation_islands+1) - 1"
+  },
+  {
+    type = "noise-expression",
+    name = "snowfall_elevation_islands_limit",
+    expression = "min(1,max(debug_scaled_distance/radius - 1,0))",
+    local_expressions = {
+      -- radius = "slider_to_linear_center(" .. noise_debug.temp_control("start", "scale") .. ", 500, 500)"
+      radius = 1000,
+    }
+  },
+  {
+    type = "noise-expression",
+    name = "snowfall_elevation_islands",
+    -- output is 0+ (usually maxes out at 1, but can get higher in large cells)
+    expression = [[1 - falloff * voronoi_spot_noise{
+x = x * debug_thing_scale,
+y = y * debug_thing_scale,
+seed0 = map_seed,
+seed1 = 1337,
+grid_size = 400 * separation,
+distance_type = 2,
+jitter = 1}]],
+    local_expressions = {
+      -- falloff = "slider_to_linear_center(" .. noise_debug.temp_control("island", "scale") .. ", 4, 2)",
+      falloff = 3,
+      --separation = "slider_to_linear_center(" .. noise_debug.temp_control("island", "scale") .. ", 12, 4)",
+      separation = 12,
+    }
+  },
+  {
+    type = "noise-expression",
+    name = "snowfall_elevation_starting_island",
+    expression = "1 - 2 * debug_scaled_distance * 1/radius",
+    local_expressions = {
+      -- radius = "slider_to_linear_center(" .. noise_debug.temp_control("start", "scale") .. ", 1000, 900)"
+      radius = 1000,
+    }
+  },
+  {
+    type = "noise-expression",
+    name = "snowfall_elevation_detail",
+    -- output is -2 to about 3
+    expression = "nauvis_detail * strength",
+    local_expressions = {
+      distance = "debug_scaled_distance",
+      x = "x*debug_thing_scale",
+      y = "y*debug_thing_scale",
+      -- strength = "slider_to_linear_center(" .. noise_debug.temp_control("island", "coverage") .. ", 0.25, 0.25)", -- 0.125
+      -- strength = "log2("..noise_debug.temp_control("island", "coverage")..")/16 + 0.25"
+      strength = 1/16 + 0.25
+    }
+  },
+  --[[{
+    type = "noise-expression",
+    name = "snowfall_elevation_macro",
+    -- output is -1 to 1?
+    expression = "nauvis_macro * strength",
+    local_expressions = {
+      strength = "slider_to_linear_center(" .. noise_debug.temp_control("macro", "coverage") .. ", 1, 0.9)",
+    }
+  },]]
+
+  {
+    type = "noise-expression",
+    name = "debug_thing_scale",
+    -- expression = "slider_to_linear(" .. noise_debug.temp_control("scale", "coverage") .. ", 0.1, 10)"
+    expression = "1"
+  },
+  {
+    type = "noise-expression",
+    name = "debug_scaled_distance",
+    expression = "distance * debug_thing_scale"
+  },
+  {
+    type = "noise-expression",
+    name = "nauvis_segmentation_multiplier",
+    -- expression = "1.5 * control:water:frequency"
+    expression = "1.5 * 1/6"
+  },
+  {
+    type = "noise-expression",
+    name = "nauvis_persistance",
+    expression = "clamp(amplitude_corrected_multioctave_noise{x = x * debug_thing_scale,\z
+                                                              y = y * debug_thing_scale,\z
+                                                              seed0 = map_seed,\z
+                                                              seed1 = 500,\z
+                                                              octaves = 5,\z
+                                                              input_scale = nauvis_segmentation_multiplier / 2,\z
+                                                              offset_x = 10000 / nauvis_segmentation_multiplier,\z
+                                                              persistence = 0.7,\z
+                                                              amplitude = 0.5} + 0.55,\z
+                      0.5, 0.65)"
+  },
+  {
+    type = "noise-expression",
+    name = "nauvis_detail", -- the small scale details with variable persistance for a mix of smooth and jagged coastline
+    expression = "variable_persistence_multioctave_noise{x = x * debug_thing_scale,\z
+                                                         y = y * debug_thing_scale,\z
+                                                         seed0 = map_seed,\z
+                                                         seed1 = 600,\z
+                                                         input_scale = nauvis_segmentation_multiplier / 14,\z
+                                                         output_scale = 0.03,\z
+                                                         offset_x = 10000 / nauvis_segmentation_multiplier,\z
+                                                         octaves = 5,\z
+                                                         persistence = nauvis_persistance}"
+  },
+}
+
+-- spot 0 is squares
+-- spot 1 is diagonal squares
+-- spot 2 is round cells
+-- spot 3 is squircle cells
+-- facet 0 is smoother evil
+-- facet 1 is less evil
+-- facet 2 is paralellograms
+-- facet 3 is lumpy paralellograms
+-- pyramid 0,1,2 are weird (2 is smooth, 0&1 are "evil")
+
+-- remove other elevation types
+data.raw["noise-expression"]["elevation_lakes"].intended_property = nil
+data.raw["noise-expression"]["elevation_island"] = nil
+
+
+
+data:extend{
+  {
     type = "noise-expression",
     name = "temperature",
     intended_property = "temperature",
